@@ -3,6 +3,7 @@
  */
 var parkingModule = (function() {
 	// Private scoped variables
+	var googleKey = "AIzaSyDW9TVDX6032Uh4nX3g3muHFf1btG5aFnU";
 	var url = "https://data.lacity.org/resource/t7gx-yi47.json";
 	var limit = 100;
 	var where = ["latitude > 100000"];
@@ -11,6 +12,7 @@ var parkingModule = (function() {
 
 	// module data
 	var data = {};
+	var cleanedData = {};
 	var currentQuery = "";
 
 	// stack to hold previous queries
@@ -18,11 +20,87 @@ var parkingModule = (function() {
 
 	// parses the query url
 	var parseQuery = function() {
+		currentQuery = "";
 		currentQuery = url + '?$limit=' + limit + '&$order=' + orderBy + '&$select=';
 		currentQuery += selectors.join(',');
 		currentQuery += '&$where=' + where.join(',');
 
 		return currentQuery;
+	}
+
+	/**
+	 * Gathers data from the data.lacity.org parking ticket api and
+	 * cleans the data for use
+	 * @return {[Objects]} array of cleaned data
+	 */
+	var fetchData = function() {
+		return new Promise(function(resolve, reject) {
+			// gets newest api url
+			parseQuery();
+			previousQueries.push(currentQuery);
+
+			// gets parking ticket data
+			fetch(currentQuery).then(function(response) {
+				return response.json();
+			}).then(function(json) {
+				//stores unsanitized data
+				data = json;
+				return true;
+			}).then(function(done) {
+				//creates an array of promises to be fufilled
+				var promises = [];
+				for(var i = 0; i < data.length; i++) {
+					// gathers the location data for each data point to fix lat and long
+					promises.push(getLocation(data[i].location));
+				}
+
+				// after all promises are fufilled
+				Promise.all(promises).then(function(info) {
+					//checks to make sure that all addresses were found
+					if(info.length !== data.length) {
+						throw new Error('There was a problem with fetching Locations.');
+					}
+
+					// cleans all the latitudes and longitudes
+					for(var i = 0; i < data.length; i++) {
+						data[i].latitude = info[i].results[0].geometry.location.lat;
+						data[i].longitude = info[i].results[0].geometry.location.lng;
+					}
+
+					//returns the cleaned data
+					cleanedData = data;
+					return resolve(cleanedData);
+				});
+			}).catch(function(err) {
+				return reject(err);
+			});
+		});
+	}
+
+	/**
+	 * Gets the location from the google maps api
+	 * @param  {String} address adress that we are getting data for
+	 * @return {Promise}         returns a promise that contains the api json
+	 */
+	var getLocation = function(address) {
+		//parses url
+		var locationUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + googleKey;
+
+		var promise = new Promise(function(resolve, reject) {
+			fetch(locationUrl).then(function(response) {
+				return resolve(response.json());
+			}).catch(function(err) {
+				return reject(err);
+			});
+		});
+
+		return promise;
+	}
+
+
+	//returns cleaned data
+	var getData = function() {
+		return cleanedData;
 	}
 
 	//sets the where clause for the query
@@ -72,6 +150,8 @@ var parkingModule = (function() {
 
 	// exposes the public functions as an object
 	return {
+		fetchData: fetchData,
+		getData: getData,
 		parseQuery: parseQuery,
 		setLimit: setLimit,
 		setSelectors: setSelectors,
