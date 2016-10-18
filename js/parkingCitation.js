@@ -11,8 +11,8 @@ var parkingModule = (function() {
 	var orderBy = ["issue_date DESC"];
 
 	// module data
-	var data = {};
-	var cleanedData = {};
+	var data = [];
+	var cleanedData = [];
 	var currentQuery = "";
 
 	// stack to hold previous queries
@@ -55,22 +55,22 @@ var parkingModule = (function() {
 				}
 
 				// after all promises are fufilled
-				Promise.all(promises).then(function(info) {
-					//checks to make sure that all addresses were found
-					if(info.length !== data.length) {
-						throw new Error('There was a problem with fetching Locations.');
-					}
+				return Promise.all(promises);
+			}).then(function(info) {
+				//checks to make sure that all addresses were found
+				if(info.length !== data.length) {
+					throw new Error('There was a problem with fetching Locations.');
+				}
 
-					// cleans all the latitudes and longitudes
-					for(var i = 0; i < data.length; i++) {
-						data[i].latitude = info[i].results[0].geometry.location.lat;
-						data[i].longitude = info[i].results[0].geometry.location.lng;
-					}
+				// cleans all the latitudes and longitudes
+				for(var i = 0; i < data.length; i++) {
+					data[i].latitude = info[i].results[0].geometry.location.lat;
+					data[i].longitude = info[i].results[0].geometry.location.lng;
+				}
 
-					//returns the cleaned data
-					cleanedData = data;
-					return resolve(cleanedData);
-				});
+				//returns the cleaned data
+				cleanedData = data;
+				return resolve(cleanedData);
 			}).catch(function(err) {
 				return reject(err);
 			});
@@ -148,8 +148,17 @@ var parkingModule = (function() {
 		return orderBy;
 	}
 
+	var dataToString = function() {
+		var data = {
+			data: cleanedData
+		};
+
+		return JSON.stringify(data, null, 2);
+	}
+
 	// exposes the public functions as an object
 	return {
+		dataToString: dataToString,
 		fetchData: fetchData,
 		getData: getData,
 		parseQuery: parseQuery,
@@ -159,3 +168,7 @@ var parkingModule = (function() {
 		setWhere: setWhere
 	};
 })();
+
+parkingModule.fetchData().then(function() {
+	document.getElementById('json').innerHTML = parkingModule.dataToString();
+});
