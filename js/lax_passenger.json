@@ -1,0 +1,22 @@
+{
+	"title":"lax passenger data",
+	"source":"https://en.wikipedia.org/wikiLos_Angeles_International_Airport",
+	"data":{
+		"domestic":[
+		{"rank":1, "airport": "San Fransisco-SFO", "state":"CA", "passengers":1837000	},
+		{"rank":2, "airport": "New York-JFK", "state":"NY", "passengers":1662000	},
+		{"rank":3, "airport": "Chicago-O'Hare", "state":"IL", "passengers":1387000},
+		{"rank":4, "airport": "Las Vegas", "state":"NV", "passengers":1334000},
+		{"rank":5, "airport": "Seattle/Tacoma", "state":"WA", "passengers":1200000},
+		{"rank":6, "airport": "Dallas/Fort Worth", "state":"TX", "passengers":1191000},
+		{"rank":7, "airport": "Atlanta", "state":"GA", "passengers":1070000},
+		{"rank":8, "airport": "Honolulu", "state":"HI", "passengers":1070000},
+		{"rank":9, "airport": "Denver", "state":"CO", "passengers":1020000},
+		{"rank":10, "airport": "Phoenix–Sky Harbor", "state":"AZ", "passengers":894000},
+			]
+		,
+		"traffic":{
+
+		}
+	}
+}
