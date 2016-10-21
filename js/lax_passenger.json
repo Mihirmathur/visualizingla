@@ -12,9 +12,21 @@
 		{"rank":7, "airport": "Atlanta", "state":"GA", "passengers":1070000},
 		{"rank":8, "airport": "Honolulu", "state":"HI", "passengers":1070000},
 		{"rank":9, "airport": "Denver", "state":"CO", "passengers":1020000},
-		{"rank":10, "airport": "Phoenix–Sky Harbor", "state":"AZ", "passengers":894000},
+		{"rank":10, "airport": "Phoenix–Sky Harbor", "state":"AZ", "passengers":894000}
 			]
 		,
+		"international":[
+			{"rank":1, "airport": "London (Heathrow)", "country":"United Kingdom", "passengers":1493010	},
+			{"rank":2, "airport": "Tokyo (Narita)", "country":"Japan", "passengers":1102172},
+			{"rank":3, "airport": "Seoul (Incheon)", "country":"South Korea", "passengers":1083522	},
+			{"rank":4, "airport": "Taipei (Taoyuan)", "country":"Taiwan", "passengers":946426	},
+			{"rank":5, "airport": "Sydney", "country": "Australia", "passengers":934215	},
+			{"rank":6, "airport": "Vancouver", "country":"Canada", "passengers":896490	},
+			{"rank":7, "airport": "Guadalajara", "country":"Mexico", "passengers":746017},
+			{"rank":8, "airport": "Mexico City", "country":"Mexico", "passengers":725575},
+			{"rank":9, "airport": "Toronto (Pearson)", "country":"Canada", "passengers":619227	},
+			{"rank":10, "airport": "Paris (Charles de Gaulle)", "country":"France", "passengers":579311}
+		],
 		"traffic":{
 
 		}
