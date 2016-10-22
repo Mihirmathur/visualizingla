@@ -1,11 +1,12 @@
+var $ = require('jquery');
+
 var api = "https://data.lacity.org/resource/x7vu-vht3.json";
 
-$(document).ready(function() {
-  $.getJSON(api, function(data) {
-    console.log(data);
-    data = joinLevels(data);
-    console.log(data);
-  });
+
+$.getJSON(api, function(data) {
+  console.log(data);
+  data = joinLevels(data);
+  console.log(data);
 });
 
 var joinLevels = function(arr) {
@@ -18,7 +19,7 @@ var joinLevels = function(arr) {
     var index = newArr.findIndex(function(el) {
       // If the newArray contains the same header data as the current element
       return (el.reportingmonth === arr[i].reportingmonth && 
-              el.entryexit === arr[i].entryexit);  
+        el.entryexit === arr[i].entryexit);  
     })
     
     // If the current date/entryexit is logged
