@@ -7,12 +7,16 @@ var parkingModule = (function() {
 	var url = "https://data.lacity.org/resource/t7gx-yi47.json";
 	var limit = 100;
 	var where = ["latitude > 100000"];
-	var selectors = ["issue_time", "latitude", "longitude", "location", "fine_amount"];
+	var selectors = ["issue_time", "issue_date","latitude", "longitude", "location", "fine_amount"];
 	var orderBy = ["issue_date DESC"];
 
 	// module data
 	var data = [];
 	var cleanedData = [];
+	var geoJson = {
+		type: 'FeatureCollection',
+		features: []
+	};
 	var currentQuery = "";
 
 	// stack to hold previous queries
@@ -84,7 +88,7 @@ var parkingModule = (function() {
 	 */
 	var getLocation = function(address) {
 		//parses url
-		var locationUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + googleKey;
+		var locationUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address  + "&key=" + googleKey;
 
 		var promise = new Promise(function(resolve, reject) {
 			fetch(locationUrl).then(function(response) {
@@ -95,6 +99,31 @@ var parkingModule = (function() {
 		});
 
 		return promise;
+	}
+
+	var createGeoJson = function() {
+		if(cleanedData.length === 0) {
+			throw new Error('Data must be fetched first');
+		}
+
+		for(var i = 0; i < cleanedData.length; i++) {
+			var feature = {
+				type: 'Feature',
+				geometry: {
+					type: 'Point',
+					coordinates: []
+				}
+			};
+
+			feature.geometry.coordinates.push(cleanedData[i].longitude);
+			feature.geometry.coordinates.push(cleanedData[i].latitude);
+
+			feature.properties = cleanedData[i];
+
+			geoJson.features.push(feature);
+		}
+
+		return geoJson;
 	}
 
 
@@ -156,8 +185,14 @@ var parkingModule = (function() {
 		return JSON.stringify(data, null, 2);
 	}
 
+	var geoJsonToString = function() {
+		return JSON.stringify(geoJson, null, 2);
+	}
+
 	// exposes the public functions as an object
 	return {
+		createGeoJson: createGeoJson,
+		geoJsonToString: geoJsonToString,
 		dataToString: dataToString,
 		fetchData: fetchData,
 		getData: getData,
@@ -170,5 +205,6 @@ var parkingModule = (function() {
 })();
 
 parkingModule.fetchData().then(function() {
-	document.getElementById('json').innerHTML = parkingModule.dataToString();
+	parkingModule.createGeoJson();
+	document.getElementById('json').innerHTML = parkingModule.geoJsonToString();
 });
