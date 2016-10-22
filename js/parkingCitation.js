@@ -101,6 +101,10 @@ var parkingModule = (function() {
 		return promise;
 	}
 
+	/**
+	 * Takes the cleaned data and creates a geoJSON compatible object
+	 * @return {geoJson} returns a proper geoJSON object
+	 */
 	var createGeoJson = function() {
 		if(cleanedData.length === 0) {
 			throw new Error('Data must be fetched first');
@@ -177,6 +181,10 @@ var parkingModule = (function() {
 		return orderBy;
 	}
 
+	/**
+	 * Returns a JSON string to be printed to html
+	 * @return {String} JSON string of the data
+	 */
 	var dataToString = function() {
 		var data = {
 			data: cleanedData
@@ -185,6 +193,10 @@ var parkingModule = (function() {
 		return JSON.stringify(data, null, 2);
 	}
 
+	/**
+	 * Returns the geoJSON as a string for printing to html
+	 * @return {String} geoJSON string of the geoJSON
+	 */
 	var geoJsonToString = function() {
 		return JSON.stringify(geoJson, null, 2);
 	}
