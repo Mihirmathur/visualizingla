@@ -1,13 +1,13 @@
 var vehiclesModule = (function() {
-  
+
   //----- Public API -----//
   
-  var getData = function() {
+  function getData() {
     return data;
   }
   
   // Returns array of all data
-  var fetchData = function() {
+  function fetchData() {
     return new Promise(function(resolve, reject) {
       $.getJSON(api, function(d) {
         data = d;
@@ -23,7 +23,7 @@ var vehiclesModule = (function() {
 
   // Returns object of the form
   // { entry: XXXXX, exit: XXXXX }
-  var vehiclesForMonth = function(month) {
+  function vehiclesForMonth(month) {
     var output = {};
     for (var i of data) {
       if (i.reportingmonth === month) {
@@ -32,13 +32,45 @@ var vehiclesModule = (function() {
     }
     return output;
   }
+
+  // Returns array of objects of the form
+  // { [date]: { entry: X, exit: Y }}
+  function getAllVehicleCounts() {
+    var m = data; 
+    var dateSet = new Set;
+    for (var item of data) {
+      dateSet.add(item.reportingmonth);
+    }
+
+    var counts = [];
+    for (var date of dateSet) {
+      var obj = {}
+      obj[date] = vehiclesForMonth(date);
+      counts.push(obj);
+    }
+
+    // Sort counts in chronological order
+    counts.sort(function(a,b) {
+      var keyA = Object.keys(a)[0];
+      var keyB = Object.keys(b)[0];
+      if (keyA < keyB) {
+        return -1;
+      } 
+      if (keyA > keyB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return counts;
+  }
   
   //----- Private API -----//  
 
   var api = "https://data.lacity.org/resource/x7vu-vht3.json";
   var data = [];
   
-  var removeTimeFromDate = function() {
+  function removeTimeFromDate() {
     var newArr = [];
     for (var i of data) {
       i.reportingmonth = i.reportingmonth.substring(0, 7);
@@ -47,7 +79,7 @@ var vehiclesModule = (function() {
     return newArr;
   }
 
-  var joinLevels = function() {
+  function joinLevels() {
     var newArr = [];
 
     for (var i = 0; i < data.length; i++) {
@@ -78,11 +110,8 @@ var vehiclesModule = (function() {
   return {
     fetchData: fetchData,
     getData: getData,
-    vehiclesForMonth: vehiclesForMonth
+    forMonth: vehiclesForMonth,
+    allCounts: getAllVehicleCounts
   }
   
 })();
-
-vehiclesModule.fetchData().then(function(d) {
-  console.log(vehiclesModule.vehiclesForMonth("2014-06"));
-});
