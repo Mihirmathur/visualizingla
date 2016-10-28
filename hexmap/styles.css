@@ -1,0 +1,66 @@
+body {
+	margin: 0px; 
+	overflow: hidden; 
+	font-family: "Helvetica Neue", Helvetica; 
+	font-size: 14px;
+}
+
+.header {
+	margin-top: 20px;
+	margin-left: 20px;
+	font-size: 36px; 
+	font-weight: 300; 
+	display: block; 
+	z-index: 1; 
+	text-shadow: 0 1px 0 #fff;
+}
+.hint {
+	width: 1280px; 
+	right: 0px; 
+	color: rgb(153, 153, 153); 
+	font-size: 12px;
+	padding-bottom: 20px;
+}
+
+#chart {
+	text-align: center;
+}
+
+.hr-style {
+	border: 0;
+	height: 2px;
+	width: 80%;
+	color: #E8E8E8;
+	background-color: #E8E8E8;
+}
+
+path {
+	fill: #000;
+	stroke-linejoin: round;
+}
+
+.land {
+	fill: #ddd;
+}
+
+.states,
+.hexagons path {
+	stroke: #fff;
+}
+
+#worldMap {
+	height: 450px;
+	width: 800px;
+}
+
+#worldCanvas {
+	display: block;
+	height: 450px;	
+	width: 800px;
+	margin: 0 auto;
+}
+
+svg {
+	display: block;
+	margin: 0 auto;
+}
