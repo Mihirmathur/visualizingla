@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Creative Labs</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+		<div class = "wrapper"
+				   data-0="bottom: 50%; opacity:1"
+				data-1200="bottom: -30%; opacity:1"
+				data-1800="bottom: -30%; opacity:0">
+				<img src="resources/car.svg" />
+		</div>
+
+		<!-- Hacky solution to fix scale problem, find a fix -->
+
+		<div class = "wrapper"
+				data-1400="bottom: -10%; opacity:0;"
+				data-2000="bottom: -10%; opacity:1; transform:scale(0.5)"
+				data-2200="bottom: -0%; transform:scale(0.3)"
+				data-2800="bottom: -100%">
+				<img src="resources/square.svg" />
+		</div>
+
+	<script type="text/javascript" src="js/skrollr.min.js"></script>
+
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="../skrollr-ie/dist/skrollr.ie.min.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript">
+	var s = skrollr.init({
+		edgeStrategy: 'set',
+		easing: {
+			inverted: function(p) {
+				return 1-p;
+			}
+		}
+	});
+	</script>
+</body>
+
+</html>

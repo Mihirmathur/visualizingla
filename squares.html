@@ -2,11 +2,10 @@
 <html>
 <style>
     body{
-        background-color: #ddd225;
+        background-color: #292444;
     }
-
     #grid{
-        margin: 20px auto;
+        margin: 50px auto;
         width: 600px;
         height: 600px;
     }
@@ -15,8 +14,8 @@
         cursor: pointer;
     }
 
-    svg.building{
-        overflow: visible !important;
+    svg.canvas, svg.building{
+        overflow: visible;
     }
 </style>
 <body>
@@ -31,23 +30,24 @@
     var canvasWidth = canvas.node().getBoundingClientRect().width;
     var canvasHeight = canvas.node().getBoundingClientRect().height;
 
+    var width = 6, height = 6,
+        off = 3;
+
     function initSingleBuilding(buildingHeight, buildingWidth) {
         var data = new Array();
-        var xpos = 1, ypos = 1,
-            width = 5, height = 5;
-        var off = 5,
-            xOffset = 0,
+        var xpos = 1, ypos = 1;
+            
+        var xOffset = 0,
             yOffset = 0;
         var xTrans = 0,
             yTrans = 0;
 
-        for (var row = 0; row < buildingHeight/(height + off) - 1; row++) {
+        for (var row = 0; row < buildingHeight/(height + off); row++) {
             data.push(new Array());
-            for (var col = 0; col < buildingWidth/(width + off) - 1; col++) {
+            for (var col = 0; col < buildingWidth/(width + off); col++) {
                 data[row].push({
                     x: xpos,
                     y: ypos,
-                    off: off,
                     width: width - off,
                     height: height - off,
                     xOffset: xOffset,
@@ -66,8 +66,36 @@
         return data;
     }
 
+    function flyOut(d){
+        var xOff = 30/(Math.random() - 0.5);
+        var yOff = 30/(Math.random() - 0.5);
+        d3.select(this)
+            .attr('xTrans', function(d){return xOff;})
+            .attr('yTrans', function(d){return yOff;})
+            .transition()
+                .ease('cubic')
+            .duration(1000)
+                .attr('transform', 'translate(' + xOff + ', ' + yOff + ')')
+                .style('fill', '#fff');
+    }
+
+    function flyIn(d){
+        d3.select(this)
+            .transition()
+            .delay(1000)
+            .duration(500)
+                .attr('transform', function(d){
+                    return 'translate(' + (-d.xTrans + d.xOffset) + ', ' + (-d.yTrans + d.yOffset) + ')';
+                })
+            .attr('xTrans', 0)
+            .attr('yTrans', 0)
+            .style('fill', '#f0ff00');
+    }
+
 
     function initAllBuildings(arr){
+        var left = 0;
+
         for (building of arr){
             var gridData = initSingleBuilding(building.height, building.width);
 
@@ -75,45 +103,44 @@
                         .classed('building', true)
                         .attr('height', building.height)
                         .attr('width', building.width)
+                        .attr('x', left)
+                        .attr('y', canvasHeight - gridData.length * (width + off))
                     .selectAll('.row')
                     .data(gridData)
                     .enter().append('g')
-                    .attr('class', 'row');
+                        .attr('class', 'row');
+                        
 
             var col = row.selectAll('rect')
                     .data(function(d) {return d;})
                     .enter().append('rect')
-                    .attr('x', function(d) {return d.x;})
-                    .attr('y', function(d) {return d.y;})
-                    .attr('width', function(d) {return d.width + d.off;})
-                    .attr('height', function(d) {return d.height + d.off;})
-                    .attr('transform', function(d) {return 'translate(' + d.xOffset + ', ' + d.yOffset + ')';}) 
-                    .style('fill', '#fff')
-                    .on('mouseover', function(d){
-                        var xOff = 30/(Math.random() - 0.5);
-                        var yOff = 30/(Math.random() - 0.5);
-                        d3.select(this)
-                            .attr('xTrans', function(d){return xOff;})
-                            .attr('yTrans', function(d){return yOff;})
-                            .transition()
-                            .duration(500)
-                                .attr('transform', 'translate(' + xOff + ', ' + yOff + ')');
-                    })
-                    .on('mouseout', function(d){
-                        d3.select(this)
-                            .transition()
-                            .delay(1000)
-                            .duration(500)
-                                .attr('transform', function(d){return 'translate(' + (-d.xTrans + d.xOffset) + ', ' + (-d.yTrans + d.yOffset) + ')';})
-                            .attr('xTrans', 0)
-                            .attr('yTrans', 0);
-                    });
+                        .attr('id', function(d, i) {return 'rect' + i;})
+                        .attr('x', function(d) {return d.x;})
+                        .attr('y', function(d) {return d.y;})
+                        .attr('width', function(d) {return d.width + off;})
+                        .attr('height', function(d) {return d.height + off;})
+                        .attr('transform', function(d) {return 'translate(' + d.xOffset + ', ' + d.yOffset + ')';}) 
+                        .style('fill', '#000')
+                        .on('mouseover', flyOut)
+                        .on('mouseout', flyIn);
+
+            left += gridData[0].length * (width + off) + 5;
         }
     }
+
+    function exit(){
+        d3.selectAll('rect').each(flyOut);
+    }
+
+    function enter(){
+        d3.selectAll('rect').each(flyIn);
+    }
+
     var grid = canvas
-        .append('g')
+        .append('svg')
         .attr('width', canvasWidth)
-        .attr('height', canvasHeight);
+        .attr('height', canvasHeight)
+        .classed('canvas', true);
 
     initAllBuildings([
             {
@@ -125,7 +152,7 @@
                 'width' : 50
             },
             {
-                'height' : 400,
+                'height' : 440,
                 'width' : 140
             },
             {
@@ -133,15 +160,16 @@
                 'width' : 120
             },
             {
-                'height' : 370,
-                'width' : 70
+                'height' : 350,
+                'width' : 90
             },
             {
                 'height' : 200,
-                'width' : 50
+                'width' : 60
             }
         ]);
 
+    d3.select('body').on('click', exit);
     
 </script>
 </body>
