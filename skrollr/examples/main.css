@@ -1,0 +1,27 @@
+
+body {
+	background: #eeeeee;
+	background-attachment:fixed;
+}
+
+.wrapper {
+	height: 100%;
+	width: 100%;
+	text-align:center;
+}
+/*.wrapper {
+	transform-origin: 50% 50%;
+	-webkit-transform-origin: 50% 50%;
+}*/
+h3 {
+	text-align: center;
+	color: white;
+}
+/*Need to find a normal workaround*/
+div {
+	position: fixed;
+}
+/*Need to find a normal workaround*/
+div div {
+	position: absolute;
+}
