@@ -201,9 +201,15 @@ var parkingModule = (function() {
 		return JSON.stringify(geoJson, null, 2);
 	}
 
+
+	var getGeoJson = function() {
+		return geoJson;
+	}
+
 	// exposes the public functions as an object
 	return {
 		createGeoJson: createGeoJson,
+		getGeoJson: getGeoJson,
 		geoJsonToString: geoJsonToString,
 		dataToString: dataToString,
 		fetchData: fetchData,
@@ -216,7 +222,45 @@ var parkingModule = (function() {
 	};
 })();
 
-parkingModule.fetchData().then(function() {
-	parkingModule.createGeoJson();
-	document.getElementById('json').innerHTML = parkingModule.geoJsonToString();
-});
+
+
+function init() {
+	parkingModule.fetchData().then(function() {
+		parkingModule.createGeoJson();
+		initMap(parkingModule.getGeoJson());
+	});
+
+
+}
+
+
+function initMap(geoJson) {
+	mapboxgl.accessToken = 'pk.eyJ1IjoiY29keWxleWhhbiIsImEiOiJjaXVldHZsYmswMGVlMm9sM2ZrN3BoeWpwIn0.1XUE4GT-FZ5fatKFdKt4OQ';
+	var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/codyleyhan/ciunly98n008y2iqoawox0gjp'
+	});
+
+	console.log(geoJson);
+
+	map.on('load', function() {
+		map.addSource('tickets', {
+			type: 'geojson',
+			data: geoJson
+		});
+
+		map.addLayer({
+        "id": "points",
+        "type": "circle",
+        "source": "tickets",
+				"paint" : {
+					"circle-color" : 'rgba(255,0,0, 0.5)',
+					"circle-radius" : 10,
+					"circle-blur" : 1
+				}
+    });
+	});
+}
+
+
+init();
