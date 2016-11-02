@@ -120,47 +120,6 @@ var DataManager = (function () {
         });
     }
 
-    function processData() {
-        var flightCounts = [];
-        for (var i of flights) {
-            var key = Object.keys(i)[0];
-            var count = i[key];
-            flightCounts.push(count);
-        }
-        var vehiclesInCounts = [];
-        var vehiclesOutCounts = [];
-        for (var i of vehicles) {
-            var key = Object.keys(i)[0];
-            var inCount = i[key].entry;
-            var outCount = i[key].exit;
-            vehiclesInCounts.push(inCount);
-            vehiclesOutCounts.push(outCount);
-        }
-        stats.flights = {};
-        stats.flights.max = Math.max(...flightCounts);
-        stats.flights.min = Math.min(...flightCounts);
-        stats.flights.average = flightCounts.reduce(function (a, b) {
-            return a + b
-        }) / flightCounts.length;
-        stats.flights.range = stats.flights.max - stats.flights.min;
-        stats.flights.count = flightCounts.length;
-        stats.vehiclesIn = {};
-        stats.vehiclesIn.max = Math.max(...vehiclesInCounts);
-        stats.vehiclesIn.min = Math.min(...vehiclesInCounts);
-        stats.vehiclesIn.average = vehiclesInCounts.reduce(function (a, b) {
-            return a + b
-        }) / vehiclesInCounts.length;
-        stats.vehiclesIn.range = stats.vehiclesIn.max - stats.vehiclesIn.min;
-        stats.vehiclesIn.count = vehiclesInCounts.length;
-        stats.vehiclesOut = {};
-        stats.vehiclesOut.max = Math.max(...vehiclesOutCounts);
-        stats.vehiclesOut.min = Math.min(...vehiclesOutCounts);
-        stats.vehiclesOut.average = vehiclesOutCounts.reduce(function (a, b) {
-            return a + b
-        }) / vehiclesOutCounts.length;
-        stats.vehiclesOut.range = stats.vehiclesOut.max - stats.vehiclesOut.min;
-        stats.vehiclesOut.count = vehiclesOutCounts.length;
-    }
     // Return object with data on flights and vehicles in/out for a given month
     function dataForMonth(month) {
         var obj = {};
@@ -175,7 +134,6 @@ var DataManager = (function () {
     return {
         downloadData: downloadData
         , data: data
-        , stats: stats
         , dates: dates
         , flights: flightsArray
         , vehiclesIn: vehiclesInArray
