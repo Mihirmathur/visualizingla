@@ -12,6 +12,7 @@ div {
 	background: #BABABA;
 }
 
+/*
 .chart div {
     float: left;
     margin: 1px;
@@ -31,13 +32,4 @@ div {
     
     margin-top: 50px;
 }
-
-.chart rect {
-  fill: steelblue;
-}
-
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
+*/

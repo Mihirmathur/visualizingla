@@ -39,53 +39,91 @@ var DataManager = (function () {
     }
 
     function plot(data, selector) {
-        //        d3.select("#flights-chart").selectAll("div").data(flightsArray()).enter().append("div").style("width", function () {
-        //            return (maxWidth / dates.length);
-        //        }).style("height", function (d) {
-        //            var factor = stats.flights.max / maxHeight;
-        //            return ((d / factor) + "px");
-        //        }).html(function (d) {
-        //            return "<p>" + d + "</p>";
-        //        })
-        //        
-        var width = 420
-        var barHeight = 20;
-        var x = d3.scaleLinear().domain([0, d3.max(data)]).range([0, width]);
-        // Set SVG's size attributes based on dataset size
-        var chart = d3.select(selector).attr("width", width).attr("height", barHeight * data.length);
-        // Create "g" elements for every data point
-        var bar = chart.selectAll("g").data(data).enter().append("g").attr("transform", function (d, i) {
-            return "translate(0," + i * barHeight + ")";
-        });
-        bar.append("rect").attr("width", x).attr("height", barHeight - 1);
-        bar.append("text").attr("x", function (d) {
-            return x(d) - 3;
-        }).attr("y", barHeight / 2).attr("dy", ".35em").text(function (d) {
-            return d;
-        });
-    }
 
-//    function plotVehiclesInData() {
-//        d3.select("#vehicles-in-chart").selectAll("div").data(vehiclesInArray()).enter().append("div").style("width", function () {
-//            return (maxWidth / dates.length);
-//        }).style("height", function (d) {
-//            var factor = stats.vehiclesIn.max / maxHeight;
-//            return ((d / factor) + "px");
-//        }).html(function (d) {
-//            return "<p>" + d + "</p>";
-//        })
-//    }
-//
-//    function plotVehiclesOutData() {
-//        d3.select("#vehicles-out-chart").selectAll("div").data(vehiclesOutArray()).enter().append("div").style("width", function () {
-//            return (maxWidth / dates.length);
-//        }).style("height", function (d) {
-//            var factor = stats.vehiclesIn.max / maxHeight;
-//            return ((d / factor) + "px");
-//        }).html(function (d) {
-//            return "<p>" + d + "</p>";
-//        })
-//    }
+        var margin = {top: 20, right: 20, bottom: 50, left: 100},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+        
+        var max = d3.max(data);
+        var min = d3.min(data);
+        var range = max - min;
+        
+        // Set the ranges
+        // TODO: Set domains as well (for x-axis)
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .range([height, 0]);
+        
+        // Set SVG's size
+        var chart = d3.select(selector)
+            .attr("width", width)
+            .attr("height", height)
+            .attr("cx", "30")
+            .style("padding", "100px");
+        
+        var barWidth = width / data.length;
+        
+        // Create "g" elements for every data point
+        var bar = chart.selectAll("g")
+            .data(data).enter().append("g")
+        
+            // TODO: Understand how transform works
+            .attr("transform", function (d, i) {
+                return "translate(" + (i * barWidth) + ",0)";
+            })
+            .attr("fill", function(d) {
+                // Fill with gradient color based on data value
+                // TODO: Adapt to color style for our project
+                return "rgb(0, 0, " + Math.floor((((d-min)/range) * 255))  + ")";
+            });
+        
+        // Create rect elements for each bar
+        bar.append("rect")
+            // get relative height on our linear scale
+            // and position it so the bottoms of the bars are flush
+            .attr("y", function(d) { return y(d); })
+            .attr("height", function(d) { return height - y(d); })
+            .attr("width", barWidth - 1);
+        
+        // Add x-axis
+        chart.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+//         x-axis labels
+        chart.append("text")
+            .attr("transform", 
+                  "translate(" + (width/2) + "," + (height + margin.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .style("fill", "#000")
+            .style("font-size", "14px")
+            .style("font-family", "Arial, sans-serif")
+            .text("Date");
+        
+        // Add y-axis
+        chart.append("g")
+            .attr("transform", "translate(0, 5)")
+            .call(d3.axisLeft(y));
+//         y-axis labels
+        chart.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x",0 - (height / 2))
+            .attr("dy", "1em")
+            .attr("fill", "#000")
+            .style("text-anchor", "middle")
+            .text("Value");  
+    
+        // Text is probably not a good idea with such high values
+        // unless we scale them down to "2.3m" for 2,300,000
+        // Label the text in each rect
+//        bar.append("text")
+//            .attr("x", barWidth / 2)
+//            .attr("y", function(d) { return y(d) + 3; })  
+//            .attr("dy", ".75em")
+//            .attr("transform", "rotate(90)")
+//            .text(function (d) { return d; });
+    }
 
     function intersectArrays(a, b) {
         // Create array of concurrent dates
@@ -131,6 +169,7 @@ var DataManager = (function () {
         })[month];
         return obj;
     }
+    
     return {
         downloadData: downloadData
         , data: data
@@ -138,7 +177,6 @@ var DataManager = (function () {
         , flights: flightsArray
         , vehiclesIn: vehiclesInArray
         , vehiclesOut: vehiclesOutArray
-        , processData: processData
         , plot: plot
     }
 })();
