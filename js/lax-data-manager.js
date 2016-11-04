@@ -215,7 +215,10 @@ var DataManager = (function (maxWidth, maxHeight) {
         , plotFlights: plotFlights
     }
 })(1200, 400);
-DataManager.downloadData().then(function () {
+
+$(document).ready(function() {
+    DataManager.downloadData().then(function () {
     DataManager.plotVehicles("#vehicles-chart");
     DataManager.plotFlights("#flights-chart");
+});
 });
