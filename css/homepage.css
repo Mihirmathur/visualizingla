@@ -40,6 +40,7 @@ body{
 /*==================NAV-BAR===================*/
 
 .nav {
+    z-index:100;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
