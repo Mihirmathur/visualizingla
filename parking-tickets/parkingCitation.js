@@ -5,7 +5,7 @@ var parkingModule = (function() {
 	// Private scoped variables
 	var googleKey = "AIzaSyDW9TVDX6032Uh4nX3g3muHFf1btG5aFnU";
 	var url = "https://data.lacity.org/resource/t7gx-yi47.json";
-	var limit = 100;
+	var limit = 300;
 	var where = ["latitude > 100000"];
 	var selectors = ["issue_time", "issue_date","latitude", "longitude", "location", "fine_amount"];
 	var orderBy = ["issue_date DESC"];
@@ -201,9 +201,18 @@ var parkingModule = (function() {
 		return JSON.stringify(geoJson, null, 2);
 	}
 
+	/**
+	 * Returns the geoJson
+	 * @return {Object} geoJson
+	 */
+	var getGeoJson = function() {
+		return geoJson;
+	}
+
 	// exposes the public functions as an object
 	return {
 		createGeoJson: createGeoJson,
+		getGeoJson: getGeoJson,
 		geoJsonToString: geoJsonToString,
 		dataToString: dataToString,
 		fetchData: fetchData,
@@ -216,7 +225,119 @@ var parkingModule = (function() {
 	};
 })();
 
-parkingModule.fetchData().then(function() {
-	parkingModule.createGeoJson();
-	document.getElementById('json').innerHTML = parkingModule.geoJsonToString();
-});
+
+
+function init() {
+	parkingModule.fetchData().then(function() {
+		parkingModule.createGeoJson();
+		initMap(parkingModule.getGeoJson());
+	});
+}
+
+/**
+ * Creates and adds the map to the browser
+ * @param  {object} geoJson points to be added to map
+ */
+function initMap(geoJson) {
+	// create the map
+	mapboxgl.accessToken = 'pk.eyJ1IjoiY29keWxleWhhbiIsImEiOiJjaXVldHZsYmswMGVlMm9sM2ZrN3BoeWpwIn0.1XUE4GT-FZ5fatKFdKt4OQ';
+
+	var bounds = [
+		[-118.68530273437501, 33.60546961227188], // southwest corner
+		[-117.26257324218749, 34.347971491244955] // northeast corner
+	];
+
+	var map = new mapboxgl.Map({
+			name: 'Visualizing LA',
+			container: 'map',
+			style: 'mapbox://styles/codyleyhan/ciunly98n008y2iqoawox0gjp',
+			maxBounds: bounds
+	});
+
+	// add the geoJson data
+	map.on('load', function() {
+		map.addSource('tickets', {
+			type: 'geojson',
+			data: geoJson
+		});
+
+		// add the points to the map
+		map.addLayer({
+        "id": "points",
+        "type": "circle",
+        "source": "tickets",
+				"paint" : {
+					"circle-color" : 'rgba(255,0,0, 0.5)',
+					"circle-radius" : 10,
+					"circle-blur" : 1
+				}
+    });
+	});
+
+	// if click on a point
+	map.on('click', function (e) {
+		// search for the point clicked
+		var features = map.queryRenderedFeatures(e.point, { layers: ['points']});
+
+		// if the click is not on a point
+		if(!features.length) {
+			return;
+		}
+
+
+		var feature = features[0];
+		var time = parseTime(feature);
+
+		// create pop up html
+		var html = '<strong>Information</strong><p>This fine occured on ' + feature.properties.location + ' at '
+				+ time + ' and cost $' + feature.properties.fine_amount + '.00.</p>'
+
+		// add the popup to the map
+		var popup = new mapboxgl.Popup()
+				.setLngLat(feature.geometry.coordinates)
+				.setHTML(html)
+				.addTo(map);
+	});
+
+	// adjust cursor for when over a point
+	map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+	});
+}
+
+/**
+ * Parses ticket time into a usable format
+ * @param  {object} feature the feature in geoJson format
+ * @return {string}         the parsed time string
+ */
+function parseTime(feature) {
+	var time = "";
+	var designation = "AM"
+	var normTime = feature.properties.issue_time;
+
+	// check if pm
+	if(feature.properties.issue_time >= 1200) {
+		// normalize the time and update designation
+		if(normTime >= 1300) {
+				normTime = normTime - 1200;
+		}
+		normTime = normTime.toString();
+		designation = "PM";
+	}
+
+	// add semicolon and add the time
+	time += normTime.substr(0, normTime.length - 2) + ':';
+	time += normTime.substr(normTime.length - 2) + ' ' + designation;
+
+	// if a date is avaliable then add the date to string
+	if(feature.properties.issue_date) {
+		var date = moment(feature.properties.issue_date).format('ddd MMMM Do');
+		time += ' on ' + date;
+	}
+
+	return time;
+}
+
+
+init();

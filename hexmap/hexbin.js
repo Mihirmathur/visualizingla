@@ -7,7 +7,11 @@ d3.hexbin = function() {
       x = d3_hexbinX,
       y = d3_hexbinY,
       dx,
-      dy;
+      dy,
+      pixR = d3_hexbinR,
+      pixG = d3_hexbinG,
+      pixB = d3_hexbinB,
+      pixA = d3_hexbinA;
 
   function hexbin(points) {
     var binsById = {};
@@ -105,6 +109,9 @@ d3.hexbin = function() {
 
 var d3_hexbinAngles = d3.range(0, 2 * Math.PI, Math.PI / 3),
     d3_hexbinX = function(d) { return d[0]; },
-    d3_hexbinY = function(d) { return d[1]; };
-
+    d3_hexbinY = function(d) { return d[1]; },
+    d3_hexbinR = function(d) { return d[2]; },
+    d3_hexbinG = function(d) { return d[3]; },
+    d3_hexbinB = function(d) { return d[4]; },
+    d3_hexbinA = function(d) { return d[5]; };
 })();

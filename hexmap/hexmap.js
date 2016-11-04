@@ -12,7 +12,7 @@ var width = 1260,
         vertDiff - vertical offset between rows of hexagons
         horizDiff - horizontal offset between coluns of hexagons
 */
-var radius = width / 150,
+var radius = width / 200,
     hexHeight = 2 * radius,
     hexWidth = Math.sqrt(3)/2 * hexHeight
     vertDiff = hexHeight * 3/4,
@@ -60,7 +60,7 @@ var points = [];
     Load the template image which we will mimic with hexagons
 */
 var logoImg = new Image();
-logoImg.src = "bwmap.jpg";
+logoImg.src = "putin.png";
 logoImg.onload = function() {
     ctx.drawImage(logoImg, 0, 0, width, height);
     placeHexagons();
@@ -78,10 +78,17 @@ function placeHexagons() {
     for (let x = hexWidth; x < canvas.width; x+=hexWidth) {
         for (let y = vertDiff; y < canvas.height; y+=vertDiff) {
             let data = ctx.getImageData(x, y, 1, 1).data;
-            if (data[0] < 240) {
+            let pixR = data[0];
+            let pixG = data[1];
+            let pixB = data[2];
+            let pixA = data[3];
+
+            // Filtering out pixels of a specific color according to the threshold
+            let thresh = 120;
+            if (!(data[0] > thresh && data[1] > thresh && data[2] > thresh)) {
                 if (x < width - hexWidth &&
                     y < height - hexHeight) {
-                    points.push([Math.floor(x), Math.floor(y)]);
+                    points.push([Math.floor(x), Math.floor(y), pixR, pixG, pixB, pixA]);
                 }
             }
         }
@@ -94,7 +101,14 @@ function placeHexagons() {
        .attr("class", "hexagon")
        .attr("d", (d) => { return hexbin.hexagon() }) 
        .attr("transform", (d) => { return "translate(" + d.x + "," + d.y + ")" })
-       .attr("stroke", "#fff")
-       .attr("stroke-width", "2px")
-       .style("fill", (d) => { return "#2a5c5c" });
+       .attr("stroke", "#323339")
+       .attr("stroke-width", "1.5px")
+       // .style("fill", (d) => { return "#6cbf84" });
+       .style("fill", (d) => {
+            return "rgba(" +
+                    d[0][2] + "," +
+                    d[0][3] + "," +
+                    d[0][4] + "," +
+                    d[0][5] + ")"
+        });
 }

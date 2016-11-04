@@ -1,0 +1,141 @@
+/*============================================*/
+/*==================HOMEPAGE==================*
+/*============================================*/
+
+/*===================TITLE====================*/
+
+body{
+        background-color: #292444;
+}
+
+.title-container{
+    position: fixed;
+    opacity: 0;
+    z-index: 1;
+    top: 200px;
+    pointer-events: none;
+}
+
+.title-text-wrapper{
+    width:700px;
+    margin: 0 auto;
+}
+
+.title{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    font-size: 60px;
+    letter-spacing: 5px;
+}
+
+.title-line span{
+    display: inline-block;
+    position: relative;
+}
+
+#line1{
+    margin-left:15px;
+}
+
+/*==================NAV-BAR===================*/
+
+.nav {
+    z-index:100;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5%;
+    padding: 0;
+}
+
+.nav-box {
+    display: block;
+    margin-bottom:50px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+}
+
+.nav-box:hover,
+.active {
+    background-color: white;
+    cursor: pointer;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+/*==================BUILDINGS=================*/
+
+.black-square{
+    fill: #000;
+    stroke: none;
+}
+
+#grid{
+    margin: 50px auto 0 auto;
+    width: 570px;
+    height: 550px;
+    opacity: 0.5;
+    overflow: visible !important;
+} 
+
+#grid:hover{
+    cursor: pointer;
+}
+
+svg.canvas, svg.building{
+    overflow: visible;
+}
+
+.section{
+    height: 1000px;
+}
+
+/*=====================CAR====================*/
+
+.car-wrapper {
+    height: 100%;
+    width: 100%;
+    left:350px;
+    text-align:center;
+    position: fixed;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/*===================STREETS==================*/
+
+.street-wrapper {
+    position: fixed;
+    pointer-events: none;
+}
+
+.street-wrapper .hoz {
+    background-color: white;
+    width: 1000px;
+    height: 7px;
+}
+
+.street-wrapper .vert {
+    background-color: white;
+    width: 8px;
+    height: 1px;
+    transform-origin: top;
+}
+
+#street1{
+    left:2000px;
+}
+
+#street2{
+    bottom: 53.2%;
+    opacity: 0;
+}
+
+/*============================================*/
+/*===============END-HOMEPAGE=================*
+/*============================================*/

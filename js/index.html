@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Testing</title>
-	</head>
-	<body>
-		<pre id="json"></pre>
-		<script src="./parkingCitation.js" charset="utf-8"></script>
-	</body>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>LAX Visualization</title>
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="lax-flights.js"></script>
+    <script src="lax-vehicles.js"></script>
+    <script src="lax-data-manager.js"></script>
+    
+    <link rel="stylesheet" href="css/styles.css" type="text/css"> </head>
+
+<body>
+    <h1>Flights Data</h1>
+    <svg class="chart" id="flights-chart"></svg>
+    <h1>Vehicles In Data</h1>
+    <svg class="chart" id="vehicles-in-chart"></svg>
+    <h1>Vehicles Out Data</h1>
+    <svg class="chart" id="vehicles-out-chart"></svg>
+
+    <!-- <pre id="json"></pre> -->
+        <!-- <script src="./parkingCitation.js" charset="utf-8"></script> -->
+    
+</body>
+
 </html>
