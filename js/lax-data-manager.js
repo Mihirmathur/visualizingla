@@ -1,51 +1,24 @@
-// Auxiliary Functions
-
-function intersectArrays(a, b) {
-    // Create array of concurrent dates
-    var aSet = new Set;
-    for (var i of a) {
-        aSet.add(Object.keys(i)[0]);
-    }
-    var bSet = new Set;
-    for (var i of b) {
-        bSet.add(Object.keys(i)[0]);
-    }
-    var intersection = new Set([...aSet].filter(x => bSet.has(x)))
-    return Array.from(intersection);
-}
-
-// --------- Data Manager Module ----------- //
-
 var DataManager = (function (maxWidth, maxHeight) {
 
-    var dates, flights, vehicles;
     // have data from 2013-05 to 2016-07
     // Stored in the form
-    // { YYYY-MM: { flights: XXX, vehicles: { entry: XXX, exit: XXX } } }
+    // [ { date: Date, flights: XXX, vin: XXX, vout: XXX } ]
     var data = [];
-    // Stored in the form
-    // { flights: {max, min, average, range}, vehiclesIn: ...}
-    var stats = {};
     
     var margin = {top: 20, right: 20, bottom: 50, left: 100},
     width = maxWidth - margin.left - margin.right,
     height = maxHeight - margin.top - margin.bottom;
-
-    function dates() {
-        return dates;
-    }
     
     function downloadData() {
+        var flights, vehicles, dates;
         return new Promise(function (resolve, reject) {
             flightsModule.fetchData().then(function () {
                 flights = flightsModule.allCounts();
-                console.log(flights);
             }).then(function () {
                 vehiclesModule.fetchData().then(function () {
                     vehicles = vehiclesModule.allCounts();
-                    console.log(vehicles);
                 }).then(function () {
-                    // Create array of concurrent dates
+                    // Create local data structure
                     dates = intersectArrays(flights, vehicles);
                     for (var date of dates) {
                         var obj = {}
@@ -68,7 +41,7 @@ var DataManager = (function (maxWidth, maxHeight) {
         var max = d3.max(data, function(d) { return d.flights; });
         var range = max - min;
         
-                // Set the domain and ranges for each axis
+        // Set the domain and ranges for each axis
         var x = d3.scaleTime()
             .range([0, width])
             .domain(d3.extent(data, function(d) { return d.date; }));   
@@ -76,7 +49,7 @@ var DataManager = (function (maxWidth, maxHeight) {
             .range([height, 0])
             .domain([0, d3.max(data, function(d) { return d.flights; })]);
         
-         // Create a chart on the passed-in selector SVG
+        // Create a chart on the passed-in selector SVG
         var chart = makeChart(selector);
         
         // Define the flight line to be graphed
@@ -95,8 +68,6 @@ var DataManager = (function (maxWidth, maxHeight) {
     }
     
     function plotVehicles(selector) {
-        
-        var yAxisLabel = "No. of Vehicles";
         
         // Set the domain and ranges for each axis
         var x = d3.scaleTime()
@@ -129,7 +100,6 @@ var DataManager = (function (maxWidth, maxHeight) {
             .attr("class", "line")
             .attr("d", voutLine)
             .style("stroke", "#f00");
-        
         
         addAxes(chart, x, y, "Date", "No. of Vehicles");
         
@@ -183,12 +153,26 @@ var DataManager = (function (maxWidth, maxHeight) {
         return obj;
     }
     
+    function intersectArrays(a, b) {
+        // Create array of concurrent dates
+        var aSet = new Set;
+        for (var i of a) {
+            aSet.add(Object.keys(i)[0]);
+        }
+        var bSet = new Set;
+        for (var i of b) {
+            bSet.add(Object.keys(i)[0]);
+        }
+        var intersection = new Set([...aSet].filter(x => bSet.has(x)))
+        return Array.from(intersection);
+    }
+    
     return {
         downloadData: downloadData
         , plotVehicles: plotVehicles
         , plotFlights: plotFlights
     }
-})(1200, 400);
+})(800, 400);
 
 $(document).ready(function() {
     DataManager.downloadData().then(function () {
