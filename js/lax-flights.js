@@ -6,7 +6,9 @@ var flightsModule = (function () {
     var fetchData = function () {
             // return a promise that the data has been accessed
             return new Promise(function (resolve, reject) {
-                $.getJSON(api + "?" + $.param(parameters), function (d) {
+                var where = "&$where=reportperiod%20>%20%272010-09-01T00:00:00.000%27"
+                var call = api + "?" + $.param(parameters) + where;
+                $.getJSON(call, function (d) {
                     data = d;
                     resolve('Success!');
                 }).fail(function (jqxhr, textStatus, error) {
@@ -71,6 +73,7 @@ var flightsModule = (function () {
     var api = "https://data.lacity.org/resource/3ndt-ics3.json";
     var parameters = {
         "$select": "reportperiod, flighttype, arrival_departure, domestic_international, flightopscount"
+//        "$where": "date>'2010-09-01T00:00:00.000'"
     };
     var data = [];
     return {

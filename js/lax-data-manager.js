@@ -22,7 +22,7 @@ var DataManager = (function (maxWidth, maxHeight) {
     // have data from 2013-05 to 2016-07
     // Stored in the form
     // { YYYY-MM: { flights: XXX, vehicles: { entry: XXX, exit: XXX } } }
-    var data = {};
+    var data = [];
     // Stored in the form
     // { flights: {max, min, average, range}, vehiclesIn: ...}
     var stats = {};
@@ -39,14 +39,22 @@ var DataManager = (function (maxWidth, maxHeight) {
         return new Promise(function (resolve, reject) {
             flightsModule.fetchData().then(function () {
                 flights = flightsModule.allCounts();
+                console.log(flights);
             }).then(function () {
                 vehiclesModule.fetchData().then(function () {
                     vehicles = vehiclesModule.allCounts();
+                    console.log(vehicles);
                 }).then(function () {
                     // Create array of concurrent dates
                     dates = intersectArrays(flights, vehicles);
                     for (var date of dates) {
-                        data[date] = dataForMonth(date);
+                        var obj = {}
+                        obj.date = new Date(date);
+                        obj.flights = flightsModule.forMonth(date);
+                        var v = vehiclesModule.forMonth(date);
+                        obj.vin = v.entry;
+                        obj.vout = v.exit;
+                        data.push(obj);
                     }
                     resolve("Success!");
                 });
@@ -55,19 +63,6 @@ var DataManager = (function (maxWidth, maxHeight) {
     }
     
     function plotFlights(selector) {
-        var flights = [];
-        for (var date of dates) {
-            flights.push(data[date].flights);
-        }
-        
-        var myData = [];
-        for (var i in dates) {
-            var obj = {}
-            obj.date = new Date(dates[i]);
-            obj.flights = flights[i];
-
-            myData.push(obj);
-        }
         
         var min = d3.min(data, function(d) { return d.flights; });
         var max = d3.max(data, function(d) { return d.flights; });
@@ -76,10 +71,10 @@ var DataManager = (function (maxWidth, maxHeight) {
                 // Set the domain and ranges for each axis
         var x = d3.scaleTime()
             .range([0, width])
-            .domain(d3.extent(myData, function(d) { return d.date; }));   
+            .domain(d3.extent(data, function(d) { return d.date; }));   
         var y = d3.scaleLinear()
             .range([height, 0])
-            .domain([0, d3.max(myData, function(d) { return d.flights; })]);
+            .domain([0, d3.max(data, function(d) { return d.flights; })]);
         
          // Create a chart on the passed-in selector SVG
         var chart = makeChart(selector);
@@ -91,7 +86,7 @@ var DataManager = (function (maxWidth, maxHeight) {
         
         // Add path to graph
         chart.append("path")
-            .data([myData])
+            .data([data])
             .attr("class", "line")
             .attr("d", flightsLine)
             .style("stroke", "#00f");
@@ -101,36 +96,15 @@ var DataManager = (function (maxWidth, maxHeight) {
     
     function plotVehicles(selector) {
         
-        var vin = [];
-        for (var date of dates) {
-            vin.push(data[date].vehicles.entry);
-        }
-        
-        var vout = [];
-        for (var date of dates) {
-            vout.push(data[date].vehicles.exit);
-        }
-        
-        var myData = [];
-        for (var i in dates) {
-            var obj = {}
-            obj.date = new Date(dates[i]);
-            obj.vin = vin[i];
-            obj.vout = vout[i];
-            myData.push(obj);
-        }
-        
-        // TODO: Fix data structure so above is not necessary
-        
         var yAxisLabel = "No. of Vehicles";
         
         // Set the domain and ranges for each axis
         var x = d3.scaleTime()
             .range([0, width])
-            .domain(d3.extent(myData, function(d) { return d.date; }));   
+            .domain(d3.extent(data, function(d) { return d.date; }));   
         var y = d3.scaleLinear()
             .range([height, 0])
-            .domain([0, d3.max(myData, function(d) { return d.vin; })]);
+            .domain([0, d3.max(data, function(d) { return d.vin; })]);
         
         // Create a chart on the passed-in selector SVG
         var chart = makeChart(selector);
@@ -146,12 +120,12 @@ var DataManager = (function (maxWidth, maxHeight) {
             .y(function(d) { return y(d.vout); });
         
         chart.append("path")
-            .data([myData])
+            .data([data])
             .attr("class", "line")
             .attr("d", vinLine)
             .style("stroke", "#0f0");
         chart.append("path")
-            .data([myData])
+            .data([data])
             .attr("class", "line")
             .attr("d", voutLine)
             .style("stroke", "#f00");

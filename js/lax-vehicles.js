@@ -75,6 +75,7 @@ var vehiclesModule = (function () {
         return counts;
     }
     //----- Private API -----//  
+//    var api = "http://data.lacity.org/resource/x7vu-vht3.json";
     var api = "https://data.lacity.org/resource/x7vu-vht3.json";
     var data = [];
 
