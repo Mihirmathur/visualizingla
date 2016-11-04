@@ -12,7 +12,7 @@ var flightsModule = (function() {
     return new Promise(function(resolve, reject) {
       $.getJSON(api + "?" + $.param(parameters), function(d) {
         data = d;
-        removeTimeFromDate();
+//        removeTimeFromDate();
         resolve('Success!');
       }).fail(function(jqxhr, textStatus, error) {
         var err = textStatus + ", " + error;
@@ -29,7 +29,7 @@ var flightsModule = (function() {
     var count = 0;
 
     for (var i = 0; i < data.length; i++) {
-      if (data[i].hasOwnProperty('reportperiod') && data[i].reportperiod.substr(0, 7) === month) {
+      if (data[i].hasOwnProperty('reportperiod') && data[i].reportperiod/*.substr(0, 7)*/ === month) {
         count += Number(data[i].flightopscount);
       }
     }

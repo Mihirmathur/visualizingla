@@ -1,6 +1,5 @@
 var DataManager = (function () {
-    var maxHeight = 500; //px
-    var maxWidth = 1000; //px
+
     var dates, flights, vehicles;
     // have data from 2013-05 to 2016-07
     // Stored in the form
@@ -14,46 +13,58 @@ var DataManager = (function () {
         return dates;
     }
 
-    function flightsArray() {
+    function plotFlights(selector) {
         var flightArr = [];
         for (var date of dates) {
             flightArr.push(data[date].flights);
         }
-        return flightArr;
+        plot(flightArr, selector)
     }
 
-    function vehiclesInArray() {
+    function plotVehiclesIn(selector) {
         var vin = [];
         for (var date of dates) {
             vin.push(data[date].vehicles.entry);
         }
-        return vin;
+        plot(vin, selector);
     }
 
-    function vehiclesOutArray() {
+    function plotVehiclesOut(selector) {
         var vout = [];
         for (var date of dates) {
             vout.push(data[date].vehicles.exit);
         }
-        return vout;
+        plot(vout, selector);
     }
 
-    function plot(data, selector) {
+    function plot(dataRange, selector) {
+        
+        var data = [];
+        for (var i in dataRange) {
+            var obj = {}
+            obj.date = new Date(dates[i]);
+            obj.value = dataRange[i];
+            data.push(obj);
+        }
 
         var margin = {top: 20, right: 20, bottom: 50, left: 100},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
         
-        var max = d3.max(data);
-        var min = d3.min(data);
+        var min = d3.min(dataRange);
+        var max = d3.max(dataRange);
         var range = max - min;
+        
         
         // Set the ranges
         // TODO: Set domains as well (for x-axis)
-        var x = d3.scaleTime().range([0, width]);
+        var x = d3.scaleTime()
+            .range([0, width]);
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data)])
-            .range([height, 0]);
+            .range([height, 0])
+        
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.max(data, function(d) { return d.value; })]);
         
         // Set SVG's size
         var chart = d3.select(selector)
@@ -62,28 +73,37 @@ var DataManager = (function () {
             .attr("cx", "30")
             .style("padding", "100px");
         
-        var barWidth = width / data.length;
+        var barWidth = width / dataRange.length;
         
-        // Create "g" elements for every data point
+//        var valueline = d3.line()
+//            .x(function(d,i) { return x(d.date); })
+//            .y(function(d) { return y(d.close); });
+        
+//        chart.append("path")
+//            .data([data])
+//            .attr("class", "line")
+//            .attr("d", valueline);
+        
+//         Create "g" elements for every data point
+//        console.log(data);
         var bar = chart.selectAll("g")
             .data(data).enter().append("g")
-        
-            // TODO: Understand how transform works
             .attr("transform", function (d, i) {
                 return "translate(" + (i * barWidth) + ",0)";
             })
             .attr("fill", function(d) {
                 // Fill with gradient color based on data value
                 // TODO: Adapt to color style for our project
-                return "rgb(0, 0, " + Math.floor((((d-min)/range) * 255))  + ")";
+                return "rgb(0, 0, " + Math.floor((((d.value-min)/range) * 255))  + ")";
             });
+    
         
         // Create rect elements for each bar
         bar.append("rect")
             // get relative height on our linear scale
             // and position it so the bottoms of the bars are flush
-            .attr("y", function(d) { return y(d); })
-            .attr("height", function(d) { return height - y(d); })
+            .attr("y", function(d) { return y(d.value); })
+            .attr("height", function(d) { return height - y(d.value); })
             .attr("width", barWidth - 1);
         
         // Add x-axis
@@ -174,14 +194,19 @@ var DataManager = (function () {
         downloadData: downloadData
         , data: data
         , dates: dates
-        , flights: flightsArray
-        , vehiclesIn: vehiclesInArray
-        , vehiclesOut: vehiclesOutArray
-        , plot: plot
+        , plotFlights: plotFlights
+        , plotVehiclesIn: plotVehiclesIn
+        , plotVehiclesOut: plotVehiclesOut
     }
 })();
 DataManager.downloadData().then(function () {
-    DataManager.plot(DataManager.flights(), "#flights-chart");
-    DataManager.plot(DataManager.vehiclesIn(), "#vehicles-in-chart");
-    DataManager.plot(DataManager.vehiclesOut(), "#vehicles-out-chart");
+    DataManager.plotFlights("#flights-chart");
+    DataManager.plotVehiclesIn("#vehicles-in-chart");
+    DataManager.plotVehiclesOut("#vehicles-out-chart");
+    
+//    var dates = DataManager.dates();
+//    
+//    var dateFormat = new Date(dates[0]);
+//    
+//    console.log(dates[0] + "formmatted is: " + dateFormat);
 });

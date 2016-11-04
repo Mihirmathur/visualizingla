@@ -1,3 +1,7 @@
+// Glitch in the API 
+// 2014 April has rendundant entries!!!!
+
+
 var vehiclesModule = (function() {
 
   //----- Public API -----//
@@ -11,7 +15,8 @@ var vehiclesModule = (function() {
     return new Promise(function(resolve, reject) {
       $.getJSON(api, function(d) {
         data = d;
-        removeTimeFromDate();
+//        removeTimeFromDate();
+          removeRedundancies();
         joinLevels();
         resolve(data);
       }).fail(function(jqxhr, textStatus, error) {
@@ -32,6 +37,25 @@ var vehiclesModule = (function() {
     }
     return output;
   }
+    
+    function removeRedundancies() {
+        var arr = [];
+        
+        for (var i of data) {
+            if (arr.find(function(d) {
+                var a = (d.entryexit === i.entryexit); 
+                var b = (d.reportingmonth === i.reportingmonth);
+                var c = (d.total_vehicles === i.total_vehicles);
+                var d = (d.upperlower === i.upperlower);
+                return (a && b && c && d);
+            }) === undefined) {
+                // If no duplicate was found, add it
+                arr.push(i);
+            }
+        }
+        
+        data = arr;
+    }
 
   // Returns array of objects of the form
   // { [date]: { entry: X, exit: Y }}
@@ -70,14 +94,14 @@ var vehiclesModule = (function() {
   var api = "https://data.lacity.org/resource/x7vu-vht3.json";
   var data = [];
   
-  function removeTimeFromDate() {
-    var newArr = [];
-    for (var i of data) {
-      i.reportingmonth = i.reportingmonth.substring(0, 7);
-      newArr.push(i);
-    }
-    return newArr;
-  }
+//  function removeTimeFromDate() {
+//    var newArr = [];
+//    for (var i of data) {
+//      i.reportingmonth = i.reportingmonth.substring(0, 7);
+//      newArr.push(i);
+//    }
+//    return newArr;
+//  }
 
   function joinLevels() {
     var newArr = [];
