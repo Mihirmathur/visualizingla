@@ -103,7 +103,6 @@ var vehiclesModule = (function () {
     }
     return {
         fetchData: fetchData
-        , getData: getData
         , forMonth: vehiclesForMonth
         , allCounts: getAllVehicleCounts
     }

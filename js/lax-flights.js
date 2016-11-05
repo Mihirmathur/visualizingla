@@ -6,7 +6,9 @@ var flightsModule = (function () {
     var fetchData = function () {
             // return a promise that the data has been accessed
             return new Promise(function (resolve, reject) {
-                $.getJSON(api + "?" + $.param(parameters), function (d) {
+                var call = api + "?" + $.param(parameters);
+                console.log(call);
+                $.getJSON(call, function (d) {
                     data = d;
                     resolve('Success!');
                 }).fail(function (jqxhr, textStatus, error) {
@@ -16,6 +18,7 @@ var flightsModule = (function () {
                 });
             });
         }
+    
         // Returns # of flights in a given month
         // Enter date in format: YYYY-MM
     function getFlightCountForMonth(month) {
@@ -27,6 +30,7 @@ var flightsModule = (function () {
         }
         return count;
     }
+    
     // Returns an object with KV-pairs of the form
     // YYYY-MM: ######
     function getAllFlightCounts() {
@@ -70,12 +74,13 @@ var flightsModule = (function () {
     //----- Private API -----//
     var api = "https://data.lacity.org/resource/3ndt-ics3.json";
     var parameters = {
-        "$select": "reportperiod, flighttype, arrival_departure, domestic_international, flightopscount"
+        "$select": "reportperiod, flighttype, arrival_departure, domestic_international, flightopscount",
+        "$where": "reportperiod>'2013-01-01T00:00:00.000'"
+        // weird API glitch not returning all values without limiting query
     };
     var data = [];
     return {
-        getData: getData
-        , fetchData: fetchData
+        fetchData: fetchData
         , forMonth: getFlightCountForMonth
         , allCounts: getAllFlightCounts
     };

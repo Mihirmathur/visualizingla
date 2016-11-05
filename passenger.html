@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Passenger Count</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+</head>
+<body>
+	<!-- <svg id="canvas" width="800" height="600"></svg> -->
+	<canvas id="myCanvas" width="1000" height="600" style="border:1px solid #d3d3d3;">
+</body>
+<script type="text/javascript">
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(100, 75, 50, 0, Math.PI);
+	ctx.lineWidth=1;
+	ctx.font="15px Open Sans";
+	ctx.fillText("LAX",40,60);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(140, 75, 90, 0, Math.PI);
+	ctx.lineWidth=2;
+	ctx.font="10px Open Sans";
+	ctx.fillText("Phoenix–Sky Harbor",100,60);
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(180, 75, 130, 0, Math.PI);
+	ctx.lineWidth=3;
+	ctx.font="15px Open Sans";
+	ctx.fillText("Toronto",200,60);
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.arc(180, 75, 130, 0, Math.PI);
+	ctx.lineWidth=4;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(220, 75, 170, 0, Math.PI);
+	ctx.lineWidth=5;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(260, 75, 210, 0, Math.PI);
+	ctx.lineWidth=6;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(300, 75, 250, 0, Math.PI);
+	ctx.lineWidth=7;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(340, 75, 290, 0, Math.PI);
+	ctx.lineWidth=7;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(380, 75, 330, 0, Math.PI);
+	ctx.lineWidth=9;
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.arc(420, 75, 370, 0, Math.PI);
+	ctx.lineWidth=10;
+	ctx.stroke();
+
+	
+</script>
+
+<!-- <script>
+var svg = d3.select('#canvas');
+var groupPadding = 12;
+var segmentPadding = 4;
+/*
+var data = [
+   // [{group: 'A', value: 50}],
+   [{group: '2', value: 50}],
+   [{group: '3', value: 20}],
+   [{group: '3', value: 80}, {group: '2', value: 80}],
+   [{group: '3', value: 50}, {group: '1', value: 50}, {group: '2', value: 50}]
+];
+*/
+
+var data = [
+    [{group: '1', value: 50}, {group: '10', "rank":1, "airport": "San Fransisco-SFO", "state":"CA", "passengers":1837000, value: 50}, {group: '9', "rank":2, "airport": "New York-JFK", "state":"NY", "passengers":1662000, value: 50}],
+   // [{group: '2', value: 50}],
+   // [{group: '3', value: 50}],
+   // [{group: '3', value: 50}, {group: '2', value: 50}],
+   // [{group: '1', value: 50}, {group: '2', value: 50}],
+   // [{group: '1', value: 50}, {group: '3', value: 50}],
+   // [{group: '3', value: 50}, {group: '1', value: 50}, {group: '2', value: 50}]
+];
+
+
+
+var d3cat20 = d3.scale.category10();
+
+// Range
+var radians = d3.scale.linear().range([Math.PI/2, 3*Math.PI/2]);
+
+// path generator for arcs (uses polar coordinates)
+var arc = d3.svg.line.radial()
+  .interpolate('basis')
+  .tension(0)
+  .angle(function(d) { return radians(d); });
+
+
+function fillColour(idx) {
+  return d3cat20(idx);
+}
+
+
+function calculateGroups(data) {
+
+  // First pass: aggregate subgroups to get group totals 
+  var groups = {};
+  data.forEach(function(subGroup, subGroupIdx) {
+    subGroup.forEach(function(item) {
+      if (! groups[item.group]) {
+        groups[item.group] = {
+          groupId: item.group,
+          size: 0,
+          segments: []
+        };
+      }
+      groups[item.group].size += item.value;
+      groups[item.group].segments.push({
+        groupId: item.group,
+        subGroupId: subGroupIdx,
+        size: item.value
+      });
+    });
+  });
+
+  // Flatten: flatten into array to make iteration easier
+  var results = [];
+  Object.keys(groups).forEach(function(key) {
+    results.push(groups[key]);
+  });
+
+  // Second pass: compute group and subgroup positions 
+  var offset = groupPadding;
+  results.forEach(function(group) {
+    group.startX = offset;
+
+    console.log(group.groupId, group.startX);
+    
+    var segmentOffset = group.startX + segmentPadding;
+    group.segments.forEach(function(segment) {
+      segment.startX = segmentOffset;
+      segmentOffset += segment.size + segmentPadding;
+
+      console.log('\t', segment.groupId, segment.subGroupId, segment.startX);
+    });
+    offset += group.size + groupPadding + group.segments.length * segmentPadding + segmentPadding;
+  });
+
+  return results;
+}
+
+
+function calculateLinks(groupData) {
+  var uniqueSubGroups = [];
+  var segments = [];
+  var results = [];
+
+
+  // Pull out the sub groups and unique group names
+  groupData.forEach(function(group) {
+    group.segments.forEach(function(segment) {
+      var segmentGroup = segment.subGroupId;
+      if (uniqueSubGroups.indexOf(segmentGroup) === -1) {
+        uniqueSubGroups.push(segmentGroup);
+      }
+      segments.push(segment);
+    });
+  });
+
+
+  // Find arc combinations
+  uniqueSubGroups.forEach(function(key) {
+    var links = _.filter(segments, function(segment) {
+      return segment.subGroupId === key;
+    });
+    console.log(key, links);
+
+    // No relations to other segments
+    if (! links || links.length < 2) {
+      return;
+    }
+
+    // Calculate the arcs
+    // Not efficient, but since we are not dealing with large number of groups, it doesn't really matter...
+    links.forEach(function( outer ) {
+      links.forEach(function( inner ) {
+        // Self
+        if (outer.groupId === inner.groupId) {
+          return;
+        }
+
+        // Avoid redundant arcs
+        var exists = _.filter(results, function(item) {
+          return (item.from === outer.groupId && item.to === inner.groupId) || 
+            (item.from === inner.groupId && item.to === outer.groupId); 
+        });
+
+        // Add arc
+        results.push({
+          from: outer.groupId,
+          to: inner.groupId,
+          subGroupId: key,
+          offsetX: 0.5 * Math.abs(outer.startX + inner.startX) + 0.5*outer.size,
+          radius: 0.5 * Math.abs(outer.startX - inner.startX)
+        });
+
+      });
+    });
+  });
+  return results;
+}
+
+
+function mouseover(subGroupId) {
+  var selection = '.subgroup-' + subGroupId;
+  d3.selectAll(selection).style('opacity', 1.0);
+
+}
+
+function mouseout(subGroupId) {
+  var selection = '.subgroup-' + subGroupId;
+  d3.selectAll(selection).style('opacity', 0.33);
+}
+
+
+
+var groupData = calculateGroups(data);
+var linkData = calculateLinks(groupData);
+
+svg.selectAll('.data-group')
+  .data(groupData)
+  .enter()
+  .append('rect')
+  .attr('class', 'data-group')
+  .attr('x', function(d) {
+    return d.startX;
+  })
+  .attr('y', 100)
+  .attr('width', function(d) {
+    return d.size + d.segments.length * segmentPadding + segmentPadding;
+  })
+  .attr('height', function(d) {
+    return 50;
+  })
+  .style({
+    'fill': '#888888',
+    'stroke': '#666666'
+  })
+  .each(function(d, i) {
+    var groupNode = this.parentNode;
+    
+    // Render label
+    d3.select(groupNode).append('text')
+      .attr('x', d.startX)
+      .attr('y', 90)
+      .text('Group ' + d.groupId);
+
+    
+    // Render subgroups
+    var segmentOffset = segmentPadding;
+    d.segments.forEach(function(segment) {
+      d3.select(groupNode).append('rect')
+        .attr('class', 'subgroup subgroup-' + segment.subGroupId)
+        .attr('x', function() {
+          return segment.startX;
+        })
+        .attr('y', 105)
+        .attr('width', segment.size)
+        .attr('height', 40)
+        .style({
+          //'fill': '#22EEBB',
+          'fill': fillColour(+ d.groupId),
+          'stroke': '#000',
+          'opacity': '0.33'
+        })
+        .on('mouseover', function() {
+          mouseover(segment.subGroupId);
+        })
+        .on('mouseout', function() {
+          mouseout(segment.subGroupId);
+        });
+    })
+  });
+
+
+svg.selectAll('.data-link')
+  .data(linkData)
+  .enter()
+  .append('path')
+  .attr('class', function(d) {
+    return 'data-link subgroup-' + d.subGroupId;
+  })
+  .attr('transform', function(d) {
+    return 'translate(' + d.offsetX + ', 150)';
+  })
+  .attr('d', function(d, i) {
+    var points = d3.range(0, 10);
+    radians.domain([0, points.length -1]);
+    arc.radius(d.radius);
+    return arc(points);
+  })
+  .style({
+    'fill': 'none',
+    'stroke': '#888888',
+    'stroke-width': '5',
+    'opacity': 0.33
+  });
+
+</script> -->
+</html>
