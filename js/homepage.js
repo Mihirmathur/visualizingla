@@ -1,15 +1,81 @@
-var canvas = d3.select('#grid');
+//var canvas = d3.select('#grid');
 
 var startingSequence = true;
 
-var canvasWidth = canvas.node().getBoundingClientRect().width;
-var canvasHeight = canvas.node().getBoundingClientRect().height;
+//var canvasWidth = canvas.node().getBoundingClientRect().width;
+//var canvasHeight = canvas.node().getBoundingClientRect().height;
 
-var width = 10, height = 10,
+var sectionWidth = d3.select('#section-1').node().getBoundingClientRect().width;
+var sectionHeight = d3.select('#section-1').node().getBoundingClientRect().height;
+
+var winWidth = $(window).width();
+var winHeight = $(window).height();
+
+var width = 5, height = 5,
     off = 3, buildingSpacing = 10;
+var continueSquaresMovement = true;
 
-var colors = ['#dad83a', '#ed494b']; //[yellow, pink]
+var colors = ['#fff', '#000'];
+var colorScale = d3.scale.linear()
+                .domain([0, 1])
+                .range(['#fff', '#222']);
 
+var background = d3.select('#section-1')
+        .append('svg')
+        .attr('width', sectionWidth)
+        .attr('height', sectionHeight);
+
+function initSquaresDataRandomely(number){
+    var data = new Array();
+
+    for(var i = 0; i < number; i++){
+        var rand = Math.random();
+
+        data.push({
+            x: Math.random()*sectionWidth, 
+            y: (1+Math.random())*sectionHeight,
+            width: width,
+            height: height,
+            fill: colorScale(rand),          //smaller rand = whiter & more in front
+            duration: (rand+0.001) * 2000 + 2000,       //smaller rand = slower
+        });
+    }
+
+    return data;
+}
+
+function initSquaresRandomly(number){
+    var squaresData = initSquaresDataRandomely(number);
+
+    background.append('g').selectAll('rect')
+        .data(squaresData)
+        .enter()
+        .append('rect')
+            .attr('x', function(d) {return d.x;})
+            .attr('y', function(d) {return d.y;})
+            .attr('width', function(d) {return d.width;})
+            .attr('height', function(d) {return d.height;})
+            .style('fill', function(d) {return d.fill;})
+            .transition()
+                .each('start', function upwardsRepeat(){
+                    if(continueSquaresMovement){
+                        d3.select(this)
+                            .transition()
+                                .duration(function(d){return d.duration})
+                                .ease('linear')
+                                .attr('y', '-200')
+                            .transition()
+                                .duration(0)
+                                .attr('y', sectionHeight + 50)
+                            .transition()
+                                .each('start', upwardsRepeat);
+                    }
+                });
+}
+
+initSquaresRandomly(500);
+
+/*
 function initSingleBuilding(buildingHeight, buildingWidth) {
     var data = new Array();
     var xpos = 1, ypos = 1;
@@ -54,7 +120,8 @@ function flyOut(d){
         .duration(1000)
             .attr('transform', 'translate(' + xOff + ', ' + yOff + ')')
             .style('fill', 'none')
-            .style('stroke', colors[Math.floor(Math.random() * colors.length)])
+            //.style('stroke', colors[Math.floor(Math.random() * colors.length)])
+            .style('stroke', '#fff')
             .style('stroke-width', '1');
 }
 
@@ -67,6 +134,7 @@ function flyInAfterHover(d){
             .attr('transform', function(d){
                 return 'translate(' + d.xOffset + ', ' + d.yOffset + ')';
             })
+            .style('stroke', '#fff')
             .attr('xTrans', 0)
             .attr('yTrans', 0);
 }
@@ -76,13 +144,13 @@ function flyIn(d){
         .transition()
         .ease('cubic')
         .delay(1000)
-        .duration(600)
+        .duration(2000)
             .attr('transform', function(d){
                 return 'translate(' + d.xOffset + ', ' + d.yOffset + ')';
             })
             .attr('xTrans', 0)
             .attr('yTrans', 0)
-            .style('fill', '#000')
+            .style('fill', '#fff')
             .style('stroke', 'none');
 }
 
@@ -99,8 +167,8 @@ function initAllBuildings(arr){
                     .attr('width', building.width)
                     .attr('x', left)
                     .attr('y', y)
-                    .attr('data-0', '@y: ' + y)
-                    .attr('data-50', '@y:' + (y-1000*Math.random()))
+                    //.attr('data-0', '@y: ' + y)
+                    //.attr('data-50', '@y:' + (y-1000*Math.random()))
                 .selectAll('.row')
                 .data(gridData)
                 .enter().append('g')
@@ -167,49 +235,51 @@ initAllBuildings([
         'width' : 70
     },
     {
-        'height' : 180,
+        'height' : 220,
         'width' : 60
+    },
+    {
+        'height' : 470,
+        'width' : 80
     }
-]);
+]);*/
 
 $(document).ready(function() {
-
-    var winWidth = $(window).width();
-    $('.title-container').css('width', winWidth);
-    $('.grid-wrapper').css('width', winWidth);
-
-    var gridDone = false;
-    enter();
 
     var s = skrollr.init({
         forceHeight: false,
         smoothScrolling: false,
-        render: function() {
-            /*if ( $('.building').hasClass('skrollable-after') ) {
-                if ( ! gridDone ) {
-                    gridDone = true;
-                    exit();
-                }
-            }else if (gridDone){
-                gridDone = false;
-                enter();
-            }*/
-        }
+        //TODO: trigger mouseclick on scrolling to section
     });
 
     skrollr.menu.init(s);
 
+    /*POSITIONING START*/
+
+    $('.main-centered').css('width', winWidth);
+    $('.title-text-wrapper').css({'width': winWidth});
+    $('.mid-top').css({'top' : winHeight * 0.5});
+    $('.mid-left').css({'left' : winWidth * 0.5});
+
+    /*POSITIONING END*/
+
+    /*NAVIGATION START*/
     $('.nav-box').click(function() {
         $('.nav-box').removeClass('active');
-        $(this).toggleClass('active');
+        $(this).addClass('active');
     });
-
-    $('.title-container').css('opacity', '1');
 
     var sectionArray = [];
     var activeSessionID = '';
 
     $(window).scroll(function() {
+
+        var top = $(document).scrollTop();
+
+        /*if(top > 1000 && top < 2500){
+            $('a[href=#section-1').trigger('click');
+        }*/
+
         sectionArray = ($('[id^="section"]').toArray());
 
         sectionArray.forEach(function(section) {
@@ -220,4 +290,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    /*NAVIGATION END*/
+
+    $('.title-text-wrapper').delay(2000)
+                            .animate({
+                                'margin-top': '0px',
+                                'opacity' : 1
+                            }, 1000);
 });

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Visualizing LA Transportation</title>
     <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
 </head>
 <body>
@@ -10,84 +12,106 @@
         <a href="#section-3" class="nav-box"><li class="list-style-none"></li></a>
         <a href="#section-4" class="nav-box"><li class="list-style-none"></li></a>
     </ul>
-    <div class="title-container" data-300="top:200px" data-400="top:-300px">
-        <div class="title-text-wrapper">
-            <h1 class="title">
-                <span class="title-line" id="line1">
-                    <span data-256="top:0px" data-300="top:-400px">V</span>
-                    <span data-240="top:0px" data-300="top:-400px">I</span>
-                    <span data-226="top:0px" data-300="top:-400px">S</span>
-                    <span data-212="top:0px" data-300="top:-400px">U</span>
-                    <span data-198="top:0px" data-300="top:-400px">A</span>
-                    <span data-184="top:0px" data-300="top:-400px">L</span>
-                    <span data-170="top:0px" data-300="top:-400px">I</span>
-                    <span data-156="top:0px" data-300="top:-400px">Z</span>
-                    <span data-142="top:0px" data-300="top:-400px">I</span>
-                    <span data-128="top:0px" data-300="top:-400px">N</span>
-                    <span data-114="top:0px" data-300="top:-400px">G</span>
-                </span>
-                <br>
-                <span class="title-line" id="line2">
-                    <span>L</span>
-                    <span>O</span>
-                    <span>S</span>
-                    <span>&nbsp</span>
-                    <span>A</span>
-                    <span>N</span>
-                    <span>G</span>
-                    <span>E</span>
-                    <span>L</span>
-                    <span>E</span>
-                    <span>S</span>
-                </span>
-            </h1>
-        </div>
-    </div>
 
-    <!--SECTIONS-->
-    <div id="section-1" class="section" data-0="opacity: 1" data-500="opacity: 0">
-        <div class="grid-wrapper">
-            <div id="grid"></div>
-        </div>
-    </div>
-    <div id="section-2" class="section" data-501="" data-1500=""></div>
-    <div id="section-3" class="section" data-1501="" data-2500=""></div>
-    <div id="section-4" class="section" data-2501="" data-3500=""></div>
+    <div class="main-centered">
 
-    <!--STREETS-->
-        <!--[1] HORIZ-->
-        <div class = "street-wrapper" id="street1"
-            data-0="top:315px; margin-left: 0px;"
-            data-50="margin-left: -1500px;"
-            data-300=""
-            data-400="top:-185px">
-            <div class="hoz"></div>
-        </div>
-        <!--[2] VERT-->
-        <div class = "street-wrapper" style="left: 492px"
-                data-50="opacity: 0;"
-                data-51="opacity: 1;"
-                data-300="top:315px" data-400="top:-185px">
-            <div class = "vert" 
-                    data-50="transform: scale(1,1)"
-                    data-100="transform: scale(1,1600)">
+        <div id="section-1" class="section" data-0="" data-500="">
+            <div class="title-wrapper">
+                <div class="title-text-wrapper mid-top">
+                    <h1 class="title">
+                        <span class="title-line" id="line1">
+                            <span data-175="top:0px" data-390="top:-600px">V</span>
+                            <span data-315="top:0px" data-390="top:-600px">I</span>
+                            <span data-200="top:0px" data-390="top:-600px">S</span>
+                            <span data-329="top:0px" data-390="top:-600px">U</span>
+                            <span data-363="top:0px" data-390="top:-600px">A</span>
+                            <span data-127="top:0px" data-390="top:-800px">L</span>
+                            <span data-130="top:0px" data-390="top:-600px">I</span>
+                            <span data-267="top:0px" data-390="top:-600px">Z</span>
+                            <span data-179="top:0px" data-390="top:-600px">I</span>
+                            <span data-321="top:0px" data-390="top:-600px">N</span>
+                            <span data-305="top:0px" data-390="top:-600px">G</span>
+                        </span>
+                        <br>
+                        <span class="title-line" id="line2">
+                            <span data-255="top:0px" data-390="top:-600px">L</span>
+                            <span data-223="top:0px" data-390="top:-600px">O</span>
+                            <span data-211="top:0px" data-390="top:-600px">S</span>
+                            <span data-255="top:0px" data-390="top:-600px">.</span>
+                            <span data-327="top:0px" data-390="top:-600px">A</span>
+                            <span data-165="top:0px" data-390="top:-600px">N</span>
+                            <span data-155="top:0px" data-390="top:-600px">G</span>
+                            <span data-311="top:0px" data-390="top:-600px">E</span>
+                            <span data-329="top:0px" data-390="top:-600px">L</span>
+                            <span data-307="top:0px" data-390="top:-600px">E</span>
+                            <span data-325="top:0px" data-390="top:-600px">S</span>
+                        </span>
+                    </h1>
+                </div>
             </div>
-        </div>
+            
+            <div class="plane-wrapper mid-top mid-left"
+                data-0="transform: rotate(-90deg); margin-top:-1000px; margin-left: -37px;"
+                data-250="margin-top:500px">       
+                <div>
+                    <img src="resources/plane.svg" />
+                </div> 
+            </div>
 
-    <!--CAR-->
-    <div class = "car-wrapper"
-        data-50="bottom: 20px; left: 350px; transform: rotate(90deg); opacity:1"
-        data-220="left: -435px;"
-        >       
-        <div data-240="transform: rotate(0deg)"
-            data-300="transform: rotate(90deg)">
-            <img src="resources/car.svg" />
+            <div class="path-wrapper mid-top mid-left" id="path1"
+                data-0="margin-top: -2100px"
+                data-250="margin-top:-520px; opacity: 0.9"
+                data-290="opacity: 0">
+                <div class="vert"></div>
+            </div>
+
+            <div class="plane-wrapper mid-top mid-left"
+                data-0="transform: rotate(-90deg); margin-top:-1000px; margin-left: -237px"
+                data-350="margin-top:500px">       
+                <div>
+                    <img src="resources/plane.svg" />
+                </div> 
+            </div>
+
+            <div class="path-wrapper mid-top mid-left" id="path2"
+                data-0="margin-top: -2100px"
+                data-350="margin-top:-520px; opacity: 0.9"
+                data-390="opacity: 0">
+                <div class="vert"></div>
+            </div>
+
+             <div class="plane-wrapper mid-top mid-left" 
+                data-0="transform: rotate(-90deg); margin-top:-1000px; margin-left: 163px"
+                data-220=""
+                data-400="margin-top:500px">       
+                <div>
+                    <img src="resources/plane.svg" />
+                </div> 
+            </div> 
+             
+             <div class="path-wrapper mid-top mid-left" id="path3"
+                data-220="margin-top: -2100px"
+                data-400="margin-top:-520px; opacity: 1"
+                data-440="opacity: 0">
+                <div class="vert"></div>
+            </div>
+
         </div>
-                
+        <div id="section-2" class="section" data-501="opacity:0; margin-top:0px" data-600="margin-top:-400px; height: 1400px" data-800="opacity:1"data-1500="">
+           <!-- <div id="chart" style="opacity:0.5"></div>-->
+        </div>
+        <div id="section-3" class="section" data-1501="" data-2500=""></div>
+        <div id="section-4" class="section" data-2501="" data-3500=""></div>
+
+        <!--<div class="grid-wrapper">
+                <div id="grid"></div>
+        </div>-->
+
     </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.hexbin.v0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
     <script>
     (function(t,e){"use strict";var n=500,a="sqrt",o=1,r="data-menu-top",i="data-menu-offset",u="data-menu-duration",c="data-menu-ignore",l=e.skrollr,s=e.history,f=!!s.pushState,h=function(e){return e!==t&&e?"A"===e.tagName.toUpperCase()?e:h(e.parentNode):!1},p=function(t){if(1===t.which||0===t.button){var e=h(t.target);e&&m(e)&&t.preventDefault()}},m=function(n,a){var o;if(y){if(n.hostname!==e.location.hostname)return!1;if(n.pathname!==t.location.pathname)return!1;o=n.hash}else o=n.getAttribute("href");if(!/^#/.test(o))return!1;if(!a&&null!==n.getAttribute(c))return!1;var l,h;if(h=T?T(n):n.getAttribute(r),null!==h)l=/p$/.test(h)?h.slice(0,-1)/100*t.documentElement.clientHeight:+h*k;else{var p=t.getElementById(o.substr(1));if(!p)return!1;l=v.relativeToAbsolute(p,"top","top");var m=p.getAttribute(i);null!==m&&(l+=+m)}f&&N&&!a&&s.pushState({top:l},"",o);var d=parseInt(n.getAttribute(u),10),q=A(v.getScrollTop(),l);return isNaN(d)||(q=d),E&&E(o,l),S&&!a?v.animateTo(l,{duration:q,easing:b}):g(function(){v.setScrollTop(l)}),!0},d=function(){if(e.location.hash&&t.querySelector){var n=t.querySelector('a[href="'+e.location.hash+'"]');n||(n=t.createElement("a"),n.href=e.location.hash),m(n,!0)}},g=function(t){e.setTimeout(t,1)};l.menu={},l.menu.init=function(r,i){v=r,i=i||{},b=i.easing||a,S=i.animate!==!1,A=i.duration||n,T=i.handleLink,k=i.scale||o,y=i.complexLinks===!0,E=i.change,N=i.updateUrl!==!1,"number"==typeof A&&(A=function(t){return function(){return t}}(A)),l.addEvent(t,"click",p),f&&l.addEvent(e,"popstate",function(t){var e=t.state||{},n=e.top||0;g(function(){v.setScrollTop(n)})},!1),d()},l.menu.click=function(t){m(t)};var v,b,A,S,T,k,y,E,N;g(function(){e.location.hash&&e.scrollTo(0,0)})})(document,window);
