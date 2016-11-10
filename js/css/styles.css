@@ -2,8 +2,32 @@ body {
     font-family: "Helvetica", sans-serif;
 }
 
+/* Understand what stroke-dahsarray works */
+
 .line {
-  fill: none;
-/*  stroke: steelblue;*/
-  stroke-width: 2px;
+    fill: none;
+    stroke-width: 2px;
+/*    stroke-dasharray: 3000;*/
+/*    stroke-dashoffset: 3000;*/
+    animation: dash 1s linear forwards;
+}
+
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 110px;
+  height: 35px;
+  padding: 2px;
+  font: 14px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }
