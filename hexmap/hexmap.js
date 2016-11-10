@@ -1,4 +1,4 @@
-/* 
+/*
     Setting up parameters for the hexagon svg container
 */
 var width = 1260,
@@ -39,7 +39,7 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
     .projection(projection);
 
-/* 
+/*
     svg element to hold all the hexagons.
         - a group is appended to the <svg> to hold the hexagons
         - prepend it to the body
@@ -68,7 +68,7 @@ logoImg.onload = function() {
 
 /*
     Function to place hexagons on non-white or colored parts of an image.
-    
+
     How it works: Then using the 'imageData' properties of the image drawn on the canvas,
         look at the pixel color at each center of a hexagon. If this point is not white,
         place a hexagon there. (This can be changed to look for specific colors to
@@ -99,7 +99,7 @@ function placeHexagons() {
        .data(hexbin(points))
        .enter().append("path")
        .attr("class", "hexagon")
-       .attr("d", (d) => { return hexbin.hexagon() }) 
+       .attr("d", (d) => { return hexbin.hexagon() })
        .attr("transform", (d) => { return "translate(" + d.x + "," + d.y + ")" })
        .attr("stroke", "#323339")
        .attr("stroke-width", "1.5px")
