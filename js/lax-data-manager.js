@@ -322,10 +322,10 @@ var DataManager = (function () {
 })();
 
 $(document).ready(function() {
-    DataManager.init(1200, 400).then(function () {
+    DataManager.init(800, 400).then(function () {
 //        DataManager.plotFlights("#flights-chart", $(window).width(), 400);
 //        DataManager.plotVehicles("#vehicles-chart");
-        DataManager.plotTogether("#flights-chart");
+        DataManager.plotTogether("#together-chart");
     });
 });
 
