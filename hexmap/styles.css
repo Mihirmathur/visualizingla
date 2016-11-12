@@ -2,13 +2,13 @@ body {
 	margin: 0px; 
 	overflow: hidden; 
 	font-family: "Helvetica Neue", Helvetica; 
-	font-size: 14px;
 	/*background: #0b1b2d;*/
 	background: #323339;
 }
 
 path {
 	stroke-linejoin: round;
+	z-index: 10;
 }
 
 svg {
@@ -22,6 +22,16 @@ svg {
 
 .hexagons path {
 	stroke: #fff;
+	z-index: 0;
+}
+
+.pulse {
+	animation: pulse 3s 1;
+}
+
+@keyframes pulse {
+	0% { fill: rgba(255,255,255,.1); }
+	100% { fill: rgba(255,255,255,.7); }
 }
 
 #worldMap {
@@ -39,4 +49,21 @@ svg {
 #hexcontainer {
 	position: relative;
 	margin: 150px auto;
+}
+
+#help {
+	position: absolute;
+	bottom: 100px;
+	width: 100%;
+	font-size: 13px;
+	text-align: center;
+	z-index: 100;
+	color: #CCCCFF;
+}
+
+#legend {
+	position: absolute;
+	top: 650px;
+	font-size: 13px;
+	color: #CCCCFF;
 }
