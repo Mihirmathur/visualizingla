@@ -1,3 +1,28 @@
+var initModule = (function() {
+	var el = $('#map-init');
+
+	var closePopup = function() {
+		el.each(function(i) {
+			//$(this).fadeOut(1000);
+			$(this).animate({
+				"left": "100%"
+			}, {
+				"complete" : function() {
+					el.remove();
+					$(".leaflet-control-zoom").css("visibility", "");
+				}
+			});
+		});
+	}
+
+
+	return {
+		closePopup: closePopup
+	};
+})();
+
+
+
 /**
  * Parking moudule for requesting and parsing data from the data.lacity.org
  */
@@ -16,7 +41,7 @@ var parkingModule = (function() {
 		data = parkingData;
 
 		for(var i = 0; i < data.length; i++) {
-			points.push([data[i].longitude, data[i].latitude]);
+			points.push([+(data[i].longitude.toFixed(2)), +(data[i].latitude.toFixed(2))]);
 		}
 	}
 
@@ -35,27 +60,39 @@ var parkingModule = (function() {
 
 
 function init() {
-	initMap(parkingModule.getPoints());
+	var map = initMap(parkingModule.getPoints());
+
+	$(".leaflet-control-zoom").css("visibility", "hidden");
+
+	$('.btn-close').click(function() {
+
+		initModule.closePopup();
+	});
 }
 
 /**
  * Creates and adds the map to the browser
  * @param  {object} geoJson points to be added to map
  */
-function initMap(geoJson) {
+function initMap(points) {
 
 	L.mapbox.accessToken = "pk.eyJ1IjoiY29keWxleWhhbiIsImEiOiJjaXVldHZsYmswMGVlMm9sM2ZrN3BoeWpwIn0.1XUE4GT-FZ5fatKFdKt4OQ";
+	var bounds = L.latLngBounds([33.2,-119.37369384765625], [34.643594729697406,-116.9769287109375]);
+	console.log(bounds);
+
 	var map = L.mapbox.map('map', 'mapbox.dark',{
-		center: L.latLng(34.052235, -118.2437),
-		zoom: 14,
-		zoomControl: false
+		maxBounds: bounds,
+		center: L.latLng(34.052235, -118.2437)
 	});
+
+	map.fitBounds(bounds);
+
 	L.mapbox.styleLayer('mapbox://styles/codyleyhan/ciukqoz0100682iqo5r90dmnf').addTo(map);
 
 	// generate hexbins
 	var options = {
     radius : 12,
-    opacity: 0.75,
+    opacity: 0.5,
     duration: 500,
     lng: function(d){
         return d[0];
@@ -70,11 +107,11 @@ function initMap(geoJson) {
     valueCeil: undefined
 	};
 
-	console.log(geoJson);
 	var hexLayer = L.hexbinLayer(options).addTo(map)
-	hexLayer.colorScale().range(['white', 'blue']);
-	hexLayer.data(geoJson);
+	hexLayer.colorScale().range(['white', 'red']);
+	hexLayer.data(points);
 
+	return map;
 }
 
 
@@ -110,6 +147,5 @@ function parseTime(feature) {
 
 	return time;
 }
-
 
 init();
