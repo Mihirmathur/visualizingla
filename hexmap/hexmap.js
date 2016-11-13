@@ -119,8 +119,93 @@ var hexmap = function() {
     logoImg.src = "colormap3.gif";
     logoImg.onload = function() {
         ctx.drawImage(logoImg, 0, 0, width, height);
+        addLegendListeners();
         createHexagons();
     };
+
+    /*
+        Function to add hover effect when mousing over the names of the top airports
+
+        Hides all paths besides the selected one, highlights the selected name, and
+        shows the relevant info.
+    */
+    function addLegendListeners() {
+        let londonItem = document.getElementById("londonItem");
+        londonItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            londonItem.className += "hover";
+            document.getElementById("londonInfo").style.display = "block";
+        });
+        let tokyoItem = document.getElementById("tokyoItem");
+        tokyoItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            tokyoItem.className += "hover";
+            document.getElementById("tokyoInfo").style.display = "block";
+        });
+        let seoulItem = document.getElementById("seoulItem");
+        seoulItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            seoulItem.className += "hover";
+            document.getElementById("seoulInfo").style.display = "block";
+        });
+        let taipeiItem = document.getElementById("taipeiItem");
+        taipeiItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            taipeiItem.className += "hover";
+            document.getElementById("taipeiInfo").style.display = "block";
+        });
+        let sydneyItem = document.getElementById("sydneyItem");
+        sydneyItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            sydneyItem.className += "hover";
+            document.getElementById("sydneyInfo").style.display = "block";
+        });
+        let vancouverItem = document.getElementById("vancouverItem");
+        vancouverItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            vancouverItem.className += "hover";
+            document.getElementById("vancouverInfo").style.display = "block";
+        });
+        let guadalajaraItem = document.getElementById("guadalajaraItem");
+        guadalajaraItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            guadalajaraItem.className += "hover";
+            document.getElementById("guadalajaraInfo").style.display = "block";
+        });
+        let mexicoCityItem = document.getElementById("mexicoCityItem");
+        mexicoCityItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            mexicoCityItem.className += "hover";
+            document.getElementById("mexicoCityInfo").style.display = "block";
+        });
+        let torontoItem = document.getElementById("torontoItem");
+        torontoItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            torontoItem.className += "hover";
+            document.getElementById("torontoInfo").style.display = "block";
+        });
+        let parisItem = document.getElementById("parisItem");
+        parisItem.addEventListener("mouseover", () => {
+            deselectOtherItems();
+            parisItem.className += "hover";
+            document.getElementById("parisInfo").style.display = "block";
+        });
+    }
+
+    /*
+        Deselcts other legend items
+    */
+    function deselectOtherItems() {
+        let children = document.getElementById("legendItems").childNodes;
+        for (let i = 0; i < children.length; i++) {
+            children[i].className = "";
+            if (children[i].nodeName == "LI") {
+                let name = children[i].id.split("Item")[0];
+                document.getElementById("defaultInfo").style.display = "none";
+                document.getElementById(name+"Info").style.display = "none";
+            }
+        }
+    }
 
     /*
         Function to create a grid of hexagons based on an image.
@@ -235,12 +320,12 @@ var hexmap = function() {
                 }
             }
         }
-        drawCountry("Asia", .05);
-        drawCountry("Africa", .05);
-        drawCountry("Australia", .05);
-        drawCountry("NorthAmerica", .05);
-        drawCountry("SouthAmerica", .05);
-        drawCountry("Europe", .05);
+        drawCountry("Asia", .3);
+        drawCountry("Africa", .3);
+        drawCountry("Australia", .3);
+        drawCountry("NorthAmerica", .3);
+        drawCountry("SouthAmerica", .3);
+        drawCountry("Europe", .3);
         drawHexagons();
         drawFlightPaths();
     }
@@ -331,8 +416,9 @@ var hexmap = function() {
     }
     function transition(airport, marker, path, rate) {
         let len = path.node().getTotalLength();
+        let dur = 7500/(rate*1.5);
         marker.transition()
-            .duration(7500/(rate*1.5))
+            .duration(dur)
             .attrTween("transform", translateAlong(path.node()))
             .each("end", () => {
                 // Remove the previously added 'plane'
@@ -341,13 +427,26 @@ var hexmap = function() {
                 // Keep looping more planes
                 animateFlightPath(airport, rate);
 
+                // Trigger second half of pulse
+                /*
+                setTimeout(() => {
+                    let curSvg = d3.select("#hexcontainer");
+                    curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulseon", false);
+                    curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulseoff", true);
+                }, 1000);
+                */
+            });
+            /*
+            // Trigger start of pulse when plane lands on a country
+            setTimeout(() => {
                 // Illuminate the country that it lands on
                 let curSvg = d3.select("#hexcontainer");
                 // curSvg.selectAll("path."+portToCountry[airport]+"hexagon").remove();
                 // drawCountry(portToCountry[airport], 1);
-                curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulse", true);
-                curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulse", true);
-            });
+                curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulseoff", false);
+                curSvg.selectAll("path."+portToCountry[airport]+"hexagon").classed("pulseon", true);
+            }, dur-350);
+            */
     }
     function translateAlong(path) {
         let len = path.getTotalLength();

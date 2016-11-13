@@ -8,25 +8,80 @@
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
 	<script src="hexbin.js"></script>	
 	<script type="text/javascript" src="../js/lax_passenger.json"></script>
+	<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<h1 id="title">Most Frequented Airports From LAX</h1>
 	<canvas id="worldCanvas"></canvas>
 	<div id="hexcontainer"></div>
-	<!-- <p id="help"><i>Hover over a white hexagon to view airport statistics.</i></p> -->
+	<!-- <p id="laxTo">LAX -></p> -->
 	<div id="legend">
-		<ol>
-			<li>London (Heathrow) - 1,493,010</li>
-			<li>Tokyo (Narita) - 1,102,172</li>
-			<li>Seoul (Incheon) - 1,083,522</li>
-			<li>Taipei (Taoyuan) - 946,426</li>
-			<li>Sydney - 934,215</li>
-			<li>Vancouver - 896,490</li>
-			<li>Guadalajara - 746,017</li>
-			<li>Mexico City - 725,575</li>
-			<li>Toronto (Pearson) - 619,227</li>
-			<li>Paris (Charles de Gaulle) - 579,311</li>
-		</ol>
+		<ul id="legendItems">
+			<li id="londonItem"> 1   London</li>
+			<li id="tokyoItem"> 2   Tokyo</li>
+			<li id="seoulItem"> 3   Seoul</li>
+			<li id="taipeiItem"> 4   Taipei</li>
+			<li id="sydneyItem"> 5   Sydney</li>
+			<li id="vancouverItem"> 6   Vancouver</li>
+			<li id="guadalajaraItem"> 7   Guadalajara</li>
+			<li id="mexicoCityItem"> 8   Mexico City</li>
+			<li id="torontoItem"> 9   Toronto</li>
+			<li id="parisItem">10   Paris</li>
+		</ul>
+		<div class="legendInfo" id="defaultInfo">
+			<p><i>Hover over the airport locations to see statistics about the top airports.</i></p>
+		</div>
+		<div class="legendInfo" id="londonInfo">
+			<h1>Heathrow Airport</h1>
+			<p>Annual passenger count (2015): 1,493,010</p>
+			<p>Heathrow is the second busiest airport in the world by international passenger traffic as well as the busiest airport in Europe by passenger traffic, and sixth busiest airport in the world by total passenger traffic.</p>
+		</div>
+		<div class="legendInfo" id="tokyoInfo">
+			<h1>Narita International Airport</h1>
+			<p>Annual passenger count (2015): 1,102,172</p>
+			<p>Narita is the predominant international airport in Japan, handling around 50% of the country's international passenger traffic and 60% of its international air cargo traffic. As of 2013, Narita was the second-busiest passenger airport in Japan (after Haneda Airport in Tokyo), and was the tenth-busiest air freight hub in the world</p>
+		</div>
+		<div class="legendInfo" id="seoulInfo">
+			<h1>Incheon International Airport</h1>
+			<p>Annual passenger count (2015): 1,083,522</p>
+			<p>The largest airport in South Korea, the primary airport serving the Seoul Capital Area, and one of the largest and busiest airports in the world.</p>
+		</div>
+		<div class="legendInfo" id="taipeiInfo">
+			<h1>Taoyuan International Airport</h1>
+			<p>Annual passenger count (2015): 946,426</p>
+			<p>Taiwan's largest airport. It is one of five Taiwanese airports with regular international flights, and is by far the busiest international air entry point amongst them. It is the main international hub for China Airlines and EVA Air.</p>
+		</div>
+		<div class="legendInfo" id="sydneyInfo">
+			<h1>Kingsford Smith Airport</h1>
+			<p>Annual passenger count (2015): 934,215</p>
+			<p>Sydney Airport is both the longest continuously operated commercial airport and oldest commercial international airport in the world, the world's oldest continually operating commercial airport, and the busiest airport in Australia.</p>
+		</div>
+		<div class="legendInfo" id="vancouverInfo">
+			<h1>Vancouver International Airport</h1>
+			<p>Annual passenger count (2015): 896,490</p>
+			<p> It is the second busiest airport in Canada by aircraft movements and passengers, behind Toronto Pearson International Airport. It has non-stop flights daily to Asia, Europe, Oceania, the United States, Mexico and other airports within Canada.</p>
+		</div>
+		<div class="legendInfo" id="guadalajaraInfo">
+			<h1>Guadalajara International Airport</h1>
+			<p>Annual passenger count (2015): 746,017</p>
+			<p> the main airport of Mexico's second-largest city Guadalajara. Opened in 1966, it's located 16 km south of the city center. It is Mexico's third busiest airport, after Mexico City International Airport and Cancún International Airport and second busiest for cargo flights.</p>
+		</div>
+		<div class="legendInfo" id="mexicoCityInfo">
+			<h1>Mexico City International Airport</h1>
+			<p>Annual passenger count (2015): 725,575</p>
+			<p> It is Mexico's busiest and Latin America's second busiest airport by passenger traffic; and it is both Mexico's and Latin America's busiest airport by aircraft movements.</p>
+		</div>
+		<div class="legendInfo" id="torontoInfo">
+			<h1>Pearson International Airport</h1>
+			<p>Annual passenger count (2015): 619,227</p>
+			<p>Pearson is the main hub for Air Canada. It is also a hub for passenger airline WestJet and cargo airline FedEx Express, and serves as an operating base for passenger airlines Air Transat and Sunwing Airlines.</p>
+		</div>
+		<div class="legendInfo" id="parisInfo">
+			<h1>Charles de Gaulle Airport</h1>
+			<p>Annual passenger count (2015): 579,311</p>
+			<p>The world's eighth-busiest airport and Europe's second-busiest airport (after London Heathrow) in terms of passenger numbers. It is also the world's tenth-busiest and it is Europe's second-busiest airport (after London Heathrow) in aircraft movements.</p>
+		</div>
 	</div>
 	<script type="text/javascript" src="hexmap.js"></script>
 </body>
