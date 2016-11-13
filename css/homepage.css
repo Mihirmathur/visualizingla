@@ -2,19 +2,26 @@
 /*==================HOMEPAGE==================*
 /*============================================*/
 body{
-    background-color: #292444;
+    background-color: #002040;
     overflow-x: hidden;
     margin: 0;
 }
 
 .main-centered{
     position: absolute;
-    width: 100%; /*just initially*/
+    width: 100%;
     text-align: center;
 }
 
-/*==================NAV-BAR===================*/
+.mid-top{
+    top: 50%;
+}
 
+.mid-left{
+    left:50%;
+}
+
+/*==================NAV-BAR===================*/
 .nav {
     z-index:100;
     position: fixed;
@@ -44,7 +51,7 @@ body{
 }
 
 .nav-box:hover{
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 .list-style-none {
@@ -58,28 +65,37 @@ body{
     pointer-events: none;
     text-align: center;
     transform: translateY(-50%);
-    /*just initially*/
     top: 50%;
     width: 100%; 
     margin-top: 600px;
     opacity: 0;
+    z-index: 90;
 }
 
-.title{
+.title-line{
     pointer-events: none;
     color: white;
-    font-family: 'Avenir', sans-serif;
     font-size: 60px;
-    letter-spacing: 5px;
+    letter-spacing: 0px;
+    text-shadow: 0 0 5px #002040;
 }
 
 .title-line span{
     display: inline-block;
     position: relative;
+    padding: 0px;
 }
 
 #line1{
     margin-left:15px;
+    font-family: 'Avenir', sans-serif;
+}
+
+#line2{
+    font-family: 'Maven Pro Light', sans-serif;
+    letter-spacing: -5px;
+    font-size: 50px;
+    margin-top: -40px;
 }
 
 /*==================BUILDINGS=================*/
@@ -154,10 +170,21 @@ svg.canvas, svg.building{
     z-index:1;
 }
 
+.transition-to-black{
+    margin-top: -400px;
+    height: 400px;
+    background-color: black;
+    opacity: 0;
+}
+
 #section-2{
     z-index:2;
+    /*TODO: FIX MARGIN FOR NAV ACCURACY*/
+    height: 1300px;
+    opacity: 0;
     background-color: black;
-    padding-top:500px;
+    /*background-image: url('../resources/parkingtickets.png');
+    background-size: cover !important;*/
 }
 
 #section-3{
