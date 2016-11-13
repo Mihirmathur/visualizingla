@@ -1,44 +1,27 @@
 /*============================================*/
 /*==================HOMEPAGE==================*
 /*============================================*/
-
-/*===================TITLE====================*/
-
 body{
-        background-color: #292444;
+    background-color: #002040;
+    overflow-x: hidden;
+    margin: 0;
 }
 
-.title-container{
-    position: fixed;
-    opacity: 0;
-    z-index: 1;
-    top: 200px;
-    pointer-events: none;
+.main-centered{
+    position: absolute;
+    width: 100%;
+    text-align: center;
 }
 
-.title-text-wrapper{
-    width:700px;
-    margin: 0 auto;
+.mid-top{
+    top: 50%;
 }
 
-.title{
-    color: white;
-    font-family: 'Avenir', sans-serif;
-    font-size: 60px;
-    letter-spacing: 5px;
-}
-
-.title-line span{
-    display: inline-block;
-    position: relative;
-}
-
-#line1{
-    margin-left:15px;
+.mid-left{
+    left:50%;
 }
 
 /*==================NAV-BAR===================*/
-
 .nav {
     z-index:100;
     position: fixed;
@@ -50,22 +33,69 @@ body{
 
 .nav-box {
     display: block;
-    margin-bottom:50px;
-    width: 10px;
-    height: 10px;
+    margin: 0px auto 20px;
+    width: 3px;
+    height: 3px;
     border: 1px solid white;
-    transition: background-color 0.5s;
-    -webkit-transition: background-color 0.5s;
+    background-color: white;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s;
 }
 
 .nav-box:hover,
 .active {
-    background-color: white;
+    background-color:rgba(0,0,0,0);
     cursor: pointer;
+    width: 10px;
+    height: 10px;
+}
+
+.nav-box:hover{
+    margin-bottom:12px;
 }
 
 .list-style-none {
     list-style: none;
+}
+
+/*===================TITLE====================*/
+
+.title-text-wrapper{
+    position: fixed;
+    pointer-events: none;
+    text-align: center;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%; 
+    margin-top: 600px;
+    opacity: 0;
+    z-index: 90;
+}
+
+.title-line{
+    pointer-events: none;
+    color: white;
+    font-size: 60px;
+    letter-spacing: 0px;
+    text-shadow: 0 0 5px #002040;
+}
+
+.title-line span{
+    display: inline-block;
+    position: relative;
+    padding: 0px;
+}
+
+#line1{
+    margin-left:15px;
+    font-family: 'Avenir', sans-serif;
+}
+
+#line2{
+    font-family: 'Maven Pro Light', sans-serif;
+    letter-spacing: -5px;
+    font-size: 50px;
+    margin-top: -40px;
 }
 
 /*==================BUILDINGS=================*/
@@ -75,65 +105,96 @@ body{
     stroke: none;
 }
 
+.grid-wrapper{
+    margin-top: -3000px;
+}
+
 #grid{
     margin: 50px auto 0 auto;
-    width: 570px;
+    width: 800px;
     height: 550px;
     opacity: 0.5;
     overflow: visible !important;
 } 
 
-#grid:hover{
-    cursor: pointer;
+#grid:hover, .building:hover, .rect{
+    cursor: pointer !important;
 }
 
 svg.canvas, svg.building{
     overflow: visible;
 }
+/*=====================PLANE===================*/
+
+.plane-wrapper {
+    position: fixed;
+    z-index: 10;
+    pointer-events: none;
+    margin-left: 2000px;
+}
+
+/*===================pathS==================*/
+
+.path-wrapper {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    margin-top: -2100px;
+}
+
+.path-wrapper .vert {
+    background-color: white;
+    width: 1px;
+    height: 1000px;
+}
+
+#path1{
+    left:50vw;
+}
+
+#path2{
+    margin-left:-200px
+}
+
+#path3{
+    margin-left:200px
+}
+
+/*===================SECTIONS=================*/
 
 .section{
     height: 1000px;
 }
 
-/*=====================CAR====================*/
-
-.car-wrapper {
-    height: 100%;
-    width: 100%;
-    left:350px;
-    text-align:center;
-    position: fixed;
-    z-index: 10;
-    pointer-events: none;
+#section-1{
+    z-index:1;
 }
 
-/*===================STREETS==================*/
-
-.street-wrapper {
-    position: fixed;
-    pointer-events: none;
-}
-
-.street-wrapper .hoz {
-    background-color: white;
-    width: 1000px;
-    height: 7px;
-}
-
-.street-wrapper .vert {
-    background-color: white;
-    width: 8px;
-    height: 1px;
-    transform-origin: top;
-}
-
-#street1{
-    left:2000px;
-}
-
-#street2{
-    bottom: 53.2%;
+.transition-to-black{
+    margin-top: -400px;
+    height: 400px;
+    background-color: black;
     opacity: 0;
+}
+
+#section-2{
+    z-index:2;
+    /*TODO: FIX MARGIN FOR NAV ACCURACY*/
+    height: 1300px;
+    opacity: 0;
+    background-color: black;
+    /*background-image: url('../resources/parkingtickets.png');
+    background-size: cover !important;*/
+}
+
+#section-3{
+    z-index:3;
+    background-color: blue;
+}
+
+#section-4{
+    z-index:4;
+   
 }
 
 /*============================================*/
