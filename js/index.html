@@ -11,55 +11,52 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="lax-flights.js"></script>
     <script src="lax-vehicles.js"></script>
-    <script src="lax-data-manager.js"></script>
-    
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
     <script src="//s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js"></script>
-    
     <link rel="stylesheet" href="css/styles.css" type="text/css"> </head>
 
 <body>
+    <div id="one-world-way">
+        <svg class="svg" id="mainsvg" width="1000" height="1000" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path id="road" d="M -100,100 
+           H 600 
+           A 100,100 0 0 1 600 400 
+           H -100" stroke="#777473" stroke-width="80" fill="none" id="theMotionPath" />
+            <path id="carpath" d="M -100,100 
+           H 600  
+           A 100,100 0 0 1 600 400 
+           H -100" stroke="white" stroke-width="0" fill="none" /> </svg>
+    </div>
     
-    <svg class="chart" id="together-chart"></svg>
-    
+    <div id="data">
+        <svg class="chart" id="together-chart"></svg>
+    </div>
+<!--
     <div>
-            <svg class="svg" width="1000" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
-                
-                <g id="road">
+        <svg class="svg" width="1000" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="road">
                 <path d="M 0,100 
                          H 400 
                          A 100,100 0 0 1 400 400 
-                         H 0" 
-                      stroke="lightgrey" 
-                      stroke-width="140" 
-                      fill="none"/>
-                <path id="carpath" 
-                      d="M 0,100 
+                         H 0" stroke="lightgrey" stroke-width="140" fill="none" />
+                <path id="carpath" d="M 0,100 
                          H 400 
                          A 100,100 0 0 1 400 400 
-                         H 0" 
-                      stroke="white" 
-                      stroke-width="10" fill="none" />
-                </g>
-
-                <g id="car1">
-                    <path fill="#24296B" d="M117.784,128.363c0,6.169-2.904,11.169-6.899,11.169H88.106c-3.995,0-7.178-5-7.178-11.169V90.144
+                         H 0" stroke="white" stroke-width="10" fill="none" /> </g>
+            <g id="car1">
+                <path fill="#24296B" d="M117.784,128.363c0,6.169-2.904,11.169-6.899,11.169H88.106c-3.995,0-7.178-5-7.178-11.169V90.144
 	l1.298-18.738c0-6.168,1.885-11.168,5.878-11.168h22.779c3.995,0,5.74,5,5.74,11.168l1.159,18.738V128.363z" />
-                    <path fill="#D2F8F9" d="M116.729,86.573c0.362,1.13-0.813,1.971-2.596,1.971H85.09c-1.781,0-2.958-0.841-2.596-1.971l0.252-0.743
+                <path fill="#D2F8F9" d="M116.729,86.573c0.362,1.13-0.813,1.971-2.596,1.971H85.09c-1.781,0-2.958-0.841-2.596-1.971l0.252-0.743
 	c0.336-1.052,1.92-1.815,3.553-1.815h26.622c1.635,0,3.218,0.763,3.555,1.815L116.729,86.573z" />
-                    <path fill="#D2F8F9" d="M116.729,119.932c0.362-1.766-0.813-3.08-2.596-3.08H85.09c-1.781,0-2.958,1.314-2.596,3.08l0.252,1.302
-	c0.336,1.644,1.92,2.978,3.554,2.978h26.622c1.635,0,3.218-1.333,3.555-2.978L116.729,119.932z" /> 
-                </g>
-                
-            </svg>
+                <path fill="#D2F8F9" d="M116.729,119.932c0.362-1.766-0.813-3.08-2.596-3.08H85.09c-1.781,0-2.958,1.314-2.596,3.08l0.252,1.302
+	c0.336,1.644,1.92,2.978,3.554,2.978h26.622c1.635,0,3.218-1.333,3.555-2.978L116.729,119.932z" /> </g>
+        </svg>
     </div>
-    
-    
+-->
 </body>
-    
-    
-    
+
     <script src="lax-animator.js"></script>
+    <script src="lax-data-manager.js"></script>
 
 </html>
