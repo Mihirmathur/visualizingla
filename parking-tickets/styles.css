@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'Avenir Next LT Pro';
+	src: url('./AvenirNextLTPro-Regular.otf');
+}
+
+
+html {
+	font-family: 'Avenir Next LT Pro', sans-serif;
+}
+
+
 #map {
 	position: absolute;
 	bottom: 0;
@@ -19,11 +30,80 @@
   right: 0;
   width: 100%;
   z-index: 2;
-  background-color: rgba(245,245,245,0.75);
+  background-color: rgba(50, 52, 50, .90);
   overflow: scroll;
+	color: #ffffff;
 }
+
+.case-study {
+	color: #8f8f8f;
+}
+
+.header {
+	color: #D0021b;
+}
+
+.leaflet-top {
+	margin-top: 20px;
+}
+
+h1 {
+	font-size: 48px;
+}
+
+.info-panel {
+	background: rgba(143, 143, 143, .90);
+	color: #ffffff;
+	padding: 25px;
+}
+
 
 .container {
 	width: 70%;
-	margin: 0 15%;
+	margin: 7.5% 15%;
+}
+
+.btn-close {
+	color: #ffffff;
+	background: #D0021b;
+	border-radius: 0;
+	border: 0;
+	box-shadow: 0;
+	font-size: 1em;
+	padding: .75em 3em;
+}
+
+.info {
+	font-size: 18.5px;
+	width: 80%;
+	margin-bottom: 1em;
+}
+
+.sub {
+	color: #8f8f8f;
+	font-size: 11px;
+	margin-bottom: 1.25em;
+}
+
+.sub a {
+	color: #8f8f8f;
+}
+
+
+@media (max-width: 600px) {
+	.container {
+		width: 90%;
+		margin: 7.5% 5%;
+	}
+
+	.info {
+		width: 90%;
+	}
+}
+
+
+.leaflet-bar {
+	background-color: rgba(143, 143, 143, .90);
+	border: 0;
+	border-radius: 0;
 }

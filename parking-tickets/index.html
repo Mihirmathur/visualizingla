@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Visualizing LA | Parking Tickets</title>
-		<link rel="stylesheet" href="./styles.css">
 		<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+		<link rel="stylesheet" href="./styles.css">
 	</head>
 	<body>
 		<nav>
@@ -12,11 +12,33 @@
 		</nav>
 		<div id="map-init">
 			<div class="container">
-				<h1 class="header">Testing</h1>
+				<h1 class="header"><span class="case-study">Case Study: </span>Parking Tickets in Los Angeles</h1>
 				<p class="info">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem culpa temporibus, nesciunt dicta! Velit dicta exercitationem, ut fugit fugiat unde nostrum provident iure in voluptatem. Incidunt, alias fuga aut similique.
+					Who likes parking tickets??? We all see the parking patrol giving
+					tickets and wince at just the thought of them coming up to your car.
+					Parking tickets are one of the worst things about living in Los Angeles.
+					That feeling of getting a ticket can never be matched.
+
 				</p>
-				<button class="btn-close">X</button>
+				<p class="info">
+					With that said we decided to visualize how parking tickets are
+					distributed throughout the city.  We have analyzed almost 3000 tickets
+					from the past 3 years and projected them onto a map of Los Angeles.
+					Our best tip if you want to avoid a ticket, stay away from downtown
+					Los Angeles or any of the many touristy spots around Los Angeles.
+				</p>
+				<p class="info">
+					The map data gets more and more precise the more that you zoom in,
+					down to the very steet and cost of the fine.  To get more ticket info
+					just click or mouse over the hexagons.
+				</p>
+				<p class="sub">
+					Technologies used: Leaflet, Mapbox, D3, JQuery
+				</p>
+				<p class="sub">
+					Data sources: <a href="https://data.lacity.org/A-Well-Run-City/Parking-Citations/t4h6-r362">Parking Citations</a>
+				</p>
+				<button class="btn-close">Explore The Data</button>
 			</div>
 		</div>
 		<div id='map'></div>
@@ -26,7 +48,6 @@
 		<script src="./hexbin.js" charset="utf-8"></script>
 		<script src="./jquery-3.1.1.min.js" charset="utf-8"></script>
 		<script type="text/javascript" language="javascript" src="parkingCitations.json"></script>
-		<script src="http://momentjs.com/downloads/moment.js" charset="utf-8"></script>
 		<script src="./parkingCitationLeaflet.js" charset="utf-8"></script>
 	</body>
 </html>

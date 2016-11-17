@@ -106,9 +106,10 @@
 			var data = that._data.map(function(d) {
 				var lng = that.options.lng(d);
 				var lat = that.options.lat(d);
+				var data = that.options.data(d);
 
 				var point = that._project([lng, lat]);
-				return { o: d, point: point };
+				return { o: d, point: point, data: data };
 			});
 
 			var zoom = this._map.getZoom();

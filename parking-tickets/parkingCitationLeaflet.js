@@ -1,15 +1,53 @@
+/**
+ * If called on a string capitalizes the first letter of each word.
+ */
+String.prototype.capitalize = function(){
+	return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+};
+
+
+
+
+/**
+ * Function that runs as soon as the page loads
+ */
+function init() {
+	// create the map
+	var map = initMap(parkingModule.getPoints());
+
+	// hide map controls
+	$(".leaflet-control-zoom").css("visibility", "hidden");
+	$(".info-panel").css('visibility', 'hidden');
+
+	// watch btn click
+	$('.btn-close').click(function() {
+		initModule.closePopup();
+	});
+}
+
+
+/**
+ * Module that controls the inital info screen that covers the map
+ */
 var initModule = (function() {
+	// cache the element
 	var el = $('#map-init');
 
+	/**
+	 * When the close button is pressed
+	 */
 	var closePopup = function() {
 		el.each(function(i) {
-			//$(this).fadeOut(1000);
+			// the init screen slides out to the right
 			$(this).animate({
 				"left": "100%"
 			}, {
 				"complete" : function() {
+					// remove the init screen
 					el.remove();
+					// show map controls
 					$(".leaflet-control-zoom").css("visibility", "");
+					$(".info-panel").css('visibility', '');
 				}
 			});
 		});
@@ -32,16 +70,15 @@ var parkingModule = (function() {
 	// module data
 	var data = [];
 	var points = [];
-	var geoJson = {
-		type: 'FeatureCollection',
-		features: []
-	};
 
+	// constructor
 	var init = function() {
+		// store the json
 		data = parkingData;
 
+		// push data to just points with the last element being all the data
 		for(var i = 0; i < data.length; i++) {
-			points.push([+(data[i].longitude.toFixed(2)), +(data[i].latitude.toFixed(2))]);
+			points.push([data[i].longitude, data[i].latitude, data[i]]);
 		}
 	}
 
@@ -58,18 +95,6 @@ var parkingModule = (function() {
 })();
 
 
-
-function init() {
-	var map = initMap(parkingModule.getPoints());
-
-	$(".leaflet-control-zoom").css("visibility", "hidden");
-
-	$('.btn-close').click(function() {
-
-		initModule.closePopup();
-	});
-}
-
 /**
  * Creates and adds the map to the browser
  * @param  {object} geoJson points to be added to map
@@ -78,18 +103,39 @@ function initMap(points) {
 
 	L.mapbox.accessToken = "pk.eyJ1IjoiY29keWxleWhhbiIsImEiOiJjaXVldHZsYmswMGVlMm9sM2ZrN3BoeWpwIn0.1XUE4GT-FZ5fatKFdKt4OQ";
 	var bounds = L.latLngBounds([33.2,-119.37369384765625], [34.643594729697406,-116.9769287109375]);
-	console.log(bounds);
 
+	// create the map
 	var map = L.mapbox.map('map', 'mapbox.dark',{
 		maxBounds: bounds,
 		center: L.latLng(34.052235, -118.2437)
 	});
 
+	// set the map limits
 	map.fitBounds(bounds);
 
+	// load map tiles
 	L.mapbox.styleLayer('mapbox://styles/codyleyhan/ciukqoz0100682iqo5r90dmnf').addTo(map);
 
-	// generate hexbins
+	// create the ticket density window
+	var info = L.control();
+
+	info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info-panel'); // create a div with a class "info"
+    this.update();
+    return this._div;
+	};
+
+
+	// function to update the ticket density window
+	info.update = function (props) {
+    this._div.innerHTML = '<h4>Parking Ticket Density</h4>' +  (props ?
+			 props.density + ' tickets / hexagon <br /> Average fine amount is $' +
+			 props.average + '<br /><hr />' + props.ticket  : 'Hover over a hexagon <br /> To see more stats')
+	};
+
+	info.addTo(map);
+
+	// hexbin options
 	var options = {
     radius : 12,
     opacity: 0.5,
@@ -100,15 +146,64 @@ function initMap(points) {
     lat: function(d){
         return d[1];
     },
+		data: function(d) {
+			return d[2];
+		},
     value: function(d){
         return d.length;
     },
     valueFloor: 0,
-    valueCeil: undefined
+    valueCeil: undefined,
+		onclick: function(d, node, layer) {
+			this.onmouseover(d, node, layer);
+		},
+		onmouseout: function(d, node, layer) {
+			// change the color back to its original color
+			node.setAttribute('fill', layer.options.lastColor);
+			info.update();
+		},
+		onmouseover: function(d, node, layer) {
+			// find the fine average for a hexagon
+			var fineTotal = 0;
+
+			for(var i = 0; i < d.length; i++) {
+				fineTotal += d[i].data.fine_amount;
+			}
+
+			var fineAverage = (fineTotal / (1.0 * d.length)).toFixed(2);
+
+			// choose a random ticket from hexagon to show more info
+			var randomNum = Math.floor(Math.random() * (d.length));
+			var ranTicket = d[randomNum].data;
+
+			// parse the random ticket time
+			var time = parseTime(d[randomNum].data);
+
+			// generate the html
+			var ticketString = "One of the tickets happened at <br /> " + ranTicket.location.toLowerCase().capitalize() + " at " +
+									 time + "<br /> because of violating \"" + ranTicket.violation.toLowerCase().capitalize() +
+									 "\"<br /> and the fine was $" + ranTicket.fine_amount;
+
+
+			//update ticket density window
+			info.update({
+				density: d.length,
+				average: fineAverage,
+				ticket: ticketString
+			});
+
+			// cache the current hexagon color
+			layer.options.lastColor = node.getAttribute('fill');
+
+			// change the hexagon to a new color
+			node.setAttribute('fill', '#061F38');
+		},
+		lastColor: null
 	};
 
+	// generate the hexbin heat map
 	var hexLayer = L.hexbinLayer(options).addTo(map)
-	hexLayer.colorScale().range(['white', 'red']);
+	hexLayer.colorScale().range(['#ffffff', '#D0021B']);
 	hexLayer.data(points);
 
 	return map;
@@ -117,17 +212,17 @@ function initMap(points) {
 
 /**
  * Parses ticket time into a usable format
- * @param  {object} feature the feature in geoJson format
+ * @param  {object} feature the feature that has the time data
  * @return {string}         the parsed time string
  */
-function parseTime(feature) {
+function parseTime(data) {
 	var time = "";
 	var designation = "AM"
-	var normTime = feature.properties.issue_time;
+	var normTime = data.issue_time.toString();
 
 	// check if pm
-	if(feature.properties.issue_time >= 1200) {
-		// normalize the time and update designation
+	if(data.issue_time >= 1200) {
+		// normalize th be time and update designation
 		if(normTime >= 1300) {
 				normTime = normTime - 1200;
 		}
@@ -140,9 +235,8 @@ function parseTime(feature) {
 	time += normTime.substr(normTime.length - 2) + ' ' + designation;
 
 	// if a date is avaliable then add the date to string
-	if(feature.properties.issue_date) {
-		var date = moment(feature.properties.issue_date).format('ddd MMMM Do');
-		time += ' on ' + date;
+	if(data.issue_date) {
+		time += ' on ' + data.issue_date;
 	}
 
 	return time;
