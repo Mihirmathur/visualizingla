@@ -81,6 +81,11 @@ h1 {
 	text-transform: uppercase;
 }
 
+.btn-close:hover {
+	background: #ffffff;
+	color: #d0021b;
+}
+
 .info {
 	font-size: 18.5px;
 	width: 90%;
