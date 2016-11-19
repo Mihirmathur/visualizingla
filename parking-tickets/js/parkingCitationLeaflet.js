@@ -1,11 +1,10 @@
+
 /**
  * If called on a string capitalizes the first letter of each word.
  */
 String.prototype.capitalize = function(){
 	return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
 };
-
-
 
 
 /**
@@ -157,7 +156,10 @@ function initMap(points) {
     valueFloor: 0,
     valueCeil: undefined,
 		onclick: function(d, node, layer) {
-			this.onmouseover(d, node, layer);
+			// ensure that click event only works on mobile
+			if(node.getAttribute('fill') != '#f8c81c') {
+				this.onmouseover(d, node, layer);
+			}
 		},
 		onmouseout: function(d, node, layer) {
 			// change the color back to its original color
@@ -183,7 +185,7 @@ function initMap(points) {
 
 			// generate the html
 			var ticketString = "One of the tickets happened at <br /> " + ranTicket.location.toLowerCase().capitalize() + " at " +
-									 time + "<br /> because of violating \"" + ranTicket.violation.toLowerCase().capitalize() +
+									 time + "<br /> because of violating \"" + ranTicket.violation.toLowerCase().capitalize()  +
 									 "\"<br /> and the fine was $" + ranTicket.fine_amount;
 
 
@@ -198,7 +200,7 @@ function initMap(points) {
 			layer.options.lastColor = node.getAttribute('fill');
 
 			// change the hexagon to a new color
-			node.setAttribute('fill', '#061F38');
+			node.setAttribute('fill', '#f8c81c');
 		},
 		lastColor: null
 	};
