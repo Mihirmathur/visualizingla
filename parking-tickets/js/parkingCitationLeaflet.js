@@ -106,12 +106,14 @@ function initMap(points) {
 
 	// create the map
 	var map = L.mapbox.map('map', 'mapbox.dark',{
-		maxBounds: bounds,
-		center: L.latLng(34.052235, -118.2437)
+		center: L.latLng(34.052234, -118.243685),
+		minZoom: 11,
+		maxBounds: bounds
 	});
 
 	// set the map limits
 	map.fitBounds(bounds);
+
 
 	// load map tiles
 	L.mapbox.styleLayer('mapbox://styles/codyleyhan/ciukqoz0100682iqo5r90dmnf').addTo(map);

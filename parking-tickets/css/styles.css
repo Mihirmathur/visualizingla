@@ -1,13 +1,12 @@
 @font-face {
 	font-family: 'Avenir Next LT Pro';
-	src: url('./AvenirNextLTPro-Regular.otf');
+	src: url('../font/AvenirNextLTPro-Regular.otf');
 }
 
 
 html {
 	font-family: 'Avenir Next LT Pro', sans-serif;
 }
-
 
 #map {
 	position: absolute;
@@ -35,12 +34,12 @@ html {
 	color: #ffffff;
 }
 
-.case-study {
-	color: #8f8f8f;
-}
+
 
 .header {
-	color: #D0021b;
+	font-size: 48px;
+	color: #ffffff;
+	text-transform: uppercase;
 }
 
 .leaflet-top {
@@ -52,37 +51,49 @@ h1 {
 }
 
 .info-panel {
-	background: rgba(143, 143, 143, .90);
+	background: rgba(208, 2, 27, .85);
 	color: #ffffff;
 	padding: 25px;
 }
 
 
 .container {
-	width: 70%;
-	margin: 7.5% 15%;
+	width: 33.5%;
+	margin: 10% 7.5%;
+	padding-left: 15px;
+	background: #D0021b;
+}
+
+.wrapper {
+	margin: 5%;
+	padding: 15px 10px;
 }
 
 .btn-close {
 	color: #ffffff;
 	background: #D0021b;
 	border-radius: 0;
-	border: 0;
+	border: 1px solid #ffffff;
 	box-shadow: 0;
 	font-size: 1em;
-	padding: .75em 3em;
+	padding: 1em 3em;
+	margin-bottom: 2em;
+	text-transform: uppercase;
 }
 
 .info {
 	font-size: 18.5px;
-	width: 80%;
+	width: 90%;
 	margin-bottom: 1em;
 }
 
 .sub {
 	color: #8f8f8f;
 	font-size: 11px;
-	margin-bottom: 1.25em;
+	position: fixed;
+	z-index: 99999;
+	left: 100px;
+	bottom: 0;
 }
 
 .sub a {
@@ -90,7 +101,7 @@ h1 {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
 	.container {
 		width: 90%;
 		margin: 7.5% 5%;
@@ -99,11 +110,20 @@ h1 {
 	.info {
 		width: 90%;
 	}
+
 }
 
-
-.leaflet-bar {
-	background-color: rgba(143, 143, 143, .90);
+.leaflet-bar{
+	background-color: rgba(208, 2, 27, .85);
+	color: #ffffff;
 	border: 0;
 	border-radius: 0;
+}
+
+.leaflet-bar a {
+	color: #ffffff;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+	color: #ffffff;
 }
