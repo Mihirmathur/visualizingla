@@ -2,7 +2,7 @@
 
 Example call
 
-VehiclesModule.init().then(function(r)) {
+VehiclesModule.fetchData().then(function(r)) {
     var vehiclesArr = r;
 }
 
@@ -126,7 +126,7 @@ var VehiclesModule = (function () {
         data = newArr;
     }
     return {
-        init: fetchData
+        fetchData: fetchData
         , forMonth: vehiclesForMonth
         , allCounts: getAllVehicleCounts
     }
