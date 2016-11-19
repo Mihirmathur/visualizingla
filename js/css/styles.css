@@ -7,11 +7,17 @@ body {
 .line {
     fill: none;
     stroke-width: 2px;
-/*    stroke-dasharray: 3000;*/
-/*    stroke-dashoffset: 3000;*/
     animation: dash 1s linear forwards;
+    z-index: 1;
 }
 
+.car {
+    z-index: 100;
+}
+
+#data-circles {
+    z-index: 1;
+}
 
 @keyframes dash {
     to {
@@ -41,4 +47,8 @@ div.tooltip {
 
 #data {
     background-color: #666;
+}
+
+#chartdata {
+    z-index: 1;
 }

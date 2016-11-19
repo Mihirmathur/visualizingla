@@ -1,11 +1,16 @@
 var DataManager = (function () {
+    
+    var VIN_PATH_COLOR = "#fff";
+    var VOUT_PATH_COLOR = "#fff";
+    var FLIGHTS_PATH_COLOR = "#fff";
+    var DATA_POINT_COLOR = "#fff";
 
     // have data from 2013-05 to 2016-07
     // Stored in the form
     // [ { date: Date, flights: XXX, vin: XXX, vout: XXX } ]
     var data = [];
     
-    var margin = {top: 20, right: 20, bottom: 50, left: 100};
+    var margin = {top: 20, right: 20, bottom: 50, left: 0};
     var width, height;
     
     function init(w, h) {
@@ -31,7 +36,7 @@ var DataManager = (function () {
                         obj.vout = v.exit;
                         data.push(obj);
                     }
-                    resolve("Success!");
+                    resolve(data);
                 });
             });
         });
@@ -136,6 +141,10 @@ var DataManager = (function () {
         
         // Create a chart on the passed-in selector SVG
         var chart = makeChart(selector);
+        var chartdata = chart.append("g")
+//                                .append("g")
+                                .attr("id", "chartdata");
+        
         
         var formatTime = d3.timeFormat("%b %Y");
         
@@ -146,47 +155,53 @@ var DataManager = (function () {
         
         // Define the vin line to be graphed
         var vinLine = d3.line()
+            .curve(d3.curveCardinal.tension(0.2))
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.vin / vScalar); });
         
         // Define the vout line to be graphed
         var voutLine = d3.line()
+            .curve(d3.curveCardinal.tension(0.2))
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.vout / vScalar); });
         
         // Define the flight line to be graphed
         var flightsLine = d3.line()
+            .curve(d3.curveCardinal.tension(0.2))
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.flights / fScalar); });
         
         // Add vin path to graph
-        var vinPath = chart.append("path")
+        var vinPath = chartdata.append("path")
             .data([data])
             .attr("class", "line")
+            .attr("id", "vinPath")
             .attr("d", vinLine)
-            .style("stroke", "#0f0")
+            .style("stroke", VIN_PATH_COLOR)
         
         var vinPathLength = vinPath.node().getTotalLength();
         vinPath.style("stroke-dasharray", vinPathLength + " " + vinPathLength)
         .style("stroke-dashoffset", vinPathLength)
         
         // Add vout path to graph
-        var voutPath = chart.append("path")
+        var voutPath = chartdata.append("path")
             .data([data])
             .attr("class", "line")
+            .attr("id", "voutPath")
             .attr("d", voutLine)
-            .style("stroke", "#f00")
+            .style("stroke", VOUT_PATH_COLOR)
         
         var voutPathLength = voutPath.node().getTotalLength();
         voutPath.attr("stroke-dasharray", voutPathLength + " " + voutPathLength)
         .attr("stroke-dashoffset", voutPathLength)
         
         // Add flight path to graph
-        var path = chart.append("path")
+        var path = chartdata.append("path")
             .data([data])
             .attr("class", "line")
+            .attr("id", "flightPath")
             .attr("d", flightsLine)
-            .attr("stroke", "#00f")
+            .attr("stroke", FLIGHTS_PATH_COLOR)
         
         var pathLength = path.node().getTotalLength();
         path.attr("stroke-dasharray", pathLength + " " + pathLength)
@@ -194,28 +209,34 @@ var DataManager = (function () {
         
         window.setTimeout(function() {
             var rad = 3;
-            chart.selectAll("dot")
+            // Add dots for flights
+            chart.append("g")
+                .attr("id", "data-circles")
+                .selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("fill", "#000")
-                .attr("stroke-width", "1px")
-                .attr("r", rad)
-                .attr("cx", function (d) {
-                    return x(d.date);
-                }).attr("cy", function (d) {
-                    return y(d.flights / fScalar);
-                }).on("mouseover", function (d) {
-                    div.transition().duration(200).style("opacity", .9);
-                    div.html(formatTime(d.date) + "<br/>" + d.flights).style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
-                }).on("mouseout", function (d) {
-                    div.transition().duration(500).style("opacity", 0);
-                });
+                    .attr("fill", DATA_POINT_COLOR)
+                    .attr("stroke-width", "1px")
+                    .attr("r", rad)
+                    .attr("cx", function (d) {
+                        return x(d.date);
+                    }).attr("cy", function (d) {
+                        return y(d.flights / fScalar);
+                    }).on("mouseover", function (d) {
+                        div.transition().duration(200).style("opacity", .9);
+                        div.html(formatTime(d.date) + "<br/>" + d.flights).style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
+                    }).on("mouseout", function (d) {
+                        div.transition().duration(500).style("opacity", 0);
+                    });
             
+            // Add dots for incoming vehicles
             chart.selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
+                .attr("fill", DATA_POINT_COLOR)
+                .attr("stroke-width", "1px")
                 .attr("r", rad)
                 .attr("cx", function (d) {
                     return x(d.date);
@@ -228,10 +249,13 @@ var DataManager = (function () {
                     div.transition().duration(500).style("opacity", 0);
                 });
             
+            // Add dots for outgoing vehicles
             chart.selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
+                .attr("fill", DATA_POINT_COLOR)
+                .attr("stroke-width", "1px")
                 .attr("r", rad)
                 .attr("cx", function (d) {
                     return x(d.date);
@@ -246,9 +270,7 @@ var DataManager = (function () {
             
                 
         }, 1000);
-
-        
-        addAxes(chart, x, y, "Date", "#");
+//        addAxes(chart, x, y, "Date", "#");
     }
     
     function makeChart(selector) {
@@ -256,7 +278,8 @@ var DataManager = (function () {
             .attr("width", width)
             .attr("height", height)
             .attr("cx", "30")
-            .style("padding", "100px");
+            .style("padding-top", "100px")
+            .style("padding-bottom", "100px");
     }
     
     function addAxes(chart, xScale, yScale, xLabel, yLabel) {
@@ -322,9 +345,9 @@ var DataManager = (function () {
 })();
 
 $(document).ready(function() {
-    DataManager.init(800, 400).then(function () {
-//        DataManager.plotFlights("#flights-chart", $(window).width(), 400);
-//        DataManager.plotVehicles("#vehicles-chart");
+    var width = $(window).width();
+//    var height = $(window).
+    DataManager.init(width, 700).then(function (data) {
         DataManager.plotTogether("#together-chart");
     });
 });
