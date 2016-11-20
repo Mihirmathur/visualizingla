@@ -37,7 +37,7 @@ html {
 
 
 .header {
-	font-size: 48px;
+	font-size: 24px;
 	color: #ffffff;
 	text-transform: uppercase;
 }
@@ -47,7 +47,7 @@ html {
 }
 
 h1 {
-	font-size: 48px;
+	font-size: 24px;
 }
 
 .info-panel {
@@ -61,7 +61,7 @@ h1 {
 	width: 33.5%;
 	margin: 10% 7.5%;
 	padding-left: 15px;
-	background: #D0021b;
+	background: ;
 }
 
 .wrapper {
@@ -71,7 +71,7 @@ h1 {
 
 .btn-close {
 	color: #ffffff;
-	background: #D0021b;
+	background-color: #D0021b;
 	border-radius: 0;
 	border: 1px solid #ffffff;
 	box-shadow: 0;
@@ -82,12 +82,13 @@ h1 {
 }
 
 .btn-close:hover {
-	background: #ffffff;
+	background-color: #ffffff;
 	color: #d0021b;
+	cursor: pointer;
 }
 
 .info {
-	font-size: 18.5px;
+	font-size: 14px;
 	width: 90%;
 	margin-bottom: 1em;
 }
