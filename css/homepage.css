@@ -12,6 +12,10 @@ h2{
     padding: 0px;
 }
 
+a{
+    text-decoration: none;
+}
+
 .main-centered{
     position: absolute;
     width: 100%;
@@ -60,13 +64,87 @@ h2{
     -webkit-perspective: 1000;
 }
 
-/*==================NAV-BAR===================*/
+/*===============NAV-BAR (MAIN)==============*/
+
+.fixed-over{
+    z-index: 100;
+    position: fixed;
+    top: 5vh;
+    left: 5vh;
+}
+
+.home img{
+    width:200px;
+}
+
+.home, .rect{
+    position: fixed;
+}
+
+.rect{
+    right: 5vh;
+    background-color: #fff;
+}
+
+.inactive-nav{
+    right: 5vh;
+    width: 70px;
+    height: 70px;
+}
+
+.upper-rect, .lower-rect{
+    width: 50px;
+    height: 10px;
+}
+
+.left-rect, .right-rect{
+    width: 10px;
+    height: 30px;
+}
+
+.right-rect{
+    margin-left:30px;
+    margin-top: 10px;
+}
+
+.left-rect{
+    margin-top: -70px;
+    margin-right: 90px;
+}
+
+
+.lower-rect{
+    margin-top: -40px;
+    margin-right:50px;
+}
+
+.scroll-down{
+    z-index: 100;
+    position: fixed;
+    right: 5vh;
+    bottom: 5vh;
+
+}
+
+.scroll-down h1{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.scroll-down span{
+    display: block;
+}
+
+
+/*===============NAV-BAR (HOMEPAGE)==========*/
 .nav {
     z-index:100;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    left: 5%;
+    left: 5vh;
     padding: 0;
 }
 
@@ -119,13 +197,14 @@ h2{
 
 #line1{
     font-weight: 600;
-    margin-left:15px;
 }
 
 #line2{
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 200;
     margin-top: -40px;
+    margin-left:20px;
+    letter-spacing: 10px;
 }
 
 .title-line span{
@@ -227,7 +306,6 @@ svg.canvas, svg.building{
 }
 
 .info-box a{
-    text-decoration: none;
     padding: 5px 10px;
     
     -webkit-transition: background-color 0.5s ease;
