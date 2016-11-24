@@ -184,6 +184,8 @@ h1 {
 	background: rgba(208, 2, 27, .85);
 	color: #ffffff;
 	padding: 25px;
+	min-width: 300px;
+	z-index: 100;
 }
 
 
@@ -191,7 +193,8 @@ h1 {
 	width: 33.5%;
 	margin: 10% 7.5%;
 	padding-left: 15px;
-	background: ;
+	background: #D0021b;
+	z-index: 100;
 }
 
 .wrapper {
@@ -240,13 +243,40 @@ h1 {
 @media (max-width: 1024px) {
 	.container {
 		width: 90%;
-		margin: 7.5% 5%;
+		margin: 15% 5%;
+		padding: 0;
+		z-index: 100;
 	}
 
 	.info {
-		width: 90%;
+		width: 100%;
 	}
 
+	.leaflet-bar {
+		display: none;
+	}
+
+	.sub {
+		display: none;
+	}
+
+	.wrapper {
+		margin: 5%;
+		padding: 15px 5px;
+	}
+
+}
+
+@media (max-width: 700px) {
+	.leaflet-top {
+		margin: 0;
+		width: 100%;
+	}
+
+	.leaflet-right .leaflet-control {
+		margin: 0;
+		width: 100%;
+	}
 }
 
 .leaflet-bar{
@@ -262,4 +292,8 @@ h1 {
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
 	color: #ffffff;
+}
+
+.violation {
+	text-transform: capitalize;
 }

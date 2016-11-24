@@ -185,7 +185,7 @@ function initMap(points) {
 
 			// generate the html
 			var ticketString = "One of the tickets happened at <br /> " + ranTicket.location.toLowerCase().capitalize() + " at " +
-									 time + "<br /> because of violating \"" + ranTicket.violation.toLowerCase().capitalize()  +
+									 time + "<br /> because of violating \"" + ranTicket.violation.toString().toLowerCase()  +
 									 "\"<br /> and the fine was $" + ranTicket.fine_amount;
 
 
