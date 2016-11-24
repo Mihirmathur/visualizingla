@@ -2,7 +2,7 @@
 
 Example call
 
-FlightsModule.init().then(function(r)) {
+FlightsModule.fetchData().then(function(r)) {
     var flightsArr = r;
 }
 
@@ -97,11 +97,10 @@ var FlightsModule = (function () {
     var parameters = {
         "$select": "reportperiod, flighttype, arrival_departure, domestic_international, flightopscount",
         "$where": "reportperiod>'2013-01-01T00:00:00.000'"
-        // weird API glitch not returning all values without limiting query
     };
     var data = [];
     return {
-        init: fetchData
+        fetchData: fetchData
         , forMonth: getFlightCountForMonth
         , allCounts: getAllFlightCounts
     };

@@ -18,10 +18,35 @@
 
 <body>
     <div id="data">
-        <svg z-index="1" class="chart" id="together-chart"></svg>
+        <svg viewBox = "0 0 1200 400" preserveAspectRatio z-index="1" class="chart" id="visualization"></svg>
     </div>
 </body>
 <script src="lax-animator.js"></script>
 <script src="lax-data-manager.js"></script>
+    
+<script>
+    $(document).ready(function() {
+        
+        $(window).resize(function() {
+             d3.select("#visualization").attr("width", $(window).width());
+        });
+        
+        DataManager.init($(window).width(), 700).then(function (data) {
+            DataManager.plot("#visualization");
+            
+            // Animate traffic
+            setTimeout(function() {
+                Animator.spawnIncomingCars(5, "#visualization");
+                Animator.spawnOutgoingCars(5, "#visualization");
+                Animator.spawnPlanesIn(5, "#visualization");
+                Animator.spawnPlanesOut(5, "#visualization");
+                Animator.animate();
+            }, 1500);
+        });
+        
+        
+        
+});
+</script>
 
 </html>

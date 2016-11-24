@@ -2,9 +2,18 @@
 /*==================HOMEPAGE==================*
 /*============================================*/
 body{
-    background-color: #002040;
+    background-color: #061F38;
     overflow-x: hidden;
     margin: 0;
+}
+
+h2{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+    text-decoration: none;
 }
 
 .main-centered{
@@ -21,38 +30,145 @@ body{
     left:50%;
 }
 
-/*==================NAV-BAR===================*/
+.blur{
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
+/*====================FIXING==================*/
+
+.page-tracker{
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    height:5px;
+    width:100%;
+    opacity: 0;
+}
+
+.page-tracker,
+.title-line span,
+.plane-wrapper,
+.path-wrapper,
+/*.section,
+.section-2-content,
+.section-3-content,
+.section-4-content,*/
+.info-box
+{
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+
+/*===============NAV-BAR (MAIN)==============*/
+
+.fixed-over{
+    z-index: 100;
+    position: fixed;
+    top: 5vh;
+    left: 5vh;
+}
+
+.home img{
+    width:200px;
+}
+
+.home, .rect{
+    position: fixed;
+}
+
+.rect{
+    right: 5vh;
+    background-color: #fff;
+}
+
+.inactive-nav{
+    right: 5vh;
+    width: 70px;
+    height: 70px;
+}
+
+.upper-rect, .lower-rect{
+    width: 50px;
+    height: 10px;
+}
+
+.left-rect, .right-rect{
+    width: 10px;
+    height: 30px;
+}
+
+.right-rect{
+    margin-left:30px;
+    margin-top: 10px;
+}
+
+.left-rect{
+    margin-top: -70px;
+    margin-right: 90px;
+}
+
+
+.lower-rect{
+    margin-top: -40px;
+    margin-right:50px;
+}
+
+.scroll-down{
+    z-index: 100;
+    position: fixed;
+    right: 5vh;
+    bottom: 5vh;
+
+}
+
+.scroll-down h1{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.scroll-down span{
+    display: block;
+}
+
+
+/*===============NAV-BAR (HOMEPAGE)==========*/
 .nav {
     z-index:100;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    left: 5%;
+    left: 5vh;
     padding: 0;
 }
 
 .nav-box {
     display: block;
-    margin: 0px auto 20px;
+    margin: 20px auto;
     width: 3px;
     height: 3px;
     border: 1px solid white;
     background-color: white;
-    transition: background-color 0.2s;
-    -webkit-transition: background-color 0.2s;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .nav-box:hover,
 .active {
-    background-color:rgba(0,0,0,0);
+    background: none;
     cursor: pointer;
     width: 10px;
     height: 10px;
 }
 
-.nav-box:hover{
-    margin-bottom:12px;
-}
 
 .list-style-none {
     list-style: none;
@@ -64,20 +180,31 @@ body{
     position: fixed;
     pointer-events: none;
     text-align: center;
-    transform: translateY(-50%);
-    top: 50%;
     width: 100%; 
-    margin-top: 600px;
     opacity: 0;
     z-index: 90;
+    margin-top: -110px !important;
 }
 
 .title-line{
     pointer-events: none;
-    color: white;
+    color: #fff;
     font-size: 60px;
+    font-family: 'Avenir', sans-serif;
     letter-spacing: 0px;
     text-shadow: 0 0 5px #002040;
+}
+
+#line1{
+    font-weight: 600;
+}
+
+#line2{
+    font-size: 20px;
+    font-weight: 200;
+    margin-top: -40px;
+    margin-left:20px;
+    letter-spacing: 10px;
 }
 
 .title-line span{
@@ -86,16 +213,8 @@ body{
     padding: 0px;
 }
 
-#line1{
-    margin-left:15px;
-    font-family: 'Avenir', sans-serif;
-}
-
-#line2{
-    font-family: 'Maven Pro Light', sans-serif;
-    letter-spacing: -5px;
-    font-size: 50px;
-    margin-top: -40px;
+.title-text-wrapper h3{
+    color: #fff;
 }
 
 /*==================BUILDINGS=================*/
@@ -126,26 +245,26 @@ svg.canvas, svg.building{
 }
 /*=====================PLANE===================*/
 
-.plane-wrapper {
+.plane-wrapper.sec1{
     position: fixed;
     z-index: 10;
     pointer-events: none;
     margin-left: 2000px;
 }
 
-/*===================pathS==================*/
+/*=====================PATHS====================*/
 
-.path-wrapper {
+.path-wrapper.sec1{
     position: fixed;
     pointer-events: none;
     opacity: 0;
-    margin-top: -2100px;
+    margin-top: -2050px;
 }
 
 .path-wrapper .vert {
     background-color: white;
     width: 1px;
-    height: 1000px;
+    height: 2000px;
 }
 
 #path1{
@@ -160,7 +279,80 @@ svg.canvas, svg.building{
     margin-left:200px
 }
 
-/*===================SECTIONS=================*/
+/*==================INFO-BOXES====================*/
+
+.info-box{
+    z-index: 10;
+    position: absolute;
+    width:40vw;
+    
+    margin-top: 100vh;
+    margin-left: 10vw;
+    padding: 30px;
+    transform: translateY(-50%);
+
+    text-align: left;
+    font-family: 'Avenir', sans-serif;
+    color: white;
+}
+
+.box-title{
+    font-size: 24px;
+}
+
+.box-blurb{
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.info-box a{
+    padding: 5px 10px;
+    
+    -webkit-transition: background-color 0.5s ease;
+    -moz-transition: background-color 0.5s ease;
+    -o-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+.section-2-content .info-box a{
+    color: #D0021B;
+    border: 1px solid #D0021B;
+}
+
+.section-2-content .info-box a:hover{
+    cursor: pointer;
+    background-color: #D0021B;
+    color: #fff;
+}
+
+.section-3-content .info-box a{
+    color: #F8C81C;
+    border: 1px solid #F8C81C;
+}
+
+.section-3-content .info-box a:hover{
+    cursor: pointer;
+    background-color: #F8C81C;
+    color: #333;
+}
+
+.section-4-content .info-box a{
+    color: #00009F;;
+    border: 1px solid #00009F;;
+}
+
+.section-4-content .info-box a:hover{
+    cursor: pointer;
+    background-color: #00009F;
+    color: #fff;
+}
+
+/*=====================SECTIONS===================*/
 
 .section{
     height: 1000px;
@@ -170,31 +362,47 @@ svg.canvas, svg.building{
     z-index:1;
 }
 
-.transition-to-black{
-    margin-top: -400px;
-    height: 400px;
-    background-color: black;
-    opacity: 0;
+#section-2,
+.section-2-background,
+.section-3-background,
+.section-4-background{
+    z-index:2;
+    
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    top: 0px;
+
+    background-color: #000;
 }
 
-#section-2{
-    z-index:2;
-    /*TODO: FIX MARGIN FOR NAV ACCURACY*/
-    height: 1300px;
+.section-2-background{
     opacity: 0;
-    background-color: black;
-    /*background-image: url('../resources/parkingtickets.png');
-    background-size: cover !important;*/
+    top:0;
+    background-image: url('../resources/parkingtickets.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #section-3{
     z-index:3;
-    background-color: blue;
+    background-color: #061F38;
+}
+
+.section-3-background{
+    z-index: 3;
+    background-image: url('../resources/hexmapprogress.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #section-4{
     z-index:4;
-   
+}
+
+.section-4-background{
+    z-index: 4;
+    background-color: #333;
 }
 
 /*============================================*/
