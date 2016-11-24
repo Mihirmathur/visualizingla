@@ -8,6 +8,136 @@ html {
 	font-family: 'Avenir Next LT Pro', sans-serif;
 }
 
+/*===============NAV-BAR (MAIN)==============*/
+
+.fixed-over{
+    z-index: 100;
+    position: fixed;
+    top: 5vh;
+    left: 5vh;
+}
+
+.gradient-top{
+    position: fixed;
+    width:100vw;
+    height:150px;
+    top: 0;
+    left:0;
+    background: rgba(0,0,0,0); 
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+}
+
+.home img{
+    width:200px;
+}
+
+.home, .rect{
+    position: fixed;
+}
+
+.rect{
+    right: 5vh;
+    background-color: #fff;
+
+    -webkit-transition: right 0.5s ease;
+    -moz-transition: right 0.5s ease;
+    -o-transition: right 0.5s ease;
+    transition: right 0.5s ease;
+}
+
+.main-nav{
+    position: fixed;
+    right: 5vh;
+    width:90px;
+    height:60px;
+    background-color: none;
+
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+
+.main-nav:hover{
+    cursor: pointer;
+    width: 530px;
+}
+
+.main-nav:hover .active-nav .rect{
+    right:500px;
+}
+
+.main-nav:hover .nav-text-wrapper{
+    opacity: 1;
+    width: 460px;
+}
+
+.inactive-nav{
+    right: 5vh;
+    width: 70px;
+    height: 70px;
+}
+
+.upper-rect, .lower-rect{
+    width: 40px;
+    height: 8px;
+}
+
+.left-rect, .right-rect{
+    width: 8px;
+    height: 40px;
+}
+
+.right-rect{
+    margin-left:30px;
+    margin-top: 8px;
+}
+
+.left-rect{
+    margin-top: -70px;
+    margin-right: 52px;
+}
+
+.lower-rect{
+    margin-top: -30px;
+    margin-right:20px;
+}
+
+.nav-text-wrapper{
+    position: fixed;
+    top: 5vh;
+    opacity: 0;
+    height: 20px;
+    overflow: hidden;
+    width:40px;
+    margin-left: -10px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.nav-text-wrapper li{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    display: inline-block;
+    margin: 0px 20px;
+    letter-spacing: 4px;
+}
+
+.nav-text-wrapper li:first-child{
+    margin-left:35px;
+}
+
+.nav-text-wrapper li:hover{
+    margin-bottom: 10px;
+}
+
+/**/
+
 #map {
 	position: absolute;
 	bottom: 0;

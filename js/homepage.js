@@ -1,4 +1,3 @@
-
 var sectionWidth = d3.select('#section-1').node().getBoundingClientRect().width;
 var sectionHeight = d3.select('#section-1').node().getBoundingClientRect().height;
 
@@ -109,11 +108,6 @@ $(document).ready(function() {
 
     /*NAVIGATION END*/
 
-    $('.main-nav').click(function(){
-        //console.log('clicked');
-        //$('.active-nav').animate({'transform': 'rotate(90deg)'}, 500);
-        //$('.active-nav').css('right', '0');
-    });
 
     $('.title-text-wrapper').delay(2000)
                             .animate({

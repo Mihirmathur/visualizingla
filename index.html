@@ -3,20 +3,25 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Visualizing LA</title>
+
+    <link rel='shortcut icon' type='image/x-icon' href='resources/visla.ico' />
     <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
 </head>
 <body>
 
     <!--
     TODO:
-    ADD IN A 'SCROLL DOWN' INSTRUCTION
     ADD IN HEADER/NAV + FUNCTIONALITY ACROSS ALL PAGES
     FIX HOMEPAGE NAV CLICK [VERY BUGGY] 
     -->
 
+    <div class="gradient-top">
+    </div>
+
     <div class="fixed-over">
+
         <div class="home">
-            <a href="http://uclacreatives.github.io/" target="_blank">
+            <a href="index.html">
                 <img src="resources/logo.png"/>
             </a>
         </div>
@@ -30,6 +35,11 @@
                 <div class="lower-rect rect"></div>
                 <div class="left-rect rect"></div>
             </div>
+            <ul class="nav-text-wrapper list-style-none">
+                <a href="parking-tickets/index.html"><li>PARKING</li></a>
+                <a href="hexmap/index.html"><li>FLIGHTS</li></a>
+                <a href="js/index.html"><li>TRAFFIC</li></a>
+            </ul>
         </div>
 
         <div class="scroll-down">
@@ -58,6 +68,9 @@
         <a href="#section-4" class="nav-box"><li class="list-style-none"></li></a>
         <a href="#section-5" class="nav-box"><li class="list-style-none"></li></a>
     </ul>
+
+    <div class="fixed-over-squares" data-600="opacity: 0" data-700="opacity: 1">
+    </div>
 
     <div class="main-centered">
         <div class="title-wrapper">
@@ -163,7 +176,7 @@
         <div class="section-3-content">
             <div class="section-3-background blur" data-1500="opacity: 0" data-1900="opacity:1; ">
             </div>
-            <div class="info-box" data-1800="margin-top: 70vh" data-2300="opacity: 1" data-2400="opacity:0; ">
+            <div class="info-box" data-1800="margin-top: 70vh" data-2200="opacity: 1" data-2300="opacity:0; ">
                 <h2 class="box-title">FLIGHTS FROM LAX</h2>
                 <p class="box-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
                 <a href="hexmap/index.html">SEE MORE</a>
@@ -176,7 +189,7 @@
         <div class="section-4-content">
             <div class="section-4-background blur" data-2500="opacity: 0" data-2900="opacity:1; ">
             </div>
-            <div class="info-box" data-2900="margin-top: 70vh" data-3400="opacity: 1" data-3500="opacity:0; ">
+            <div class="info-box" data-2900="margin-top: 70vh" data-3200="opacity: 1" data-3300="opacity:0; ">
                 <h2 class="box-title">NEXT SECTION</h2>
                 <p class="box-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
                 <a href="js/index.html">SEE MORE</a>
@@ -196,5 +209,6 @@
     (function(t,e){"use strict";var n=500,a="sqrt",o=1,r="data-menu-top",i="data-menu-offset",u="data-menu-duration",c="data-menu-ignore",l=e.skrollr,s=e.history,f=!!s.pushState,h=function(e){return e!==t&&e?"A"===e.tagName.toUpperCase()?e:h(e.parentNode):!1},p=function(t){if(1===t.which||0===t.button){var e=h(t.target);e&&m(e)&&t.preventDefault()}},m=function(n,a){var o;if(y){if(n.hostname!==e.location.hostname)return!1;if(n.pathname!==t.location.pathname)return!1;o=n.hash}else o=n.getAttribute("href");if(!/^#/.test(o))return!1;if(!a&&null!==n.getAttribute(c))return!1;var l,h;if(h=T?T(n):n.getAttribute(r),null!==h)l=/p$/.test(h)?h.slice(0,-1)/100*t.documentElement.clientHeight:+h*k;else{var p=t.getElementById(o.substr(1));if(!p)return!1;l=v.relativeToAbsolute(p,"top","top");var m=p.getAttribute(i);null!==m&&(l+=+m)}f&&N&&!a&&s.pushState({top:l},"",o);var d=parseInt(n.getAttribute(u),10),q=A(v.getScrollTop(),l);return isNaN(d)||(q=d),E&&E(o,l),S&&!a?v.animateTo(l,{duration:q,easing:b}):g(function(){v.setScrollTop(l)}),!0},d=function(){if(e.location.hash&&t.querySelector){var n=t.querySelector('a[href="'+e.location.hash+'"]');n||(n=t.createElement("a"),n.href=e.location.hash),m(n,!0)}},g=function(t){e.setTimeout(t,1)};l.menu={},l.menu.init=function(r,i){v=r,i=i||{},b=i.easing||a,S=i.animate!==!1,A=i.duration||n,T=i.handleLink,k=i.scale||o,y=i.complexLinks===!0,E=i.change,N=i.updateUrl!==!1,"number"==typeof A&&(A=function(t){return function(){return t}}(A)),l.addEvent(t,"click",p),f&&l.addEvent(e,"popstate",function(t){var e=t.state||{},n=e.top||0;g(function(){v.setScrollTop(n)})},!1),d()},l.menu.click=function(t){m(t)};var v,b,A,S,T,k,y,E,N;g(function(){e.location.hash&&e.scrollTo(0,0)})})(document,window);
     </script>
     <script src="js/homepage.js"></script>
+    <script src="js/squares-over.js"></script>
 </body>
 </html>

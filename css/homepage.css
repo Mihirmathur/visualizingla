@@ -31,32 +31,18 @@ a{
 }
 
 .blur{
-    -webkit-filter: blur(3px);
+    /*-webkit-filter: blur(3px);
     -moz-filter: blur(3px);
     -o-filter: blur(3px);
     -ms-filter: blur(3px);
-    filter: blur(3px);
+    filter: blur(3px);*/
 }
 
-/*====================FIXING==================*/
+/*===========FIXING FUCKING SAFARI===========*/
 
-.page-tracker{
-    position: fixed;
-    z-index: 100;
-    background-color: white;
-    height:5px;
-    width:100%;
-    opacity: 0;
-}
-
-.page-tracker,
 .title-line span,
 .plane-wrapper,
 .path-wrapper,
-/*.section,
-.section-2-content,
-.section-3-content,
-.section-4-content,*/
 .info-box
 {
     -webkit-transform: translateZ(0);
@@ -73,6 +59,19 @@ a{
     left: 5vh;
 }
 
+.gradient-top{
+    position: fixed;
+    width:100vw;
+    height:150px;
+    top: 0;
+    left:0;
+    background: rgba(0,0,0,0); 
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+}
+
 .home img{
     width:200px;
 }
@@ -84,6 +83,38 @@ a{
 .rect{
     right: 5vh;
     background-color: #fff;
+
+    -webkit-transition: right 0.5s ease;
+    -moz-transition: right 0.5s ease;
+    -o-transition: right 0.5s ease;
+    transition: right 0.5s ease;
+}
+
+.main-nav{
+    position: fixed;
+    right: 5vh;
+    width:90px;
+    height:60px;
+    background-color: none;
+
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+
+.main-nav:hover{
+    cursor: pointer;
+    width: 530px;
+}
+
+.main-nav:hover .active-nav .rect{
+    right:500px;
+}
+
+.main-nav:hover .nav-text-wrapper{
+    opacity: 1;
+    width: 460px;
 }
 
 .inactive-nav{
@@ -93,30 +124,60 @@ a{
 }
 
 .upper-rect, .lower-rect{
-    width: 50px;
-    height: 10px;
+    width: 40px;
+    height: 8px;
 }
 
 .left-rect, .right-rect{
-    width: 10px;
-    height: 30px;
+    width: 8px;
+    height: 40px;
 }
 
 .right-rect{
     margin-left:30px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .left-rect{
     margin-top: -70px;
-    margin-right: 90px;
+    margin-right: 52px;
 }
-
 
 .lower-rect{
-    margin-top: -40px;
-    margin-right:50px;
+    margin-top: -30px;
+    margin-right:20px;
 }
+
+.nav-text-wrapper{
+    position: fixed;
+    top: 5vh;
+    opacity: 0;
+    height: 20px;
+    overflow: hidden;
+    width:40px;
+    margin-left: -10px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.nav-text-wrapper li{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    display: inline-block;
+    margin: 0px 20px;
+    letter-spacing: 4px;
+}
+
+.nav-text-wrapper li:first-child{
+    margin-left:35px;
+}
+
+.nav-text-wrapper li:hover{
+    margin-bottom: 10px;
+}
+
 
 .scroll-down{
     z-index: 100;
@@ -129,16 +190,17 @@ a{
 .scroll-down h1{
     color: white;
     font-family: 'Avenir', sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     text-align: center;
 }
 
 .scroll-down span{
     display: block;
+    pointer-events: none;
 }
 
-
 /*===============NAV-BAR (HOMEPAGE)==========*/
+
 .nav {
     z-index:100;
     position: fixed;
@@ -151,8 +213,8 @@ a{
 .nav-box {
     display: block;
     margin: 20px auto;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border: 1px solid white;
     background-color: white;
     -webkit-transition: all 0.2s ease;
@@ -169,9 +231,30 @@ a{
     height: 10px;
 }
 
+.nav-box:hover li{
+    opacity: 1;
+}
+
+.nav li{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    margin-left:18px;
+    margin-top:-6px;
+    opacity: 0.5;
+}
 
 .list-style-none {
-    list-style: none;
+    list-style-type: none;
+}
+
+/*=================SQUARES====================*/
+
+.fixed-over-squares{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    opacity: 0;
 }
 
 /*===================TITLE====================*/
@@ -217,32 +300,6 @@ a{
     color: #fff;
 }
 
-/*==================BUILDINGS=================*/
-
-.black-square{
-    fill: #000;
-    stroke: none;
-}
-
-.grid-wrapper{
-    margin-top: -3000px;
-}
-
-#grid{
-    margin: 50px auto 0 auto;
-    width: 800px;
-    height: 550px;
-    opacity: 0.5;
-    overflow: visible !important;
-} 
-
-#grid:hover, .building:hover, .rect{
-    cursor: pointer !important;
-}
-
-svg.canvas, svg.building{
-    overflow: visible;
-}
 /*=====================PLANE===================*/
 
 .plane-wrapper.sec1{
@@ -282,10 +339,11 @@ svg.canvas, svg.building{
 /*==================INFO-BOXES====================*/
 
 .info-box{
-    z-index: 10;
+    z-index: 60;
     position: absolute;
     width:40vw;
-    
+    pointer-events:none;
+
     margin-top: 100vh;
     margin-left: 10vw;
     padding: 30px;
@@ -306,6 +364,7 @@ svg.canvas, svg.building{
 }
 
 .info-box a{
+    pointer-events:auto;
     padding: 5px 10px;
     
     -webkit-transition: background-color 0.5s ease;
