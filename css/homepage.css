@@ -7,6 +7,10 @@ body{
     margin: 0;
 }
 
+h2, p{
+    font-family: 'Avenir', sans-serif;
+}
+
 h2{
     margin: 0px;
     padding: 0px;
@@ -31,37 +35,52 @@ a{
 }
 
 .blur{
-    -webkit-filter: blur(3px);
+    /*-webkit-filter: blur(3px);
     -moz-filter: blur(3px);
     -o-filter: blur(3px);
     -ms-filter: blur(3px);
-    filter: blur(3px);
+    filter: blur(3px);*/
 }
 
-/*====================FIXING==================*/
-
-.page-tracker{
+.pre-over{
+    width: 100%;
+    height: 100%;
+    background-color: #061F38;
     position: fixed;
-    z-index: 100;
-    background-color: white;
-    height:5px;
-    width:100%;
-    opacity: 0;
+    z-index: 1000;
 }
 
-.page-tracker,
+/*===========FIXING VARIOUS ANIMATIONS===========*/
+
 .title-line span,
 .plane-wrapper,
 .path-wrapper,
-/*.section,
-.section-2-content,
-.section-3-content,
-.section-4-content,*/
-.info-box
+.info-box,
+.rect
 {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
+}
+
+.enable3d{
+    -webkit-transform: translateZ(0);
+   -moz-transform: translateZ(0);
+   -ms-transform: translateZ(0);
+   -o-transform: translateZ(0);
+   transform: translateZ(0);
+}
+
+.fixCSSanimate{
+    -webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -ms-backface-visibility: hidden;
+   backface-visibility: hidden;
+
+   -webkit-perspective: 1000;
+   -moz-perspective: 1000;
+   -ms-perspective: 1000;
+   perspective: 1000;
 }
 
 /*===============NAV-BAR (MAIN)==============*/
@@ -71,6 +90,19 @@ a{
     position: fixed;
     top: 5vh;
     left: 5vh;
+}
+
+.gradient-top{
+    position: fixed;
+    width:100vw;
+    height:150px;
+    top: 0;
+    left:0;
+    background: rgba(0,0,0,0); 
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
 }
 
 .home img{
@@ -84,6 +116,34 @@ a{
 .rect{
     right: 5vh;
     background-color: #fff;
+    margin-right: -15px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main-nav{
+    position: fixed;
+    right: 5vh;
+    width:55px;
+    height:50px;
+    margin-right:-10px;
+    margin-top: -15px;
+
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+
+.main-nav:hover{
+    cursor: pointer;
+    width: 450px;
+}
+
+.main-nav:hover .active-nav .rect{
+    transform: perspective(500px) translateX(-400px);
 }
 
 .inactive-nav{
@@ -93,52 +153,95 @@ a{
 }
 
 .upper-rect, .lower-rect{
-    width: 50px;
-    height: 10px;
+    width: 40px;
+    height: 8px;
 }
 
 .left-rect, .right-rect{
-    width: 10px;
-    height: 30px;
+    width: 8px;
+    height: 40px;
 }
 
 .right-rect{
     margin-left:30px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .left-rect{
     margin-top: -70px;
-    margin-right: 90px;
+    margin-right: 37px;
 }
-
 
 .lower-rect{
-    margin-top: -40px;
-    margin-right:50px;
+    margin-top: -30px;
+    margin-right:5px;
 }
 
-.scroll-down{
-    z-index: 100;
+.nav-text-wrapper{
     position: fixed;
-    right: 5vh;
-    bottom: 5vh;
-
+    top: 5vh;
+    opacity: 0;
+    height: 20px;
+    overflow: hidden;
+    width:0px;
+    margin-top: -4px;
+    margin-left: 5px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
-.scroll-down h1{
+.main-nav:hover .nav-text-wrapper{
+    opacity: 1;
+    width: 360px;
+}
+
+.nav-text-wrapper li{
     color: white;
     font-family: 'Avenir', sans-serif;
-    font-size: 20px;
+    display: inline-block;
+    margin: 0px 25px;
+    letter-spacing: 2px;
+}
+
+.nav-text-wrapper li:first-child{
+    margin-left:15px;
+}
+
+.nav-text-wrapper li:hover{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#scroll{
+    position: fixed;
+    z-index: 0;
+    opacity: 0;
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    pointer-events: none;
     text-align: center;
+
+    left: 50vw;
+    top: 5vh;
+    margin-left: -100px;
+    margin-top: -20px;
 }
 
-.scroll-down span{
-    display: block;
+#scroll p{
+    color: white;
+    opacity: 1;
+    letter-spacing: 5px;
+    margin-left: 5px;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
 }
-
-
 /*===============NAV-BAR (HOMEPAGE)==========*/
+
 .nav {
     z-index:100;
     position: fixed;
@@ -151,8 +254,8 @@ a{
 .nav-box {
     display: block;
     margin: 20px auto;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border: 1px solid white;
     background-color: white;
     -webkit-transition: all 0.2s ease;
@@ -169,9 +272,33 @@ a{
     height: 10px;
 }
 
+.nav-box:hover li{
+    opacity: 1;
+}
+
+.nav li{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    margin-left:18px;
+    margin-top:-6px;
+    opacity: 0;
+}
 
 .list-style-none {
-    list-style: none;
+    list-style-type: none;
+}
+
+/*=================SQUARES====================*/
+
+.fixed-over-squares{
+    position: fixed;
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    opacity: 0;
+    padding-bottom: 10px;
 }
 
 /*===================TITLE====================*/
@@ -183,7 +310,7 @@ a{
     width: 100%; 
     opacity: 0;
     z-index: 90;
-    margin-top: -110px !important;
+    margin-top: 1000px;
 }
 
 .title-line{
@@ -217,32 +344,6 @@ a{
     color: #fff;
 }
 
-/*==================BUILDINGS=================*/
-
-.black-square{
-    fill: #000;
-    stroke: none;
-}
-
-.grid-wrapper{
-    margin-top: -3000px;
-}
-
-#grid{
-    margin: 50px auto 0 auto;
-    width: 800px;
-    height: 550px;
-    opacity: 0.5;
-    overflow: visible !important;
-} 
-
-#grid:hover, .building:hover, .rect{
-    cursor: pointer !important;
-}
-
-svg.canvas, svg.building{
-    overflow: visible;
-}
 /*=====================PLANE===================*/
 
 .plane-wrapper.sec1{
@@ -282,10 +383,11 @@ svg.canvas, svg.building{
 /*==================INFO-BOXES====================*/
 
 .info-box{
-    z-index: 10;
+    z-index: 60;
     position: absolute;
     width:40vw;
-    
+    pointer-events:none;
+
     margin-top: 100vh;
     margin-left: 10vw;
     padding: 30px;
@@ -298,6 +400,12 @@ svg.canvas, svg.building{
 
 .box-title{
     font-size: 24px;
+    float: left;
+    margin-right: 15px;
+}
+
+.section-5-content .box-title{
+    float: none;
 }
 
 .box-blurb{
@@ -306,8 +414,13 @@ svg.canvas, svg.building{
 }
 
 .info-box a{
+    pointer-events:auto;
     padding: 5px 10px;
-    
+    font-size: 12px;
+    display: inline-block;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
     -webkit-transition: background-color 0.5s ease;
     -moz-transition: background-color 0.5s ease;
     -o-transition: background-color 0.5s ease;
@@ -331,25 +444,25 @@ svg.canvas, svg.building{
 }
 
 .section-3-content .info-box a{
-    color: #F8C81C;
-    border: 1px solid #F8C81C;
+    color: #6ea6ff;
+    border: 1px solid #6ea6ff;
 }
 
 .section-3-content .info-box a:hover{
     cursor: pointer;
-    background-color: #F8C81C;
-    color: #333;
+    background-color: #6ea6ff;
+    color: #fff;
 }
 
 .section-4-content .info-box a{
-    color: #00009F;;
-    border: 1px solid #00009F;;
+    color: #F8C81C;
+    border: 1px solid #F8C81C;
 }
 
 .section-4-content .info-box a:hover{
     cursor: pointer;
-    background-color: #00009F;
-    color: #fff;
+    background-color: #F8C81C;
+    color: #333;
 }
 
 /*=====================SECTIONS===================*/
@@ -358,7 +471,13 @@ svg.canvas, svg.building{
     height: 1000px;
 }
 
+.section-background{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 #section-1{
+    height: 2000px;
     z-index:1;
 }
 
@@ -380,8 +499,6 @@ svg.canvas, svg.building{
     opacity: 0;
     top:0;
     background-image: url('../resources/parkingtickets.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 #section-3{
@@ -391,9 +508,7 @@ svg.canvas, svg.building{
 
 .section-3-background{
     z-index: 3;
-    background-image: url('../resources/hexmapprogress.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-image: url('../resources/traffic.png');
 }
 
 #section-4{
@@ -402,8 +517,22 @@ svg.canvas, svg.building{
 
 .section-4-background{
     z-index: 4;
-    background-color: #333;
+    background-image: url('../resources/hexmapprogress.png');
 }
+
+#section-5{
+    z-index:5;
+}
+
+.section-5-content{
+    height: 800px;
+}
+
+.section-5-background{
+    z-index: 5;
+    background-color: grey;
+}
+
 
 /*============================================*/
 /*===============END-HOMEPAGE=================*
