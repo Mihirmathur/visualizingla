@@ -138,6 +138,20 @@ body {
 
 /* Understand what stroke-dahsarray works */
 
+
+#info-overlay {
+    position: fixed;
+    top: 80px;
+    left: 5vh;
+    width: 250px;
+    height: 80px;
+    border-radius: 3px;
+    background-color: rgba(50, 50, 50, 0.8);
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+}
+
 .line {
     fill: none;
     stroke-width: 2px;
@@ -147,13 +161,13 @@ body {
 
 .data-dot {
     stroke-width: 1px;
-    r: 3;
     z-index: 1;
+    r: 5;
 }
 
 #visualization {
-    padding-top: 300px;
-    padding-bottom: 300px;
+    padding-top: 150px;
+/*    padding-bottom: 150px;*/
 }
 
 .car {
@@ -170,11 +184,12 @@ body {
     }
 }
 
+/*
 div.tooltip {
     position: fixed;
     left: 25px;
     top: 25px;
-/*    text-align: center;*/
+    text-align: center;
     width: 400px;
     height: 150px;
     padding: 10px;
@@ -184,6 +199,7 @@ div.tooltip {
     border-radius: 1px;
     pointer-events: none;
 }
+*/
 
 #data {
     background-color: #666;
@@ -191,5 +207,4 @@ div.tooltip {
 
 #chartdata {
     z-index: 1;
-    x: 0;
 }

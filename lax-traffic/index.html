@@ -9,74 +9,70 @@
     <title>LAX Visualization</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="lax-flights.js"></script>
-    <script src="lax-vehicles.js"></script>
+    <script src="./MorphSVGPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-    <script src="//s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js"></script>
+    
+    <script src="lax-flights.js"></script>
+    <script src="lax-vehicles.js"></script>
+    
     <link rel="stylesheet" href="css/styles.css" type="text/css"> </head>
 
 <body>
     <div class="fixed-over">
-
-            <div class="home">
-                <a href="../index.html">
-                    <img src="../resources/logo.png"/>
-                </a>
-            </div>
-
-            <div class="main-nav">
-                <div class="inactive-nav">
-                    <div class="upper-rect rect"></div>
-                    <div class="right-rect rect"></div>
-                </div>
-                <div class="active-nav">
-                    <div class="lower-rect rect"></div>
-                    <div class="left-rect rect"></div>
-                </div>
-                <ul class="nav-text-wrapper list-style-none">
-                        <a href="../parking-tickets/index.html">
-                            <li>TICKETS</li>
-                        </a>
-                        <a href="index.html">
-                            <li>TRAFFIC</li>
-                        </a>
-                        <a href="../hexmap/index.html">
-                            <li>FLIGHTS</li>
-                        </a>
-                </ul>
-            </div>
+        <div class="home">
+            <a href="../index.html"> <img src="../resources/logo.png" /> </a>
         </div>
+        <div class="main-nav">
+            <div class="inactive-nav">
+                <div class="upper-rect rect"></div>
+                <div class="right-rect rect"></div>
+            </div>
+            <div class="active-nav">
+                <div class="lower-rect rect"></div>
+                <div class="left-rect rect"></div>
+            </div>
+            <ul class="nav-text-wrapper list-style-none">
+                <a href="../parking-tickets/index.html">
+                    <li>TICKETS</li>
+                </a>
+                <a href="index.html">
+                    <li>TRAFFIC</li>
+                </a>
+                <a href="../hexmap/index.html">
+                    <li>FLIGHTS</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div id="info-overlay" class=""></div>
     <div id="data">
-        <svg viewBox = "0 0 1200 400" preserveAspectRatio z-index="1" class="chart" id="visualization"></svg>
+        <svg preserveAspectRatio z-index="1" id="visualization" class="chart"></svg>
     </div>
 </body>
 <script src="lax-animator.js"></script>
 <script src="lax-data-manager.js"></script>
-    
 <script>
-    $(document).ready(function() {
-        
-        $(window).resize(function() {
-             d3.select("#visualization").attr("width", $(window).width());
-        });
-        
-        DataManager.init($(window).width(), 700).then(function (data) {
+    function resized() {
+        d3.select("#visualization")
+            .attr("viewBox", "0 0 " + $(window).width() + " " + $(window).height())
+            .attr("width", $(window).width());
+    }
+    
+    $(document).ready(function () {
+        resized();
+        $(window).resize(resized);
+        DataManager.init($(window).width(), $(window).height()).then(function (_) {
             DataManager.plot("#visualization");
-            
-            // Animate traffic
             setTimeout(function() {
-                Animator.spawnIncomingCars(5, "#visualization");
-                Animator.spawnOutgoingCars(5, "#visualization");
-                Animator.spawnPlanesIn(5, "#visualization");
-                Animator.spawnPlanesOut(5, "#visualization");
+                Animator.spawnIncomingCars(3, "#visualization");
+                Animator.spawnOutgoingCars(3, "#visualization");
+                Animator.spawnPlanesIn(3, "#visualization");
+                Animator.spawnPlanesOut(3, "#visualization");
                 Animator.animate();
             }, 1500);
         });
-        
-        
-        
-});
+    });
 </script>
 
 </html>

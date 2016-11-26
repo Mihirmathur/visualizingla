@@ -66,13 +66,11 @@ var Animator = (function() {
             rotation: (90),
             transformOrigin: "50% 50%",
             x: -300,
-            scaleX: (0.5),
-            scaleY: (0.5)
+            scaleX: (0.3),
+            scaleY: (0.3)
         });
         
-        var path = MorphSVGPlugin.pathDataToBezier("#vinPath", {
-            align: ".car-in"
-        });
+        var path = MorphSVGPlugin.pathDataToBezier("#vinPath", { align: ".car-in" });
         
         TweenMax.set(".car-in", {
             xPercent: -50,
@@ -94,14 +92,12 @@ var Animator = (function() {
         TweenMax.to(".car-out", 0, {
             rotation: (90),
             transformOrigin: "50% 50%",
-            x: 300000,
-            scaleX: (0.5),
-            scaleY: (0.5)
+            scaleX: (0.3),
+            scaleY: (0.3),
+            x: 99999
         });
         
-        var path = MorphSVGPlugin.pathDataToBezier("#voutPath", {
-            align: ".car-out"
-        });
+        var path = MorphSVGPlugin.pathDataToBezier("#voutPath", { align: ".car-out" });
         
         TweenMax.set(".car-out", {
             xPercent: -50,
@@ -123,9 +119,9 @@ var Animator = (function() {
         TweenMax.to(".plane-in", 0, {
             rotation: (180),
             transformOrigin: "50% 50%",
-            scaleX: (7),
-            scaleY: (7),
-            x: (-1000),
+            scaleX: (6),
+            scaleY: (6),
+            x: (-99999),
         });
         
         var path = MorphSVGPlugin.pathDataToBezier("#flightPath", {align: ".plane-in"});
@@ -139,7 +135,6 @@ var Animator = (function() {
             bezier: {
                 values: path,
                 type: "cubic",
-                curviness: 1,
                 autoRotate: 180
             },
             ease: Linear.easeNone,
@@ -151,8 +146,8 @@ var Animator = (function() {
         TweenMax.to(".plane-out", 0, {
             rotation: (180),
             transformOrigin: "50% 50%",
-            scaleX: (7),
-            scaleY: (7),
+            scaleX: (6),
+            scaleY: (6),
             x: (-1000),
         });
         
@@ -169,7 +164,6 @@ var Animator = (function() {
             bezier: {
                 values: path,
                 type: "cubic",
-                curviness: 1,
                 autoRotate: true
             },
             ease: Linear.easeNone,

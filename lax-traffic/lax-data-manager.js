@@ -13,8 +13,11 @@ var DataManager = (function () {
     };
     
     var delays = {
-        dataPoints: 1000
+        dataPoints: 1000,
+        defaultMessage: 0
     };
+    
+    var DEFAULT_MESSAGE = "Hover over data points to get a closer look."
 
     // have data from 2013-05 to 2016-07
     // Stored in the form
@@ -33,6 +36,7 @@ var DataManager = (function () {
     function init(w, h) {
         width = w;
         height = h;
+        resetToDefaultMessage();
         var flights, vehicles, dates;
         return new Promise(function (resolve, reject) {
             FlightsModule.fetchData().then(function (d) {
@@ -72,27 +76,22 @@ var DataManager = (function () {
     
     function plot(selector) {
         
-                // Set the domain and ranges for each axis
+        // Set the domain and ranges for each axis
         var x = d3.scaleTime()
             .range([0, width])
             .domain(d3.extent(data, function(d) { return d.date; }));   
         var y = d3.scaleLinear()
             .range([height, 0])
+            // TODO: should be generalized
             .domain([0, d3.max(data, function(d) { return d.vin / scalars.vehicles; })]);
         
         // Create a chart on the passed-in selector SVG
         var chart = makeChart(selector);
         var chartdata = chart.append("g")
-//                                .append("g")
                                 .attr("id", "chartdata");
         
         
         var formatTime = d3.timeFormat("%B %Y");
-        
-        var div = d3.select("body")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
         
         // Define the vin line to be graphed
         var vinLine = d3.line()
@@ -148,85 +147,74 @@ var DataManager = (function () {
         path.attr("stroke-dasharray", pathLength + " " + pathLength)
         .attr("stroke-dashoffset", pathLength)
         
+        // Render data points after paths have been drawn.
         window.setTimeout(function() {
-            var rad = 3;
-            // Add dots for flights
             
+            // Add dots for flights
             chart.append("g")
+                .attr("id", "flight-dots")
                 .selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
                     .attr("class", "data-dot")
                     .attr("fill", colors.dataPoint)
-                    .attr("cx", function (d) {
-                        return x(d.date);
-                    }).attr("cy", function (d) {
-                        return y(d.flights / scalars.flights);
-                    }).on("mouseover", function (d) {
-                        div.transition().duration(200).style("opacity", .9);
-                        div.html("In " + formatTime(d.date) + ", <br/>" + commafy(d.flights) + " flew through LAX.")
-//                            .style("left", "15px")
-//                            .style("top", "15 px");
+                    .attr("cx", function (d) { return x(d.date); })
+                    .attr("cy", function (d) { return y(d.flights / scalars.flights); })
+                    .on("mouseover", function (d) {
+                        updateInfoMessage("In " + formatTime(d.date) + ", <br/>" + commafy(d.flights) + " flew through LAX.");
                     }).on("mouseout", function (d) {
-                        div.transition().duration(500).style("opacity", 0);
+                        setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });
             
             // Add dots for incoming vehicles
             chart.append("g")
+                .attr("id", "vin-dots")
                 .selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
                     .attr("class", "data-dot")
                     .attr("fill", colors.dataPoint)
-                    .attr("cx", function (d) {
-                        return x(d.date);
-                    }).attr("cy", function (d) {
-                        return y(d.vin / scalars.vehicles);
-                    }).on("mouseover", function (d) {
-                        div.transition().duration(200).style("opacity", .9);
-                        div.html("In " + formatTime(d.date) + ", <br/>" + commafy(d.vin) + " cars drove into LAX.")
-//                            .style("left", "15px")
-//                            .style("top", "15px");
+                    .attr("cx", function (d) { return x(d.date); })
+                    .attr("cy", function (d) { return y(d.vin / scalars.vehicles); })
+                    .on("mouseover", function (d) {
+                        updateInfoMessage("<p>In " + formatTime(d.date) + ", <br/>" + commafy(d.vin) + " cars drove into LAX.</p>");
                     }).on("mouseout", function (d) {
-                        div.transition().duration(500).style("opacity", 0);
+                        setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });
             
             // Add dots for outgoing vehicles
             chart.append("g")
+                .attr("id", "vout-dots")
                 .selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
+                    .attr("class", "data-dot")
                     .attr("fill", colors.dataPoint)
-                    .attr("stroke-width", "1px")
-                    .attr("r", rad)
-                    .attr("cx", function (d) {
-                        return x(d.date);
-                    }).attr("cy", function (d) {
-                        return y(d.vout / scalars.vehicles);
-                    }).on("mouseover", function (d) {
-                        div.transition().duration(200).style("opacity", .9);
-                        div.html("In " + formatTime(d.date) + ", <br/>" + commafy(d.vout) + " cars drove out of LAX.")
-//                            .style("left", (d3.event.pageX) + "px")
-//                            .style("top", (d3.event.pageY - 28) + "px");
+                    .attr("cx", function (d) { return x(d.date); }).
+                    attr("cy", function (d) { return y(d.vout / scalars.vehicles); })
+                    .on("mouseover", function (d) {
+                        updateInfoMessage("In " + formatTime(d.date) + ", <br/>" + commafy(d.vout) + " cars drove out of LAX.");
                     }).on("mouseout", function (d) {
-                        div.transition().duration(500).style("opacity", 0);
+                        setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });
             
                 
         }, delays.dataPoints);
-//        addAxes(chart, x, y, "Date", "#");
     }
     
     function makeChart(selector) {
-        return d3.select(selector)
-//            .attr("width", width)
-//            .attr("height", height)
-//            .attr("cx", "30")
-//            .style("padding-top", "100px")
-//            .style("padding-bottom", "100px");
+        return d3.select(selector);
+    }
+    
+    function updateInfoMessage(message) {
+        d3.select("#info-overlay").html("<p>" + message + "</p>");
+    }
+    
+    function resetToDefaultMessage() {
+        updateInfoMessage("<p>" + DEFAULT_MESSAGE + "<p>");
     }
     
     function addAxes(chart, xScale, yScale, xLabel, yLabel) {
@@ -284,8 +272,8 @@ var DataManager = (function () {
     }
     
     function commafy(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     
     return {
         init: init
