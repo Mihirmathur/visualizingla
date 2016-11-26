@@ -41,19 +41,20 @@ html {
 .rect{
     right: 5vh;
     background-color: #fff;
-
-    -webkit-transition: right 0.5s ease;
-    -moz-transition: right 0.5s ease;
-    -o-transition: right 0.5s ease;
-    transition: right 0.5s ease;
+    margin-right: -15px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .main-nav{
     position: fixed;
     right: 5vh;
-    width:90px;
-    height:60px;
-    background-color: none;
+    width:55px;
+    height:50px;
+    margin-right:-10px;
+    margin-top: -15px;
 
     -webkit-transition: width 0.5s ease;
     -moz-transition: width 0.5s ease;
@@ -63,16 +64,11 @@ html {
 
 .main-nav:hover{
     cursor: pointer;
-    width: 530px;
+    width: 450px;
 }
 
 .main-nav:hover .active-nav .rect{
-    right:500px;
-}
-
-.main-nav:hover .nav-text-wrapper{
-    opacity: 1;
-    width: 460px;
+    transform: perspective(500px) translateX(-400px);
 }
 
 .inactive-nav{
@@ -98,12 +94,12 @@ html {
 
 .left-rect{
     margin-top: -70px;
-    margin-right: 52px;
+    margin-right: 37px;
 }
 
 .lower-rect{
     margin-top: -30px;
-    margin-right:20px;
+    margin-right:5px;
 }
 
 .nav-text-wrapper{
@@ -112,31 +108,38 @@ html {
     opacity: 0;
     height: 20px;
     overflow: hidden;
-    width:40px;
-    margin-left: -10px;
+    width:0px;
+    margin-top: -4px;
+    margin-left: 5px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
+.main-nav:hover .nav-text-wrapper{
+    opacity: 1;
+    width: 360px;
+}
+
 .nav-text-wrapper li{
     color: white;
     font-family: 'Avenir', sans-serif;
     display: inline-block;
-    margin: 0px 20px;
-    letter-spacing: 4px;
+    margin: 0px 25px;
+    letter-spacing: 2px;
 }
 
 .nav-text-wrapper li:first-child{
-    margin-left:35px;
+    margin-left:15px;
 }
 
 .nav-text-wrapper li:hover{
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
-/**/
+/*===========================================*/
 
 #map {
 	position: absolute;

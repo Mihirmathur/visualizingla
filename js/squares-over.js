@@ -3,8 +3,7 @@ var canvas = d3.select('.fixed-over-squares');
 var canvasWidth = canvas.node().getBoundingClientRect().width;
 var canvasHeight = canvas.node().getBoundingClientRect().height;
 
-var width = 20, height = 20,
-    off = 0;
+var width = 20, height = 20;
 
 function initGrid(gridHeight, gridWidth) {
     var data = new Array();
@@ -15,24 +14,22 @@ function initGrid(gridHeight, gridWidth) {
     var xTrans = 0,
         yTrans = 0;
 
-    for (var row = 0; row < gridHeight/(height + off); row++) {
+    for (var row = 0; row < gridHeight/height; row++) {
         data.push(new Array());
-        for (var col = 0; col < gridWidth/(width + off); col++) {
+        for (var col = 0; col < gridWidth/width; col++) {
             data[row].push({
                 x: xpos,
                 y: ypos,
-                width: width - off,
-                height: height - off,
+                width: width,
+                height: height,
                 xOffset: xOffset,
                 yOffset: yOffset,
                 xTrans: xTrans,
                 yTrans: yTrans
             })
-            xOffset += off;
             xpos += width;
         }
         xOffset = 0;
-        yOffset += off;
         xpos = 1;
         ypos += height;
     }
@@ -40,16 +37,15 @@ function initGrid(gridHeight, gridWidth) {
 }
 
 function flyOut(d){
-    var xOff = 30/(Math.random() - 0.5);
-    var yOff = 30/(Math.random() - 0.5);
+    var xOff = 5/(Math.random() - 0.5);
+    var yOff = 5/(Math.random() - 0.5);
     d3.select(this)
         .attr('xTrans', function(d){return xOff;})
         .attr('yTrans', function(d){return yOff;})
         .transition()
         .ease('cubic')
-        .duration(600)
+        .duration(200)
             .attr('transform', 'translate(' + xOff + ', ' + yOff + ')')
-            .style('fill', rgba(0,0,0,0.1))
             .style('z-index', '100');
 }
 
@@ -86,12 +82,29 @@ function initAll(){
                 .attr('id', function(d, i) {return 'rect' + i;})
                 .attr('x', function(d) {return d.x + d.xOffset;})
                 .attr('y', function(d) {return d.y + d.yOffset;})
-                .attr('width', function(d) {return d.width + off;})
-                .attr('height', function(d) {return d.height + off;})
-                .style('fill', 'rgba(0,0,0,0.4)')
+                .attr('width', function(d) {return d.width;})
+                .attr('height', function(d) {return d.height;})
+                .style('fill', 'rgba(0,0,0,0.5)')
                 .on('mouseover', flyOut)
                 .on('mouseout', flyIn);
+}
 
+function flyRight(){
+    d3.select(this)
+        .transition()
+        .duration(1000)
+            .attr('transform', 'translate(2000, 0)');
+}
+
+function changeBack(){
+    d3.select(this)
+        .transition()
+        .duration(500)
+        .attr('transform', 'translate(0, 0)');
+}
+
+function allChange(change){
+    d3.selectAll('.fixed-over-squares rect').each(change);
 }
 
 var grid = canvas
