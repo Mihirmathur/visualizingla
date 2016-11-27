@@ -7,6 +7,10 @@ body{
     margin: 0;
 }
 
+body, html, .fixed-over {
+    height: 100%;
+}
+
 h2, p{
     font-family: 'Avenir', sans-serif;
 }
@@ -245,14 +249,14 @@ a{
     transform: translateY(-50%);
     left: 5vh;
     padding: 0;
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
 }
 
 .nav-box {
     display: block;
-    margin: 20px auto;
-    width: 4px;
-    height: 4px;
-    border: 1px solid white;
+    width: 8px;
+    height: 50px;
     background-color: white;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -262,22 +266,8 @@ a{
 
 .nav-box:hover,
 .active {
-    background: none;
+    background-color: rgba(255,255,255,0.2);
     cursor: pointer;
-    width: 10px;
-    height: 10px;
-}
-
-.nav-box:hover li{
-    opacity: 1;
-}
-
-.nav li{
-    color: white;
-    font-family: 'Avenir', sans-serif;
-    margin-left:18px;
-    margin-top:-6px;
-    opacity: 0;
 }
 
 .list-style-none {
@@ -306,7 +296,6 @@ a{
     width: 100%;
     opacity: 0;
     z-index: 90;
-    margin-top: 1000px;
 }
 
 .title-line{
@@ -529,7 +518,7 @@ a{
 }
 
 .section-5-content{
-    height: 820px;
+    height: 650px;
 }
 
 .section-5-background{
