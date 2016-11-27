@@ -4,7 +4,7 @@ var DataManager = (function () {
         vinPath: "#ffffff",
         voutPath: "#ffffff",
         flightsPath: "#ffffff",
-        dataPoint: "#ffffff"
+        dataPoint: "rgb(50, 52, 50)"
     };
     
     var scalars = {
@@ -17,7 +17,7 @@ var DataManager = (function () {
         defaultMessage: 0
     };
     
-    var DEFAULT_MESSAGE = "Hover over data points to get a closer look."
+    var DEFAULT_MESSAGE = "Hover over data points for a closer look at specific months."
 
     // have data from 2013-05 to 2016-07
     // Stored in the form
@@ -162,7 +162,8 @@ var DataManager = (function () {
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.flights / scalars.flights); })
                     .on("mouseover", function (d) {
-                        updateInfoMessage("In " + formatTime(d.date) + ", <br/>" + commafy(d.flights) + " flew through LAX.");
+                        updateInfoMessage(formatTime(d.date) + "</br>" +
+                                          commafy(d.flights) + " planes flew through LAX.");
                     }).on("mouseout", function (d) {
                         setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });
@@ -179,7 +180,8 @@ var DataManager = (function () {
                     .attr("cx", function (d) { return x(d.date); })
                     .attr("cy", function (d) { return y(d.vin / scalars.vehicles); })
                     .on("mouseover", function (d) {
-                        updateInfoMessage("<p>In " + formatTime(d.date) + ", <br/>" + commafy(d.vin) + " cars drove into LAX.</p>");
+                        updateInfoMessage(formatTime(d.date) + "</br>" + 
+                                          commafy(d.vin) + " cars drove into LAX.</p>");
                     }).on("mouseout", function (d) {
                         setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });
@@ -196,7 +198,8 @@ var DataManager = (function () {
                     .attr("cx", function (d) { return x(d.date); }).
                     attr("cy", function (d) { return y(d.vout / scalars.vehicles); })
                     .on("mouseover", function (d) {
-                        updateInfoMessage("In " + formatTime(d.date) + ", <br/>" + commafy(d.vout) + " cars drove out of LAX.");
+                        updateInfoMessage(formatTime(d.date) + "</br>" + 
+                                          commafy(d.vout) + " cars drove out of LAX.");
                     }).on("mouseout", function (d) {
                         setTimeout(resetToDefaultMessage, delays.defaultMessage);
                     });

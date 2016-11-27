@@ -34,7 +34,7 @@ var Animator = (function() {
             
             plane.append('path')
             .attr('fill', colors.planes)
-            .attr('d', 'M7,3.1l0.7-0.4l0.2,0L7.6,3.5l0.3,0.8c0,0-0.2,0-0.2,0L7,3.8c0,0-1.3,0-1.6,0c-0.2,0-0.2,0-0.2,0.1C5.5,4.6,6,5.8,6,5.8C6,5.9,5.9,6,5.8,6C5.6,6,5.3,6,5.3,6c-0.4-0.3-1.7-1.7-2-2C3.2,3.9,0.5,3.8,0.4,3.7c-0.2-0.1-0.2-0.3,0-0.4C0.5,3.2,3.2,3.1,3.3,3c0.7-0.6,1.3-1.4,2-2c0,0,0.3,0,0.5,0C6,1,6,1.1,6,1.2c-0.2,0.5-0.4,1-0.7,1.6c0,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0.1,0.2,0.1L7,3.1z');
+            .attr('d', 'M16.985,66.584V64l7.992,2.997L32.971,64c0,0,0,3.17,0,2.584l-4.996,6.407 c0,0,0.409,22.077,1.409,22.077c1.056,0,20.571-10.549,20.571-10.549s0,1.238,0,3.165l-20.571,22.155 c0,0-0.411,28.096-1.409,29.094c-0.998,2-4.977,2-5.977,0c-0.998-0.998-1.637-28.096-2.637-29.094L0,87.684v-3.165 c0,0,18.363,10.549,19.362,10.549c1,0,1.62-22.077,1.62-22.077L16.985,66.584z');
     }
     
     function spawnIncomingCars(num, selector) {
@@ -119,8 +119,8 @@ var Animator = (function() {
         TweenMax.to(".plane-in", 0, {
             rotation: (180),
             transformOrigin: "50% 50%",
-            scaleX: (6),
-            scaleY: (6),
+            scaleX: (0.7),
+            scaleY: (0.7),
             x: (-99999),
         });
         
@@ -135,7 +135,7 @@ var Animator = (function() {
             bezier: {
                 values: path,
                 type: "cubic",
-                autoRotate: 180
+                autoRotate: 270
             },
             ease: Linear.easeNone,
             repeat: -1,
@@ -146,9 +146,9 @@ var Animator = (function() {
         TweenMax.to(".plane-out", 0, {
             rotation: (180),
             transformOrigin: "50% 50%",
-            scaleX: (6),
-            scaleY: (6),
-            x: (-1000),
+            scaleX: (0.7),
+            scaleY: (0.7),
+            x: (-1000)
         });
         
         var path = MorphSVGPlugin.pathDataToBezier("#flightPath", {align: ".plane-out"});
@@ -164,7 +164,7 @@ var Animator = (function() {
             bezier: {
                 values: path,
                 type: "cubic",
-                autoRotate: true
+                autoRotate: 90
             },
             ease: Linear.easeNone,
             repeat: -1,

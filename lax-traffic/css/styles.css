@@ -1,7 +1,24 @@
-body {
-    font-family: "Helvetica", sans-serif;
+@font-face {
+    font-family: AvenirNext;
+    src: url("../AvenirNext.otf");
 }
 
+body {
+    font-family: "AvenirNext", serif;
+    background-color: 8f8f8f;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 18.5px;
+}
 
 /*===============NAV-BAR (MAIN)==============*/
 
@@ -136,20 +153,49 @@ body {
 
 /*===========================================*/
 
-/* Understand what stroke-dahsarray works */
-
-
 #info-overlay {
-    position: fixed;
+    position: absolute;
     top: 80px;
-    left: 5vh;
-    width: 250px;
+    left: -10px;
+    width: 350px;
     height: 80px;
     border-radius: 3px;
-    background-color: rgba(50, 50, 50, 0.8);
+    background-color: rgba(50, 52, 50, 0.8);
     color: white;
     padding: 15px;
-    font-size: 16px;
+}
+
+#analysis {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    background-color: rgba(50, 52, 50, 0.8);
+    color: white;
+    padding: 5vh;
+}
+
+#visualization {
+    padding-top: 150px;
+}
+
+#data {
+    background-color: #8f8f8f;
+    position: relative;
+}
+
+#viz-holder {
+    left: 15px;
+    width: 100vw;
+}
+
+#chartdata {
+    z-index: 1;
+}
+
+#data-circles {
+    z-index: 1;
 }
 
 .line {
@@ -165,46 +211,14 @@ body {
     r: 5;
 }
 
-#visualization {
-    padding-top: 150px;
-/*    padding-bottom: 150px;*/
-}
+
 
 .car {
     z-index: 100;
-}
-
-#data-circles {
-    z-index: 1;
 }
 
 @keyframes dash {
     to {
         stroke-dashoffset: 0;
     }
-}
-
-/*
-div.tooltip {
-    position: fixed;
-    left: 25px;
-    top: 25px;
-    text-align: center;
-    width: 400px;
-    height: 150px;
-    padding: 10px;
-    font: 30px Helvetica, sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 1px;
-    pointer-events: none;
-}
-*/
-
-#data {
-    background-color: #666;
-}
-
-#chartdata {
-    z-index: 1;
 }
