@@ -43,7 +43,7 @@ html {
 }
 
 .leaflet-top {
-	margin-top: 20px;
+	margin-top: 80px;
 }
 
 h1 {
@@ -124,6 +124,14 @@ h1 {
 
 	.leaflet-bar {
 		display: none;
+	}
+
+	.home {
+		display: none;
+	}
+
+	.main-nav {
+		z-index: 10000;
 	}
 
 	.sub {
