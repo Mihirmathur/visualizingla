@@ -1,0 +1,228 @@
+@font-face {
+    font-family: AvenirNext;
+    src: url("font/AvenirNext.otf");
+}
+
+body {
+    font-family: "AvenirNext", serif;
+    background-color: 8f8f8f;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 18.5px;
+}
+
+/*===============NAV-BAR (MAIN)==============*/
+
+.fixed-over{
+    z-index: 100;
+    position: fixed;
+    top: 5vh;
+    left: 5vh;
+}
+
+.fixed-over a {
+	text-decoration: none;
+}
+
+.gradient-top{
+    position: fixed;
+    width:100vw;
+    height:150px;
+    top: 0;
+    left:0;
+    background: rgba(0,0,0,0);
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+}
+
+.home img{
+    width:200px;
+}
+
+.home, .rect{
+    position: fixed;
+}
+
+.rect{
+    right: 5vh;
+    background-color: #fff;
+    margin-right: -15px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main-nav{
+    position: fixed;
+    right: 5vh;
+    width:55px;
+    height:50px;
+    margin-right:-10px;
+    margin-top: -15px;
+
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+
+.main-nav:hover{
+    cursor: pointer;
+    width: 450px;
+}
+
+.main-nav:hover .active-nav .rect{
+    transform: perspective(500px) translateX(-400px);
+}
+
+.inactive-nav{
+    right: 5vh;
+    width: 70px;
+    height: 70px;
+}
+
+.upper-rect, .lower-rect{
+    width: 40px;
+    height: 8px;
+}
+
+.left-rect, .right-rect{
+    width: 8px;
+    height: 40px;
+}
+
+.right-rect{
+    margin-left:30px;
+    margin-top: 8px;
+}
+
+.left-rect{
+    margin-top: -70px;
+    margin-right: 37px;
+}
+
+.lower-rect{
+    margin-top: -30px;
+    margin-right:5px;
+}
+
+.nav-text-wrapper{
+    position: fixed;
+    top: 5vh;
+    opacity: 0;
+    height: 20px;
+    overflow: hidden;
+    width:0px;
+    margin-top: -4px;
+    margin-left: 5px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main-nav:hover .nav-text-wrapper{
+    opacity: 1;
+    width: 360px;
+}
+
+.nav-text-wrapper li{
+    color: white;
+    font-family: 'Avenir', sans-serif;
+    display: inline-block;
+    margin: 0px 25px;
+    letter-spacing: 2px;
+}
+
+.nav-text-wrapper li:first-child{
+    margin-left:15px;
+}
+
+.nav-text-wrapper li:hover{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/*===========================================*/
+
+#info-overlay {
+    position: absolute;
+    top: 80px;
+    left: -10px;
+    width: 350px;
+    height: 80px;
+    border-radius: 3px;
+    background-color: rgba(50, 52, 50, 0.8);
+    color: white;
+    padding: 15px;
+}
+
+#analysis {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    background-color: rgba(50, 52, 50, 0.8);
+    color: white;
+    padding: 5vh;
+}
+
+#visualization {
+    padding-top: 150px;
+}
+
+#data {
+    background-color: #8f8f8f;
+    position: relative;
+}
+
+#viz-holder {
+    left: 15px;
+    width: 100vw;
+}
+
+#chartdata {
+    z-index: 1;
+}
+
+#data-circles {
+    z-index: 1;
+}
+
+.line {
+    fill: none;
+    stroke-width: 2px;
+    animation: dash 1s linear forwards;
+    z-index: 1;
+}
+
+.data-dot {
+    stroke-width: 1px;
+    z-index: 1;
+    r: 5;
+}
+
+
+
+.car {
+    z-index: 100;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

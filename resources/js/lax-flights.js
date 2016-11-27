@@ -1,4 +1,27 @@
-var flightsModule = (function () {
+/*
+
+Example call
+
+FlightsModule.fetchData().then(function(r)) {
+    var flightsArr = r;
+}
+
+flightsArr is of form
+[ 
+    { date/time: XXX }
+    ...
+]
+
+Other methods:
+
+FlightsModule.allCounts()
+    - gets same array as totalVehicles above
+FlightsModule.forMonth(month)
+    - returns Number for flights in a given month
+
+*/
+
+var FlightsModule = (function () {
     //----- Public API -----//
     var getData = function () {
         return data;
@@ -7,10 +30,9 @@ var flightsModule = (function () {
             // return a promise that the data has been accessed
             return new Promise(function (resolve, reject) {
                 var call = api + "?" + $.param(parameters);
-                console.log(call);
                 $.getJSON(call, function (d) {
                     data = d;
-                    resolve('Success!');
+                    resolve(getAllFlightCounts());
                 }).fail(function (jqxhr, textStatus, error) {
                     var err = textStatus + ", " + error;
                     console.log("Request Failed: " + err);
@@ -19,8 +41,7 @@ var flightsModule = (function () {
             });
         }
     
-        // Returns # of flights in a given month
-        // Enter date in format: YYYY-MM
+    // Returns # of flights in a given month
     function getFlightCountForMonth(month) {
         var count = 0;
         for (var i = 0; i < data.length; i++) {
@@ -76,7 +97,6 @@ var flightsModule = (function () {
     var parameters = {
         "$select": "reportperiod, flighttype, arrival_departure, domestic_international, flightopscount",
         "$where": "reportperiod>'2013-01-01T00:00:00.000'"
-        // weird API glitch not returning all values without limiting query
     };
     var data = [];
     return {

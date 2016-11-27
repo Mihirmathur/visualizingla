@@ -1,4 +1,28 @@
-var vehiclesModule = (function () {
+/*
+
+Example call
+
+VehiclesModule.fetchData().then(function(r)) {
+    var vehiclesArr = r;
+}
+
+vehiclesArr is of form
+[ 
+    { date/time: {entry: XXX, exit: XXX} }
+    ...
+]
+
+Other calls you can make:
+
+VehiclesModule.allCounts()
+    - gets same array as totalFlights above
+VehiclesModule.forMonth(month)
+    - gets object of the form
+      { entry: XXX, exit: XXX }
+
+*/
+
+var VehiclesModule = (function () {
     //----- Public API -----//
     function getData() {
         return data;
@@ -11,7 +35,7 @@ var vehiclesModule = (function () {
                 //        removeTimeFromDate();
                 removeRedundancies();
                 joinLevels();
-                resolve(data);
+                resolve(getAllVehicleCounts());
             }).fail(function (jqxhr, textStatus, error) {
                 console.log("Request Failed: " + err);
                 reject('Error!');

@@ -1,0 +1,117 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>LAX Visualization</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="../resources/js/vendors/MorphSVGPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="../resources/css/wow.min.js"></script>
+    
+    <script src="../resources/js/lax-flights.js"></script>
+    <script src="../resources/js/lax-vehicles.js"></script>
+    
+    <link rel="stylesheet" href="../resources/css/traffic.css" type="text/css"> </head>
+    <link rel="stylesheet" href="../resources/css/animate.min.css" type="text/css">
+
+</head>
+<body>
+    <div class="fixed-over">
+        <div class="home">
+            <a href="../"> <img src="../resources/img/logo.png" /> </a>
+        </div>
+        <div class="main-nav">
+            <div class="inactive-nav">
+                <div class="upper-rect rect"></div>
+                <div class="right-rect rect"></div>
+            </div>
+            <div class="active-nav">
+                <div class="lower-rect rect"></div>
+                <div class="left-rect rect"></div>
+            </div>
+            <ul class="nav-text-wrapper list-style-none">
+                <a href="../parking-tickets">
+                    <li>TICKETS</li>
+                </a>
+                <a href="../lax-traffic">
+                    <li>TRAFFIC</li>
+                </a>
+                <a href="../hexmap">
+                    <li>FLIGHTS</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    
+    <div id="analysis" class="animated fadeIn">
+        <h1>ANALYSIS</h1>
+        <p>We analyzed 39 months of vehicle and air traffic at Los Angeles International Airport and found that the number of flights correlated closely with the number of cars going in and out of the airport.
+        </p>
+        
+        <p> One key anomaly we noticed was that in August of 2014, 4 million more cars entered LAX than left. In the preceding months, many more cars left than entered. We infer this was a result of summer vacationers parking their cars in long-term airport parking until August.
+        </p>
+    </div>
+    
+    <div id="data">
+        
+        <div id="info-overlay" class="animated slideInLeft"></div>
+        
+        <div id="viz-holder">
+            <svg z-index="1" id="visualization" class="chart"></svg>
+        </div>
+    </div>
+    
+</body>
+<script src="../resources/js/lax-animator.js"></script>
+<script src="../resources/js/lax-data-manager.js"></script>
+<script>
+    
+    // viewBox width must be slightly > DM.w
+    
+    $(document).ready(function () {
+        
+        
+        var winWidth = $(window).width();
+        var graphWidth = winWidth;
+        
+        
+        function resized() {
+        d3.select("#visualization")
+            .attr("width", $("#data").width());
+        }
+        
+        resized();
+        d3.select("#visualization")
+            .attr("viewBox", "0 0 " + $(window).width() + " 600");
+        $(window).resize(resized);
+        
+        
+        
+        
+        DataManager.init(graphWidth, 600).then(function (_) {
+            DataManager.plot("#visualization");
+            
+//            var x = $("#chartdata").height() + $("#chartdata").position().top;
+            
+            d3.select("#visualization")
+                .attr("viewBox", "0 0 " + $(window).width() + " " + 600);
+            
+            setTimeout(function() {
+                Animator.spawnIncomingCars(3, "#visualization");
+                Animator.spawnOutgoingCars(3, "#visualization");
+                Animator.spawnPlanesIn(3, "#visualization");
+                Animator.spawnPlanesOut(3, "#visualization");
+                Animator.animate();
+            }, 1500);
+        });
+    });
+</script>
+
+</html>
