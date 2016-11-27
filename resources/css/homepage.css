@@ -92,17 +92,21 @@ a{
     left: 5vh;
 }
 
+.fixed-over a {
+	text-decoration: none;
+}
+
 .gradient-top{
     position: fixed;
     width:100vw;
     height:150px;
     top: 0;
     left:0;
-    background: rgba(0,0,0,0); 
-    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: rgba(0,0,0,0);
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
 }
 
 .home img{
@@ -307,7 +311,7 @@ a{
     position: fixed;
     pointer-events: none;
     text-align: center;
-    width: 100%; 
+    width: 100%;
     opacity: 0;
     z-index: 90;
     margin-top: 1000px;
@@ -486,7 +490,7 @@ a{
 .section-3-background,
 .section-4-background{
     z-index:2;
-    
+
     width:100vw;
     height:100vh;
     position: fixed;

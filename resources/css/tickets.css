@@ -17,6 +17,10 @@ html {
     left: 5vh;
 }
 
+.fixed-over a {
+	text-decoration: none;
+}
+
 .fixed-over-mobile {
 	display:none;
 }

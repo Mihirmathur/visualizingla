@@ -29,17 +29,21 @@ p {
     left: 5vh;
 }
 
+.fixed-over a {
+	text-decoration: none;
+}
+
 .gradient-top{
     position: fixed;
     width:100vw;
     height:150px;
     top: 0;
     left:0;
-    background: rgba(0,0,0,0); 
-    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: rgba(0,0,0,0);
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
 }
 
 .home img{
