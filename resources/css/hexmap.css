@@ -38,18 +38,8 @@ body {
     width:200px;
 }
 
-.home, .rect{
+.home{
     position: fixed;
-}
-
-.rect{
-    right: 5vh;
-    background-color: #fff;
-    margin-right: -15px;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 .main-nav{
@@ -57,8 +47,8 @@ body {
     right: 5vh;
     width:55px;
     height:50px;
-    margin-right:-10px;
-    margin-top: -15px;
+    margin-right:-30px;
+    margin-top: -10px;
 
     -webkit-transition: width 0.5s ease;
     -moz-transition: width 0.5s ease;
@@ -66,44 +56,28 @@ body {
     transition: width 0.5s ease;
 }
 
+
+.main-nav img{
+    width: 30px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main-nav:hover img{
+    transform: perspective(500px) translateY(350px);
+}
+
+.main-nav p{
+    color: #fff;
+    font-family: 'Avenir', sans-serif;
+    position: fixed;
+    right: 40px;
+}
+
 .main-nav:hover{
     cursor: pointer;
-    width: 450px;
-}
-
-.main-nav:hover .active-nav .rect{
-    transform: perspective(500px) translateX(-400px);
-}
-
-.inactive-nav{
-    right: 5vh;
-    width: 70px;
-    height: 70px;
-}
-
-.upper-rect, .lower-rect{
-    width: 40px;
-    height: 8px;
-}
-
-.left-rect, .right-rect{
-    width: 8px;
-    height: 40px;
-}
-
-.right-rect{
-    margin-left:30px;
-    margin-top: 8px;
-}
-
-.left-rect{
-    margin-top: -70px;
-    margin-right: 37px;
-}
-
-.lower-rect{
-    margin-top: -30px;
-    margin-right:5px;
 }
 
 .nav-text-wrapper{
@@ -115,6 +89,10 @@ body {
     width:0px;
     margin-top: -4px;
     margin-left: 5px;
+
+    right: -155px;
+    top: 160px;
+    transform: rotate(90deg);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
