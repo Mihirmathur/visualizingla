@@ -216,52 +216,134 @@ svg {
 	position: relative;
 }
 
-#legend {
-	position: relative;
-	width: 70%;
-	margin: 0 auto;
-	bottom: 150px;
-}
-
-#legend ul {
-	position: relative;
-	margin-left: 45px;
-	margin-top: -15px;
-	float: left;
-	display: block;
-	width: 17%;
-	list-style-type: none;
-	font-size: 15px;
-	text-align: left;
-	/*white-space: pre;*/
-}
-
-#legend li {
-	line-height: 27px;
-	color: #a4a5ad;
-	cursor: default;
-}
-
 .hover {
-	color: #efefef !important;
+	/*color: #ffcc66 !important;*/
+	color: #d0021b !important;
 }
 
-.legendInfo {
-	display: none;
-	position: relative;
-	float: left;
-	width: 65%;
-	margin-top: 25px;
-	padding-left: 15px;
-	padding-right: 15px;
-	border: 1px solid #CCCCFF;
-	border-radius: 7px;
+@media only screen and (min-height: 780px) {
+	#legend {
+		position: relative;
+		width: 70%;
+		height: auto;
+		margin: 0 auto;
+		margin-top: -5%;
+		overflow: hidden;
+	}
+
+	#legend ul {
+		position: relative;
+		margin-left: 45px;
+		float: left;
+		display: block;
+		width: 17%;
+		min-width: 105px;
+		list-style-type: none;
+		font-size: 15px;
+		text-align: left;
+	}
+
+	#legend li {
+		line-height: 27px;
+		/*color: #a4a5ad;*/
+		cursor: default;
+	}
+
+	.legendInfo {
+		display: none;
+		position: relative;
+		float: left;
+		width: 65%;
+		margin-top: 2%;
+		padding-left: 15px;
+		padding-right: 15px;
+		/*border: 1px solid #CCCCFF;*/
+		border: 1px solid #FFFFFF;
+		border-radius: 7px;
+	}
+
+	.legendInfo h1 {
+		font-size: 20px;
+	}
+
+	#defaultInfo {
+		display: block;
+	}
 }
 
-.legendInfo h1 {
-	font-size: 20px;
+@media only screen and (max-height: 780px) {
+	#legend {
+		position: relative;
+		width: 70%;
+		height: auto;
+		margin: 0 auto;
+		margin-top: -5%;
+		overflow: hidden;
+	}
+
+	#legend ul {
+		direction: rtl;
+		position: relative;
+		margin-left: 45px;
+		float: left;
+		display: block;
+		width: 19%;
+		min-width: 105px;
+		height: 190px;
+		list-style-type: none;
+		font-size: 15px;
+		text-align: left;
+		overflow: scroll;
+		overflow-x: hidden;
+	}
+
+	#legend li {
+		direction: ltr;
+		padding-left: 10px;
+		line-height: 27px;
+		color: #a4a5ad;
+		cursor: default;
+	}
+
+	.legendInfo {
+		display: none;
+		position: relative;
+		float: left;
+		width: 65%;
+		margin-top: 2%;
+		padding-left: 15px;
+		padding-right: 15px;
+		border: 1px solid #CCCCFF;
+		border-radius: 7px;
+	}
+
+	.legendInfo h1 {
+		font-size: 20px;
+	}
+
+	#defaultInfo {
+		display: block;
+	}
 }
 
-#defaultInfo {
-	display: block;
+@media only screen and (max-width: 1050px) {
+	#legend {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	#legend {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 725px) {
+	#legend {
+		width: 100%;
+	}
+
+	#legend ul {
+		margin-left: 10px;
+	}
 }
