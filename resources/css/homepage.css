@@ -498,7 +498,7 @@ a{
 .section-2-background{
     opacity: 0;
     top:0;
-    background-image: url('../resources/parkingtickets.jpeg');
+    background-image: url('../img/parkingtickets.jpeg');
 }
 
 #section-3{
@@ -508,7 +508,7 @@ a{
 
 .section-3-background{
     z-index: 3;
-    background-image: url('../resources/traffic.png');
+    background-image: url('../img/traffic.png');
 }
 
 #section-4{
@@ -517,7 +517,7 @@ a{
 
 .section-4-background{
     z-index: 4;
-    background-image: url('../resources/hexmapprogress.png');
+    background-image: url('../img/hexmapprogress.png');
 }
 
 #section-5{

@@ -32,7 +32,7 @@ function initSquaresDataRandomely(number){
             fill: '#F8C81C',          
             //fill: colors[Math.floor(Math.random()*colors.length)],
             //fill: colorScale(Math.random),            //smaller rand = whiter & more in front
-            duration: (rand+0.001) * 2000 + 2000,       //smaller rand = slower
+            duration: (rand+0.001) * 3000 + 2000,       //smaller rand = slower
             opacity: 1 - rand
         });
     }
@@ -114,9 +114,7 @@ $(document).ready(function() {
                             .animate({
                                 'margin-top': '-110px',
                                 'opacity' : 1
-                            }, 1000);
-
-    
+                            }, 1000);  
 
     $('.info-box').mouseover(function(){
         allChange(flyRight);
