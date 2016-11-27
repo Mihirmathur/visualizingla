@@ -116,7 +116,7 @@ var hexmap = function() {
         Load the template image which we will mimic with hexagons
     */
     var logoImg = new Image();
-    logoImg.src = "colormap3.gif";
+    logoImg.src = "../img/colormap3.gif";
     logoImg.onload = function() {
         ctx.drawImage(logoImg, 0, 0, width, height);
         addLegendListeners();

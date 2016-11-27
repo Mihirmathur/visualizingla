@@ -3,7 +3,7 @@ var canvas = d3.select('.fixed-over-squares');
 var canvasWidth = canvas.node().getBoundingClientRect().width;
 var canvasHeight = canvas.node().getBoundingClientRect().height;
 
-var width = 20, height = 20;
+var width = 15, height = 15;
 
 function initGrid(gridHeight, gridWidth) {
     var data = new Array();
@@ -46,6 +46,7 @@ function flyOut(d){
         .ease('cubic')
         .duration(200)
             .attr('transform', 'translate(' + xOff + ', ' + yOff + ')')
+            .style('fill', 'rgba(0,0,0,1)')
             .style('z-index', '100');
 }
 
@@ -60,6 +61,7 @@ function flyIn(d){
             })
             .attr('xTrans', 0)
             .attr('yTrans', 0)
+            .style('fill', 'rgba(0,0,0,0.5)')
             .style('z-index', '1');
 }
 function initAll(){
@@ -100,7 +102,8 @@ function changeBack(){
     d3.select(this)
         .transition()
         .duration(500)
-        .attr('transform', 'translate(0, 0)');
+        .attr('transform', 'translate(0, 0)')
+        .style('fill', 'rgba(0,0,0,0.5)');
 }
 
 function allChange(change){

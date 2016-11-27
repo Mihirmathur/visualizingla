@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>Visualizing LA</title>
 
-    <link rel='shortcut icon' type='image/x-icon' href='resources/visla.ico' />
-    <link rel="stylesheet" type="text/css" href="css/homepage.css"/>
+    <link rel='shortcut icon' type='image/x-icon' href='resources/img/visla.ico' />
+    <link rel="stylesheet" type="text/css" href="resources/css/homepage.css"/>
 </head>
 <body>
 
@@ -24,8 +24,8 @@
     <div class="fixed-over">
 
         <div class="home">
-            <a href="index.html">
-                <img src="resources/logo.png"/>
+            <a href="/">
+                <img src="resources/img/logo.png"/>
             </a>
         </div>
 
@@ -39,13 +39,13 @@
                 <div class="left-rect rect"></div>
             </div>
             <ul class="nav-text-wrapper list-style-none">
-                    <a href="parking-tickets/index.html">
+                    <a href="parking-tickets">
                         <li>TICKETS</li>
                     </a>
-                    <a href="js/index.html">
+                    <a href="lax-traffic">
                         <li>TRAFFIC</li>
                     </a>
-                    <a href="hexmap/index.html">
+                    <a href="hexmap">
                         <li>FLIGHTS</li>
                     </a>
             </ul>
@@ -105,7 +105,7 @@
                 data-0="margin-top:-1000px; margin-left: -24px;"
                 data-1080="margin-top:900px">       
                 <div>
-                    <img src="resources/plane.svg" />
+                    <img src="resources/img/plane.svg" />
                 </div> 
             </div>
 
@@ -120,7 +120,7 @@
                 data-460="margin-top:-1000px; margin-left: -224px"
                 data-1480="margin-top:900px">       
                 <div>
-                    <img src="resources/plane.svg" />
+                    <img src="resources/img/plane.svg" />
                 </div> 
             </div>
 
@@ -136,7 +136,7 @@
                 data-980=""
                 data-1520="margin-top:900px">       
                 <div>
-                    <img src="resources/plane.svg" />
+                    <img src="resources/img/plane.svg" />
                 </div> 
             </div> 
              
@@ -158,7 +158,7 @@
             </div>
             <div class="info-box" data-1700="margin-top: 70vh" data-2200="opacity: 1" data-2300="opacity: 0">
                 <h2 class="box-title">PARKING TICKETS</h2>
-                <a href="parking-tickets/index.html">EXPLORE</a>
+                <a href="parking-tickets">EXPLORE</a>
                 <p class="box-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
             </div>
             
@@ -172,7 +172,7 @@
             </div>
             <div class="info-box" data-2800="margin-top: 70vh" data-3200="opacity: 1" data-3300="opacity:0; ">
                 <h2 class="box-title">LAX TRAFFIC</h2>
-                <a href="lax-traffic/index.html">EXPLORE</a>
+                <a href="lax-traffic">EXPLORE</a>
                 <p class="box-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
             </div>
             
@@ -185,7 +185,7 @@
             </div>
             <div class="info-box" data-3900="margin-top: 70vh" data-4200="opacity: 1" data-4300="opacity:0; ">
                 <h2 class="box-title">FLIGHTS FROM LAX</h2>
-                <a href="hexmap/index.html">EXPLORE</a>
+                <a href="hexmap">EXPLORE</a>
                 <p class="box-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
             </div>
             
@@ -209,7 +209,7 @@
     <script>
     (function(t,e){"use strict";var n=500,a="sqrt",o=1,r="data-menu-top",i="data-menu-offset",u="data-menu-duration",c="data-menu-ignore",l=e.skrollr,s=e.history,f=!!s.pushState,h=function(e){return e!==t&&e?"A"===e.tagName.toUpperCase()?e:h(e.parentNode):!1},p=function(t){if(1===t.which||0===t.button){var e=h(t.target);e&&m(e)&&t.preventDefault()}},m=function(n,a){var o;if(y){if(n.hostname!==e.location.hostname)return!1;if(n.pathname!==t.location.pathname)return!1;o=n.hash}else o=n.getAttribute("href");if(!/^#/.test(o))return!1;if(!a&&null!==n.getAttribute(c))return!1;var l,h;if(h=T?T(n):n.getAttribute(r),null!==h)l=/p$/.test(h)?h.slice(0,-1)/100*t.documentElement.clientHeight:+h*k;else{var p=t.getElementById(o.substr(1));if(!p)return!1;l=v.relativeToAbsolute(p,"top","top");var m=p.getAttribute(i);null!==m&&(l+=+m)}f&&N&&!a&&s.pushState({top:l},"",o);var d=parseInt(n.getAttribute(u),10),q=A(v.getScrollTop(),l);return isNaN(d)||(q=d),E&&E(o,l),S&&!a?v.animateTo(l,{duration:q,easing:b}):g(function(){v.setScrollTop(l)}),!0},d=function(){if(e.location.hash&&t.querySelector){var n=t.querySelector('a[href="'+e.location.hash+'"]');n||(n=t.createElement("a"),n.href=e.location.hash),m(n,!0)}},g=function(t){e.setTimeout(t,1)};l.menu={},l.menu.init=function(r,i){v=r,i=i||{},b=i.easing||a,S=i.animate!==!1,A=i.duration||n,T=i.handleLink,k=i.scale||o,y=i.complexLinks===!0,E=i.change,N=i.updateUrl!==!1,"number"==typeof A&&(A=function(t){return function(){return t}}(A)),l.addEvent(t,"click",p),f&&l.addEvent(e,"popstate",function(t){var e=t.state||{},n=e.top||0;g(function(){v.setScrollTop(n)})},!1),d()},l.menu.click=function(t){m(t)};var v,b,A,S,T,k,y,E,N;g(function(){e.location.hash&&e.scrollTo(0,0)})})(document,window);
     </script>
-    <script src="js/homepage.js"></script>
-    <script src="js/squares-over.js"></script>
+    <script src="resources/js/homepage.js"></script>
+    <script src="resources/js/squares-over.js"></script>
 </body>
 </html>

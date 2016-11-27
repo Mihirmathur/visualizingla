@@ -1,11 +1,23 @@
 @font-face {
-	font-family: 'Avenir Next LT Pro';
-	src: url('../font/AvenirNextLTPro-Regular.otf');
+    font-family: AvenirNext;
+    src: url("font/AvenirNext.otf");
 }
 
+body {
+    font-family: "AvenirNext", serif;
+    background-color: 8f8f8f;
+}
 
-html {
-	font-family: 'Avenir Next LT Pro', sans-serif;
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 18.5px;
 }
 
 /*===============NAV-BAR (MAIN)==============*/
@@ -141,162 +153,72 @@ html {
 
 /*===========================================*/
 
-#map {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
+#info-overlay {
+    position: absolute;
+    top: 80px;
+    left: -10px;
+    width: 350px;
+    height: 80px;
+    border-radius: 3px;
+    background-color: rgba(50, 52, 50, 0.8);
+    color: white;
+    padding: 15px;
 }
 
-.hexbin-hexagon {
-	stroke-width: 1px;
+#analysis {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    background-color: rgba(50, 52, 50, 0.8);
+    color: white;
+    padding: 5vh;
 }
 
-#map-init {
-	position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 2;
-  background-color: rgba(50, 52, 50, .90);
-  overflow: scroll;
-	color: #ffffff;
+#visualization {
+    padding-top: 150px;
 }
 
-
-
-.header {
-	font-size: 24px;
-	color: #ffffff;
-	text-transform: uppercase;
+#data {
+    background-color: #8f8f8f;
+    position: relative;
 }
 
-.leaflet-top {
-	margin-top: 20px;
+#viz-holder {
+    left: 15px;
+    width: 100vw;
 }
 
-h1 {
-	font-size: 24px;
+#chartdata {
+    z-index: 1;
 }
 
-.info-panel {
-	background: rgba(208, 2, 27, .85);
-	color: #ffffff;
-	padding: 25px;
-	min-width: 300px;
-	z-index: 100;
+#data-circles {
+    z-index: 1;
 }
 
-
-.container {
-	width: 33.5%;
-	margin: 10% 7.5%;
-	padding-left: 15px;
-	background: #D0021b;
-	z-index: 100;
+.line {
+    fill: none;
+    stroke-width: 2px;
+    animation: dash 1s linear forwards;
+    z-index: 1;
 }
 
-.wrapper {
-	margin: 5%;
-	padding: 15px 10px;
-}
-
-.btn-close {
-	color: #ffffff;
-	background-color: #D0021b;
-	border-radius: 0;
-	border: 1px solid #ffffff;
-	box-shadow: 0;
-	font-size: 1em;
-	padding: 1em 3em;
-	margin-bottom: 2em;
-	text-transform: uppercase;
-}
-
-.btn-close:hover {
-	background-color: #ffffff;
-	color: #d0021b;
-	cursor: pointer;
-}
-
-.info {
-	font-size: 14px;
-	width: 90%;
-	margin-bottom: 1em;
-}
-
-.sub {
-	color: #8f8f8f;
-	font-size: 11px;
-	position: fixed;
-	z-index: 99999;
-	left: 100px;
-	bottom: 0;
-}
-
-.sub a {
-	color: #8f8f8f;
+.data-dot {
+    stroke-width: 1px;
+    z-index: 1;
+    r: 5;
 }
 
 
-@media (max-width: 1024px) {
-	.container {
-		width: 90%;
-		margin: 15% 5%;
-		padding: 0;
-		z-index: 100;
-	}
 
-	.info {
-		width: 100%;
-	}
-
-	.leaflet-bar {
-		display: none;
-	}
-
-	.sub {
-		display: none;
-	}
-
-	.wrapper {
-		margin: 5%;
-		padding: 15px 5px;
-	}
-
+.car {
+    z-index: 100;
 }
 
-@media (max-width: 700px) {
-	.leaflet-top {
-		margin: 0;
-		width: 100%;
-	}
-
-	.leaflet-right .leaflet-control {
-		margin: 0;
-		width: 100%;
-	}
-}
-
-.leaflet-bar{
-	background-color: rgba(208, 2, 27, .85);
-	color: #ffffff;
-	border: 0;
-	border-radius: 0;
-}
-
-.leaflet-bar a {
-	color: #ffffff;
-}
-
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
-	color: #ffffff;
-}
-
-.violation {
-	text-transform: capitalize;
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
 }
