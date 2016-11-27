@@ -10,8 +10,12 @@ var hexmap = function() {
     /*
         Setting up parameters for the hexagon svg container
     */
-    var width = 1260,
-        height = 600;
+    var width = window.innerHeight * 1.15,
+        height = width / 2;
+    if (window.innerWidth < window.innerHeight) {
+        width = window.innerWidth * .8;
+        height = width / 2;
+    }
 
     /*
         Flag which should be set if the result should be monochromatic. Defaults
@@ -61,6 +65,20 @@ var hexmap = function() {
         .interpolate("basis");
 
     /*
+        Adding event listener to dynamically size the map according to window
+    */
+    var resizeListener = function(object, type, callback) {
+        if (object == null || typeof(object) == 'undefined') return;
+        if (object.addEventListener) {
+            object.addEventListener(type, callback, false);
+        } else if (object.attachEvent) {
+            object.attachEvent("on" + type, callback);
+        } else {
+            object["on"+type] = callback;
+        }
+    };
+
+    /*
         svg element to hold all the hexagons.
             - a group is appended to the <svg> to hold the hexagons
             - prepend it to the body
@@ -80,7 +98,7 @@ var hexmap = function() {
     var airportTraffic = {
         "London": 1837000,
         "Seoul": 1083522,
-        "Japan": 1102172,
+        "Tokyo": 1102172,
         "Taipei": 946426,
         "Sydney": 934215,
         "Vancouver": 896490,
@@ -102,7 +120,7 @@ var hexmap = function() {
         "London": "Europe",
         "LA": "NorthAmerica",
         "Seoul": "Asia",
-        "Japan": "Asia",
+        "Tokyo": "Asia",
         "Taipei": "Asia",
         "Sydney": "Australia",
         "Vancouver": "NorthAmerica",
@@ -130,66 +148,24 @@ var hexmap = function() {
         shows the relevant info.
     */
     function addLegendListeners() {
-        let londonItem = document.getElementById("londonItem");
-        londonItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            londonItem.className += "hover";
-            document.getElementById("londonInfo").style.display = "block";
-        });
-        let tokyoItem = document.getElementById("tokyoItem");
-        tokyoItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            tokyoItem.className += "hover";
-            document.getElementById("tokyoInfo").style.display = "block";
-        });
-        let seoulItem = document.getElementById("seoulItem");
-        seoulItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            seoulItem.className += "hover";
-            document.getElementById("seoulInfo").style.display = "block";
-        });
-        let taipeiItem = document.getElementById("taipeiItem");
-        taipeiItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            taipeiItem.className += "hover";
-            document.getElementById("taipeiInfo").style.display = "block";
-        });
-        let sydneyItem = document.getElementById("sydneyItem");
-        sydneyItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            sydneyItem.className += "hover";
-            document.getElementById("sydneyInfo").style.display = "block";
-        });
-        let vancouverItem = document.getElementById("vancouverItem");
-        vancouverItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            vancouverItem.className += "hover";
-            document.getElementById("vancouverInfo").style.display = "block";
-        });
-        let guadalajaraItem = document.getElementById("guadalajaraItem");
-        guadalajaraItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            guadalajaraItem.className += "hover";
-            document.getElementById("guadalajaraInfo").style.display = "block";
-        });
-        let mexicoCityItem = document.getElementById("mexicoCityItem");
-        mexicoCityItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            mexicoCityItem.className += "hover";
-            document.getElementById("mexicoCityInfo").style.display = "block";
-        });
-        let torontoItem = document.getElementById("torontoItem");
-        torontoItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            torontoItem.className += "hover";
-            document.getElementById("torontoInfo").style.display = "block";
-        });
-        let parisItem = document.getElementById("parisItem");
-        parisItem.addEventListener("mouseover", () => {
-            deselectOtherItems();
-            parisItem.className += "hover";
-            document.getElementById("parisInfo").style.display = "block";
-        });
+        for (let airport in airportTraffic) {
+            let name = airport.toLowerCase();
+            item = document.getElementById(name+"Item");
+            item.addEventListener("mouseover", () => {
+                selectFlightPath(name);
+                selectAirport(name);
+            });
+        }
+    }
+
+    function selectAirport(name) {
+        name = name.toLowerCase();
+        let item = document.getElementById(name + "Item");
+        let info = document.getElementById(name + "Info");
+        deselectOtherItems();
+        item.className += "hover";
+        info.className += " hover";
+        info.style.display = "block";
     }
 
     /*
@@ -201,8 +177,10 @@ var hexmap = function() {
             children[i].className = "";
             if (children[i].nodeName == "LI") {
                 let name = children[i].id.split("Item")[0];
+                name = name.toLowerCase();
                 document.getElementById("defaultInfo").style.display = "none";
                 document.getElementById(name+"Info").style.display = "none";
+                document.getElementById(name+"Info").className = "legendInfo";
             }
         }
     }
@@ -281,7 +259,7 @@ var hexmap = function() {
                 else if (Math.floor(x/hexWidth) == 104 && Math.floor(y/vertDiff) == 21) {
                     // Japan (Nartia)
                     points.push([Math.floor(x), Math.floor(y), 255, 255, 255, 255]);
-                    airports["Japan"] = [Math.floor(x), Math.floor(y)];
+                    airports["Tokyo"] = [Math.floor(x), Math.floor(y)];
                 }
                 else if (Math.floor(x/hexWidth) == 98 && Math.floor(y/vertDiff) == 24) {
                     // Taipei (Taoyuan)
@@ -320,12 +298,7 @@ var hexmap = function() {
                 }
             }
         }
-        drawCountry("Asia", .3);
-        drawCountry("Africa", .3);
-        drawCountry("Australia", .3);
-        drawCountry("NorthAmerica", .3);
-        drawCountry("SouthAmerica", .3);
-        drawCountry("Europe", .3);
+        drawCountries();
         drawHexagons();
         drawFlightPaths();
     }
@@ -355,6 +328,15 @@ var hexmap = function() {
                         opacity + ")"
                  }
              });
+    }
+
+    function drawCountries() {
+        drawCountry("Asia", .3);
+        drawCountry("Africa", .3);
+        drawCountry("Australia", .3);
+        drawCountry("NorthAmerica", .3);
+        drawCountry("SouthAmerica", .3);
+        drawCountry("Europe", .3);
     }
 
     function drawHexagons() {
@@ -388,8 +370,23 @@ var hexmap = function() {
     function addPathListeners() {
         for (let key in airports) {
             if (key != "LA") {
-                let svgPath = document.getElementById(key);
-                svgPath.addEventListener("mouseover", () => console.log("test"));
+                let svgPath = document.getElementById(key.toLowerCase()+"Path");
+                svgPath.addEventListener("mouseover", () => {
+                    selectFlightPath(key.toLowerCase());
+                    selectAirport(key.toLowerCase());
+                });
+            }
+        }
+    }
+
+    function selectFlightPath(target) {
+        for (let airport in airports) {
+            airplanePath = document.getElementById(airport.toLowerCase()+"Path");
+            if (airport.toLowerCase() != "la") {
+                if (airport.toLowerCase() != target)
+                    airplanePath.setAttribute("stroke", "rgba(255,255,255,.2)");
+                else
+                    airplanePath.setAttribute("stroke", "rgba(208, 2, 27,.8)");
             }
         }
     }
@@ -397,15 +394,15 @@ var hexmap = function() {
     /*
         Creates illusion/representations of planes flying from LAX to other countries
     */
-    function animateFlightPath(airport, rate) {
+    function animateFlightPath(airport, rate, fill="#FFF") {
         let curSvg = d3.select("#hexcontainer").select("svg");
-        let particleFlightPath = curSvg.select("path#"+airport);
+        let particleFlightPath = curSvg.select("path#"+airport.toLowerCase()+"Path");
         startPoint = pathStartPoint(particleFlightPath);
 
         let marker = curSvg.append("circle");
         marker.attr("r", 5)
             .attr("id", airport + "marker")
-            .attr("fill", "#FFF")
+            .attr("fill", fill)
             .attr("transform", "translate(" + startPoint +")");
         transition(airport, marker, particleFlightPath, airportTraffic[airport]/avgTraffic);
     }
@@ -463,7 +460,6 @@ var hexmap = function() {
     */
     function drawFlightPaths() {
         let laxCoords = airports["LA"];
-        console.log(airports);
         for (let key in airports) {
             let midpoint = (laxCoords[0] + airports[key][0]) / 2;
             let liftPath = laxCoords[1] - 100;
@@ -477,7 +473,7 @@ var hexmap = function() {
                     .attr("stroke", "rgba(255,255,255,.2)")
                     .attr("stroke-width", 2.5)
                     .attr("fill", "none")
-                    .attr("id", key)
+                    .attr("id", key.toLowerCase() + "Path")
                     .transition()
                         .duration(3000)
                         .attrTween("stroke-dasharray", function() {
