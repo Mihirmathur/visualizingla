@@ -29,6 +29,7 @@ html {
     position: fixed;
     width:100vw;
     height:150px;
+    z-index: 100;
     top: 0;
     left:0;
     background: rgba(0,0,0,0);
@@ -174,8 +175,6 @@ html {
   overflow: scroll;
 	color: #ffffff;
 }
-
-
 
 .header {
 	font-size: 24px;
