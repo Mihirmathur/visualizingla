@@ -10,11 +10,15 @@ html {
 
 /*===============NAV-BAR (MAIN)==============*/
 
-.fixed-over{
-    z-index: 100;
+.fixed-over, .fixed-over-mobile{
+    z-index: 1001;
     position: fixed;
     top: 5vh;
     left: 5vh;
+}
+
+.fixed-over-mobile {
+	display:none;
 }
 
 .gradient-top{
@@ -23,11 +27,11 @@ html {
     height:150px;
     top: 0;
     left:0;
-    background: rgba(0,0,0,0); 
-    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0)); 
+    background: rgba(0,0,0,0);
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
 }
 
 .home img{
@@ -191,6 +195,10 @@ h1 {
 	z-index: 100;
 }
 
+.info-mobile {
+	display: none;
+}
+
 
 .container {
 	width: 33.5%;
@@ -243,6 +251,7 @@ h1 {
 }
 
 
+
 @media (max-width: 1024px) {
 	.container {
 		width: 90%;
@@ -287,6 +296,34 @@ h1 {
 	.leaflet-right .leaflet-control {
 		margin: 0;
 		width: 100%;
+	}
+
+	.fixed-over {
+		display: none;
+	}
+
+	.fixed-over-mobile {
+		display: block;
+	}
+
+	.nav-text-wrapper {
+		top: 5.75vh;
+	}
+
+	.main-nav:hover {
+		width: 130px;
+	}
+
+	.main-nav:hover .active-nav .rect {
+		    transform: perspective(500px) translateX(-40px);
+	}
+
+	.info-desk {
+		display: none;
+	}
+
+	.info-mobile {
+		display: block;
 	}
 }
 
