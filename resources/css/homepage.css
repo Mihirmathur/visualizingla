@@ -204,7 +204,7 @@ a{
     overflow: hidden;
     width:0px;
     margin-top: -4px;
-    margin-right: -1px;
+    margin-right: -3px;
 
     right: -155px;
     top: 160px;
@@ -278,8 +278,8 @@ a{
 .nav-box {
     margin: 15px 0;
     display: block;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     background-color: white;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
