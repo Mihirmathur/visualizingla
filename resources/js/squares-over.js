@@ -57,7 +57,7 @@ function flyIn(d){
         .delay(200)
         .duration(200)
             .attr('transform', function(d){
-                return 'translate(' - d.xOffset + ', ' - d.yOffset + ')';
+                return 'translate(0,0)';
             })
             .attr('xTrans', 0)
             .attr('yTrans', 0)
@@ -81,7 +81,7 @@ function initAll(){
     var col = row.selectAll('rect')
             .data(function(d) {return d;})
             .enter().append('rect')
-                .attr('id', function(d, i) {return 'rect' + i;})
+                //.attr('id', function(d, i) {return 'rect' + i;})
                 .attr('x', function(d) {return d.x + d.xOffset;})
                 .attr('y', function(d) {return d.y + d.yOffset;})
                 .attr('width', function(d) {return d.width;})

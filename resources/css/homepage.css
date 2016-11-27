@@ -34,14 +34,6 @@ a{
     left:50%;
 }
 
-.blur{
-    /*-webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);*/
-}
-
 .pre-over{
     width: 100%;
     height: 100%;
@@ -372,10 +364,6 @@ a{
     height: 2000px;
 }
 
-#path1{
-    left:50vw;
-}
-
 #path2{
     margin-left:-200px
 }
@@ -392,7 +380,6 @@ a{
     width:40vw;
     pointer-events:none;
 
-    margin-top: 100vh;
     margin-left: 10vw;
     padding: 30px;
     transform: translateY(-50%);
@@ -419,11 +406,9 @@ a{
 
 .info-box a{
     pointer-events:auto;
-    padding: 5px 10px;
     font-size: 12px;
     display: inline-block;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding: 6px 10px;
 
     -webkit-transition: background-color 0.5s ease;
     -moz-transition: background-color 0.5s ease;
@@ -469,6 +454,20 @@ a{
     color: #333;
 }
 
+.section-5-content .box-title{
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 50px
+}
+
+.section-5-content .info-box{
+    width: 80vw;
+}
+
+.section-5-content .box-blurb{
+    margin-bottom: -10px;
+}
+
 /*=====================SECTIONS===================*/
 
 .section{
@@ -488,7 +487,8 @@ a{
 #section-2,
 .section-2-background,
 .section-3-background,
-.section-4-background{
+.section-4-background,
+.section-5-background{
     z-index:2;
 
     width:100vw;
@@ -529,12 +529,12 @@ a{
 }
 
 .section-5-content{
-    height: 800px;
+    height: 820px;
 }
 
 .section-5-background{
     z-index: 5;
-    background-color: grey;
+    background-color: #061F38;
 }
 
 
