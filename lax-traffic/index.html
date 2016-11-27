@@ -12,12 +12,15 @@
     <script src="../resources/js/vendors/MorphSVGPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="../resources/css/wow.min.js"></script>
     
     <script src="../resources/js/lax-flights.js"></script>
     <script src="../resources/js/lax-vehicles.js"></script>
     
     <link rel="stylesheet" href="../resources/css/traffic.css" type="text/css"> </head>
+    <link rel="stylesheet" href="../resources/css/animate.min.css" type="text/css">
 
+</head>
 <body>
     <div class="fixed-over">
         <div class="home">
@@ -47,7 +50,7 @@
     </div>
 
     
-    <div id="analysis">
+    <div id="analysis" class="animated fadeIn">
         <h1>ANALYSIS</h1>
         <p>We analyzed 39 months of vehicle and air traffic at Los Angeles International Airport and found that the number of flights correlated closely with the number of cars going in and out of the airport.
         </p>
@@ -58,7 +61,7 @@
     
     <div id="data">
         
-        <div id="info-overlay"></div>
+        <div id="info-overlay" class="animated slideInLeft"></div>
         
         <div id="viz-holder">
             <svg z-index="1" id="visualization" class="chart"></svg>
