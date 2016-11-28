@@ -18,40 +18,33 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
-		<link rel="stylesheet" href="./css/styles.css">
+		<link rel="stylesheet" href="../resources/css/tickets.css">
+		<link rel='shortcut icon' type='image/x-icon' href='../resources/img/visla.png' />
 	</head>
 	<body>
 		<div class="fixed-over">
 
-	        <div class="home">
-	            <a href="../index.html">
-	                <img src="../resources/logo.png"/>
-	            </a>
-	        </div>
+        <div class="home">
+            <a href="../">
+                <img src="../resources/img/logo.png"/>
+            </a>
+        </div>
 
-	        <div class="main-nav">
-	            <div class="inactive-nav">
-	                <div class="upper-rect rect"></div>
-	                <div class="right-rect rect"></div>
-	            </div>
-	            <div class="active-nav">
-	                <div class="lower-rect rect"></div>
-	                <div class="left-rect rect"></div>
-	            </div>
-	            <ul class="nav-text-wrapper list-style-none">
-	                    <a href="index.html">
-	                        <li>TICKETS</li>
-	                    </a>
-	                    <a href="../js/index.html">
-	                        <li>TRAFFIC</li>
-	                    </a>
-	                    <a href="../hexmap/index.html">
-	                        <li>FLIGHTS</li>
-	                    </a>
-	            </ul>
-	        </div>
-    	</div>
-
+        <div class="main-nav">
+            <img src="../resources/img/plane.svg"/>
+            <ul class="nav-text-wrapper list-style-none">
+                    <a href="../parking-tickets">
+                        <li>TICKETS</li>
+                    </a>
+                    <a href="../lax-traffic">
+                        <li>TRAFFIC</li>
+                    </a>
+                    <a href="../lax-flights">
+                        <li>FLIGHTS</li>
+                    </a>
+            </ul>
+        </div>
+    </div>
 		<div id="map-init">
 			<div class="container">
 				<div class="wrapper">
@@ -79,10 +72,10 @@
 		<div id='map'></div>
 		<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
 		<script src="https://d3js.org/d3.v3.min.js"></script>
-		<script src="./js/vendor/leaflet-d3.js" charset="utf-8"></script>
-		<script src="./js/vendor/hexbin.js" charset="utf-8"></script>
-		<script src="./js/vendor/jquery-3.1.1.min.js" charset="utf-8"></script>
-		<script type="text/javascript" language="javascript" src="./data/parkingCitations.json"></script>
-		<script src="./js/parkingCitationLeaflet.js" charset="utf-8"></script>
+		<script src="../resources/js/vendors/leaflet-d3.js" charset="utf-8"></script>
+		<script src="../resources/js/vendors/hexbin.js" charset="utf-8"></script>
+		<script src="../resources/js/vendors/jquery-3.1.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" language="javascript" src="../resources/data/parkingCitations.json"></script>
+		<script src="../resources/js/parkingCitationLeaflet.js" charset="utf-8"></script>
 	</body>
 </html>

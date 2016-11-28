@@ -6,45 +6,38 @@
 	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="https://d3js.org/queue.v1.min.js"></script>
 	<script src="https://d3js.org/topojson.v1.min.js"></script>
-	<script src="hexbin.js"></script>	
-	<script type="text/javascript" src="../js/lax_passenger.json"></script>
+	<script src="../resources/js/hexbin.js"></script>	
+	<script type="text/javascript" src="../resources/data/lax_passenger.json"></script>
 	<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="../resources/css/hexmap.css">
+	<link rel='shortcut icon' type='image/x-icon' href='../resources/img/visla.png' />
 </head>
 <body>
 	<h1 id="title">Most Frequented Airports From LAX</h1>
 
-
 	<div class="fixed-over">
 
-	        <div class="home">
-	            <a href="../index.html">
-	                <img src="../resources/logo.png"/>
-	            </a>
-	        </div>
+        <div class="home">
+            <a href="../">
+                <img src="../resources/img/logo.png"/>
+            </a>
+        </div>
 
-	        <div class="main-nav">
-	            <div class="inactive-nav">
-	                <div class="upper-rect rect"></div>
-	                <div class="right-rect rect"></div>
-	            </div>
-	            <div class="active-nav">
-	                <div class="lower-rect rect"></div>
-	                <div class="left-rect rect"></div>
-	            </div>
-	            <ul class="nav-text-wrapper list-style-none">
-	                    <a href="../parking-tickets/index.html">
-	                        <li>TICKETS</li>
-	                    </a>
-	                    <a href="../js/index.html">
-	                        <li>TRAFFIC</li>
-	                    </a>
-	                    <a href="index.html">
-	                        <li>FLIGHTS</li>
-	                    </a>
-	            </ul>
-	        </div>
-    	</div>
+        <div class="main-nav">
+            <img src="../resources/img/plane.svg"/>
+            <ul class="nav-text-wrapper list-style-none">
+                    <a href="../parking-tickets">
+                        <li>TICKETS</li>
+                    </a>
+                    <a href="../lax-traffic">
+                        <li>TRAFFIC</li>
+                    </a>
+                    <a href="../lax-flights">
+                        <li>FLIGHTS</li>
+                    </a>
+            </ul>
+        </div>
+    </div>
 	
 	<canvas id="worldCanvas"></canvas>
 	<div id="hexcontainer"></div>
@@ -58,7 +51,7 @@
 			<li id="sydneyItem"> 5   Sydney</li>
 			<li id="vancouverItem"> 6   Vancouver</li>
 			<li id="guadalajaraItem"> 7   Guadalajara</li>
-			<li id="mexicoCityItem"> 8   Mexico City</li>
+			<li id="mexicocityItem"> 8   Mexico City</li>
 			<li id="torontoItem"> 9   Toronto</li>
 			<li id="parisItem">10   Paris</li>
 		</ul>
@@ -98,9 +91,9 @@
 		<div class="legendInfo" id="guadalajaraInfo">
 			<h1>Guadalajara International Airport</h1>
 			<p>Annual passenger count (2015): 746,017</p>
-			<p> the main airport of Mexico's second-largest city Guadalajara. Opened in 1966, it's located 16 km south of the city center. It is Mexico's third busiest airport, after Mexico City International Airport and Cancún International Airport and second busiest for cargo flights.</p>
+			<p> The main airport of Mexico's second-largest city Guadalajara. Opened in 1966, it's located 16 km south of the city center. It is Mexico's third busiest airport, after Mexico City International Airport and Cancún International Airport and second busiest for cargo flights.</p>
 		</div>
-		<div class="legendInfo" id="mexicoCityInfo">
+		<div class="legendInfo" id="mexicocityInfo">
 			<h1>Mexico City International Airport</h1>
 			<p>Annual passenger count (2015): 725,575</p>
 			<p> It is Mexico's busiest and Latin America's second busiest airport by passenger traffic; and it is both Mexico's and Latin America's busiest airport by aircraft movements.</p>
@@ -116,6 +109,6 @@
 			<p>The world's eighth-busiest airport and Europe's second-busiest airport (after London Heathrow) in terms of passenger numbers. It is also the world's tenth-busiest and it is Europe's second-busiest airport (after London Heathrow) in aircraft movements.</p>
 		</div>
 	</div>
-	<script type="text/javascript" src="hexmap.js"></script>
+	<script type="text/javascript" src="../resources/js/hexmap.js"></script>
 </body>
 </html>

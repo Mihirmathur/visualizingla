@@ -9,42 +9,40 @@
     <title>LAX Visualization</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="./MorphSVGPlugin.min.js"></script>
+    <script src="../resources/js/vendors/MorphSVGPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
-    <script src="wow.min.js"></script>
+    <script src="../resources/css/wow.min.js"></script>
     
-    <script src="lax-flights.js"></script>
-    <script src="lax-vehicles.js"></script>
+    <script src="../resources/js/lax-flights.js"></script>
+    <script src="../resources/js/lax-vehicles.js"></script>
     
-    <link rel="stylesheet" href="css/styles.css" type="text/css"> 
-    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="../resources/css/traffic.css" type="text/css"> </head>
+    <link rel="stylesheet" href="../resources/css/animate.min.css" type="text/css">
+    <link rel='shortcut icon' type='image/x-icon' href='../resources/img/visla.png' />
 
 </head>
 <body>
     <div class="fixed-over">
+
         <div class="home">
-            <a href="../index.html"> <img src="../resources/logo.png" /> </a>
+            <a href="../">
+                <img src="../resources/img/logo.png"/>
+            </a>
         </div>
+
         <div class="main-nav">
-            <div class="inactive-nav">
-                <div class="upper-rect rect"></div>
-                <div class="right-rect rect"></div>
-            </div>
-            <div class="active-nav">
-                <div class="lower-rect rect"></div>
-                <div class="left-rect rect"></div>
-            </div>
+            <img src="../resources/img/plane.svg"/>
             <ul class="nav-text-wrapper list-style-none">
-                <a href="../parking-tickets/index.html">
-                    <li>TICKETS</li>
-                </a>
-                <a href="index.html">
-                    <li>TRAFFIC</li>
-                </a>
-                <a href="../hexmap/index.html">
-                    <li>FLIGHTS</li>
-                </a>
+                    <a href="../parking-tickets">
+                        <li>TICKETS</li>
+                    </a>
+                    <a href="../lax-traffic">
+                        <li>TRAFFIC</li>
+                    </a>
+                    <a href="../lax-flights">
+                        <li>FLIGHTS</li>
+                    </a>
             </ul>
         </div>
     </div>
@@ -69,8 +67,8 @@
     </div>
     
 </body>
-<script src="lax-animator.js"></script>
-<script src="lax-data-manager.js"></script>
+<script src="../resources/js/lax-animator.js"></script>
+<script src="../resources/js/lax-data-manager.js"></script>
 <script>
     
     // viewBox width must be slightly > DM.w

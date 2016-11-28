@@ -17,6 +17,7 @@ function init() {
 	// hide map controls
 	$(".leaflet-control-zoom").css("visibility", "hidden");
 	$(".info-panel").css('visibility', 'hidden');
+	$(".fixed-over-mobile").css('visibility', 'hidden');
 
 	// watch btn click
 	$('.btn-close').click(function() {
@@ -47,6 +48,7 @@ var initModule = (function() {
 					// show map controls
 					$(".leaflet-control-zoom").css("visibility", "");
 					$(".info-panel").css('visibility', '');
+					$(".fixed-over-mobile").css('visibility', '');
 				}
 			});
 		});
@@ -129,9 +131,10 @@ function initMap(points) {
 
 	// function to update the ticket density window
 	info.update = function (props) {
-    this._div.innerHTML = '<h4>Parking Ticket Density</h4>' +  (props ?
+    this._div.innerHTML = '<h4>Parking Ticket Density</h4>' +   (props ?
 			 props.density + ' tickets / hexagon <br /> Average fine amount is $' +
-			 props.average + '<br /><hr />' + props.ticket  : 'Hover over a hexagon <br /> To see more stats')
+			 props.average + '<br /><hr /><span class="info-desk">' + props.ticket  + '</span>': 'Hover over a hexagon <br /> To see more stats')
+			 + '</span><span class="info-mobile">View on desktop for more info on tickets.</span>';
 	};
 
 	info.addTo(map);
@@ -157,6 +160,7 @@ function initMap(points) {
     valueCeil: undefined,
 		onclick: function(d, node, layer) {
 			// ensure that click event only works on mobile
+
 			if(node.getAttribute('fill') != '#f8c81c') {
 				this.onmouseover(d, node, layer);
 			}

@@ -32,7 +32,7 @@ function initSquaresDataRandomely(number){
             fill: '#F8C81C',          
             //fill: colors[Math.floor(Math.random()*colors.length)],
             //fill: colorScale(Math.random),            //smaller rand = whiter & more in front
-            duration: (rand+0.001) * 2000 + 2000,       //smaller rand = slower
+            duration: (rand+0.001) * 3000 + 2000,       //smaller rand = slower
             opacity: 1 - rand
         });
     }
@@ -81,28 +81,38 @@ $(document).ready(function() {
         smoothScrolling: true,
     });
 
-    skrollr.menu.init(s);
-
     /*NAVIGATION START*/
-    $('.nav-box').click(function() {
-        $('.nav-box').removeClass('active');
-        $(this).addClass('active');
+    
+    //smooth scroll
+    $(function() {
+      $('a[href*="#"]:not([href="#"])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html, body').animate({
+              scrollTop: target.offset().top
+            }, 1000);
+            return false;
+          }
+        }
+      });
     });
 
     var sectionArray = [];
     var activeSessionID = '';
 
-    var top = 0;
     $(window).scroll(function() {
 
-        top = $(document).scrollTop();
-
+        var top = $(document).scrollTop();
         sectionArray = ($('[id^="section"]').toArray());
 
         sectionArray.forEach(function(section) {
             if ($(section).hasClass('skrollable-between')) {
-                activeSessionID = '#' + $(section).attr('id');
-                $('a[href="' + activeSessionID + '"]').trigger('click');
+                activeSessionID = '#' + $(section).attr('id') + '-a';
+
+                $('.nav-box').removeClass('active');
+                $('a[href="' + activeSessionID + '"]').addClass('active');
 
             }
         });
@@ -112,11 +122,9 @@ $(document).ready(function() {
 
     $('.title-text-wrapper').delay(2000)
                             .animate({
-                                'margin-top': '-110px',
+                                'margin-top': '-100px',
                                 'opacity' : 1
-                            }, 1000);
-
-    
+                            }, 1000);  
 
     $('.info-box').mouseover(function(){
         allChange(flyRight);
