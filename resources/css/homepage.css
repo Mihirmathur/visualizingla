@@ -112,17 +112,7 @@ a{
 .home, .rect{
     position: fixed;
 }
-/*
-.rect{
-    right: 5vh;
-    background-color: #fff;
-    margin-right: -15px;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-*/
+
 .main-nav{
     position: fixed;
     right: 5vh;
@@ -159,42 +149,6 @@ a{
 .main-nav:hover{
     cursor: pointer;
 }
-/*
-.main-nav:hover .rect{
-    transform: perspective(500px) translateX(-400px);
-    opacity: 0;
-}
-
-.inactive-nav{
-    right: 5vh;
-    width: 70px;
-    height: 70px;
-}
-
-.upper-rect, .lower-rect{
-    width: 40px;
-    height: 8px;
-}
-
-.left-rect, .right-rect{
-    width: 8px;
-    height: 40px;
-}
-
-.right-rect{
-    margin-left:30px;
-    margin-top: 8px;
-}
-
-.left-rect{
-    margin-top: -70px;
-    margin-right: 37px;
-}
-
-.lower-rect{
-    margin-top: -30px;
-    margin-right:5px;
-}*/
 
 .nav-text-wrapper{
     position: fixed;
@@ -204,7 +158,7 @@ a{
     overflow: hidden;
     width:0px;
     margin-top: -4px;
-    margin-right: -3px;
+    margin-right: -1px;
 
     right: -155px;
     top: 160px;
@@ -263,6 +217,7 @@ a{
     -o-transition: opacity 0.5s ease;
     transition: opacity 0.5s ease;
 }
+
 /*===============NAV-BAR (HOMEPAGE)==========*/
 
 .nav {
@@ -359,6 +314,18 @@ a{
     z-index: 10;
     pointer-events: none;
     margin-left: 2000px;
+}
+
+#plane1{
+    margin-left: -24px;
+}
+
+#plane2{
+    margin-left: -224px
+}
+
+#plane3{
+    margin-left: 176px
 }
 
 /*=====================PATHS====================*/
@@ -473,7 +440,7 @@ a{
 }
 
 .section-5-content .info-box{
-    width: 80vw;
+    width: 50vw;
 }
 
 .section-5-content .box-blurb{
@@ -547,6 +514,87 @@ a{
 .section-5-background{
     z-index: 5;
     background-color: #061F38;
+}
+
+/*==============MEDIA QUERIES===================*/
+
+/*mobile*/
+@media only screen and (max-width: 700px) {
+
+    #scroll{
+        display: none;
+    }
+
+    .nav{
+        display: none;
+    }
+
+    .title-text-wrapper{
+        margin-top: -50px !important;
+    }
+
+    #line1{
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    #line2{
+        font-size: 10px;
+        letter-spacing: 5px;
+        margin-top:0px;
+    }
+
+    #scroll{
+        margin-top: 30px;
+    }
+
+    .nav-text-wrapper{
+        right: 0;
+        margin-right: -162px;
+    }
+
+    .plane-wrapper img{
+        width: 30px;
+        margin-left: 10px;
+    }
+
+    #plane2{
+        margin-left:-104px;
+    }
+
+    #path2{
+        margin-left: -80px;
+    }
+
+    #plane3{
+        margin-left:56px;
+    }
+
+    #path3{
+        margin-left:80px;
+    }
+
+    .info-box{
+        opacity: 0;
+        top: 0px;
+    }
+
+    .info-box a{
+        margin-top: 10px;
+    }
+
+}
+
+/*TODO: CHECK IF THIS IS NECESSARY*/
+
+/*landscape only*/
+@media only screen and (min-width : 550px) and (max-width: 800px){
+
+}
+
+/*portrait only*/
+@media only screen and (max-width: 550px) {
+
 }
 
 

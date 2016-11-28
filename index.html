@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
     <title>Visualizing LA</title>
 
     <link rel='shortcut icon' type='image/x-icon' href='resources/img/visla.png' />
@@ -52,7 +53,7 @@
     </div>
 
     <div class="main-centered">
-        <div class="title-wrapper">
+    <div class="title-wrapper">
                 <div id="scroll" data-0="opacity:1" data-100="opacity: 0">
                         <p>scroll down</p>
                 </div>
@@ -91,7 +92,7 @@
         <div id="section-1" class="section" data-0="" data-1700="">
             
             <div class="plane-wrapper mid-top mid-left sec1"
-                data-0="margin-top:-1000px; margin-left: -24px;"
+                data-0="margin-top:-1000px" id="plane1"
                 data-1080="margin-top:900px">       
                 <div>
                     <img src="resources/img/plane.svg" />
@@ -105,8 +106,8 @@
                 <div class="vert"></div>
             </div>
 
-            <div class="plane-wrapper mid-top mid-left sec1"
-                data-460="margin-top:-1000px; margin-left: -224px"
+            <div class="plane-wrapper mid-top mid-left sec1" id="plane2"
+                data-460="margin-top:-1000px"
                 data-1480="margin-top:900px">       
                 <div>
                     <img src="resources/img/plane.svg" />
@@ -120,8 +121,8 @@
                 <div class="vert"></div>
             </div>
 
-             <div class="plane-wrapper mid-top mid-left sec1" 
-                data-0="margin-top:-1000px; margin-left: 176px"
+             <div class="plane-wrapper mid-top mid-left sec1" id="plane3"
+                data-0="margin-top:-1000px"
                 data-980=""
                 data-1520="margin-top:900px">       
                 <div>
@@ -137,7 +138,7 @@
             </div>
 
         </div>
-
+     
         <div id="section-2" class="section" data-1600="opacity: 0" data-1700="opacity:1" class="section" data-2500="">
              
         </div>
@@ -145,7 +146,7 @@
         <div class="section-2-content" id="section-2-a">
             <div class="section-2-background section-background" data-1700="opacity: 0" data-2100="opacity:1; ">
             </div>
-            <div class="info-box" data-1700="margin-top: 55vh" data-2100="opacity: 1" data-2200="opacity: 0">
+            <div class="info-box" data-1700="margin-top: 55vh; opacity:0" data-2000="opacity: 1" data-2200="opacity: 0">
                 <h2 class="box-title">PARKING TICKETS</h2>
                 <a href="parking-tickets">EXPLORE</a>
                 <p class="box-blurb">Ever gotten a parking ticket in LA? You’re not alone. In this handy visualization, we have attempted to demystify the time/date/location factors of being the unlucky recipient of such a ticket.</p>
@@ -159,7 +160,7 @@
         <div class="section-3-content" id="section-3-a">
             <div class="section-3-background section-background" data-2500="opacity: 0" data-2900="opacity:1; ">
             </div>
-            <div class="info-box" data-2800="margin-top: 55vh" data-3100="opacity: 1" data-3200="opacity:0; ">
+            <div class="info-box" data-2800="margin-top: 55vh; opacity:0" data-3000="opacity: 1" data-3200="opacity:0; ">
                 <h2 class="box-title">LAX TRAFFIC</h2>
                 <a href="lax-traffic">EXPLORE</a>
                 <p class="box-blurb">Grumpy at One World Way being heavily trafficked? In this visualization, we used data to determine the high traffic points over the course of 39 months, and its correlation to number of flights leaving LAX. Plan your flights wisely!</p>
@@ -172,7 +173,7 @@
         <div class="section-4-content" id="section-4-a">
             <div class="section-4-background section-background" data-3500="opacity: 0" data-3900="opacity:1; ">
             </div>
-            <div class="info-box" data-3900="margin-top: 55vh" data-4100="opacity: 1" data-4200="opacity:0; ">
+            <div class="info-box" data-3900="margin-top: 55vh; opacity:0" data-4000="opacity: 1" data-4200="opacity:0; ">
                 <h2 class="box-title">FLIGHTS FROM LAX</h2>
                 <a href="lax-flights">EXPLORE</a>
                 <p class="box-blurb">Wondering where Angelenos fly off to during the year? We’ve analyzed the top travel destinations for you. Take the vacation of your dreams— with the rest of Los Angeles!</p>
@@ -185,10 +186,13 @@
         <div class="section-5-content" id="section-5-a">
             <div class="section-5-background section-background" data-4500="opacity: 0" data-4900="opacity:1; ">
             </div>
-            <div class="info-box" data-4700="opacity:0" data-4750="margin-top: 300px" data-5000="opacity: 1">
+
+            <!--TODO: FIX THIS-->
+            <!--this is breaking mobile-->
+            <!--<div class="info-box" data-4700="opacity:0" data-4750="margin-top: 300px" data-5000="opacity: 1">
                 <h2 class="box-title">SUMMARY</h2>
                 <p class="box-blurb"><hr data-4850="width:0vw" data-4950="width: 80vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
-            </div>
+            </div>-->
             
         </div>
     </div>
