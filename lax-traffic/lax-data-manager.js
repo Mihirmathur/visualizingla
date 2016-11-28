@@ -78,7 +78,7 @@ var DataManager = (function () {
         
         // Set the domain and ranges for each axis
         var x = d3.scaleTime()
-            .range([0, width])
+            .range([10, width-10])
             .domain(d3.extent(data, function(d) { return d.date; }));   
         var y = d3.scaleLinear()
             .range([height, 0])

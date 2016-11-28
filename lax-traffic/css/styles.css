@@ -183,6 +183,8 @@ p {
 #data {
     background-color: #8f8f8f;
     position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #viz-holder {
