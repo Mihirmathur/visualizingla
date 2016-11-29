@@ -87,8 +87,8 @@ body {
     height: 20px;
     overflow: hidden;
     width:0px;
-    margin-top: -4px;
-    margin-right: -1px;
+    margin-top: 15px;
+    margin-right: -9px;
 
     right: -155px;
     top: 160px;
@@ -101,7 +101,7 @@ body {
 
 .main-nav:hover .nav-text-wrapper{
     opacity: 1;
-    width: 360px;
+    width: 380px;
 }
 
 .nav-text-wrapper li{

@@ -46,6 +46,10 @@ a{
     z-index: 1000;
 }
 
+.mobile{
+    display: none;
+}
+
 /*===========FIXING VARIOUS ANIMATIONS===========*/
 
 .title-line span,
@@ -157,8 +161,8 @@ a{
     height: 20px;
     overflow: hidden;
     width:0px;
-    margin-top: -4px;
-    margin-right: -1px;
+    margin-top: 15px;
+    margin-right: -9px;
 
     right: -155px;
     top: 160px;
@@ -519,6 +523,10 @@ a{
 /*mobile*/
 @media only screen and (max-width: 700px) {
 
+    .mobile{
+        display: block;
+    }
+
     #scroll{
         display: none;
     }
@@ -548,7 +556,7 @@ a{
 
     .nav-text-wrapper{
         right: 0;
-        margin-right: -162px;
+        margin-right: -166px;
     }
 
     .plane-wrapper img{
@@ -575,10 +583,17 @@ a{
     .info-box{
         opacity: 0;
         top: 0px;
+        width: 60vw;
+        margin-left: 0px;
     }
 
     .info-box a{
         margin-top: 10px;
+    }
+
+    .section-5-content .info-box a{
+        display: inline;
+        padding: 0px;
     }
 
 }
