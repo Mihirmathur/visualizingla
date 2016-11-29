@@ -1,13 +1,13 @@
 var Animator = (function() {
     
     var STAGGER_TIME = 5.0;
-    var CAR_TIME = 30.0;
-    var FLIGHT_TIME = 30.0;
+    var CAR_TIME = 45.0;
+    var FLIGHT_TIME = 45.0;
 
     var colors = {
         outgoingCar: "#F8C81C",
         incomingCar: "#D0021B",
-        planes: "#00009F"
+        planes: "#061F38"
     }
     
     function spawnCar(parent, cls, color) {

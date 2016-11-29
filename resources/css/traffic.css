@@ -160,6 +160,7 @@ p {
 
 #visualization {
     padding-top: 150px;
+    padding-bottom: 0px;
 }
 
 #data {
@@ -184,6 +185,7 @@ p {
 
 text {
     fill: #fff;
+    font-family: 'AvenirNext', sans-serif;
 }
 
 .axis {

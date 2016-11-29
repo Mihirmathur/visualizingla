@@ -213,8 +213,8 @@ var DataManager = (function () {
     function makeChart(selector) {
         return d3.select(selector)
         .attr("cx", "30")
-        .style("padding-top", "100px")
-        .style("padding-bottom", "100px");
+//        .style("padding-top", "100px")
+//        .style("padding-bottom", "100px");
     }
     
     function updateInfoMessage(message) {
