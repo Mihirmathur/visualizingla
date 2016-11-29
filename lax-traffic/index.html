@@ -78,7 +78,8 @@
         
         var winWidth = $(window).width();
         var graphWidth = winWidth;
-        
+        var graphHeight = 400;
+        var vbHeight = graphHeight + 100;
         
         function resized() {
         d3.select("#visualization")
@@ -90,11 +91,11 @@
             .attr("viewBox", "0 0 " + graphWidth + " 600");
         $(window).resize(resized);
         
-        DataManager.init(graphWidth, 500).then(function (_) {
+        DataManager.init(graphWidth, graphHeight).then(function (_) {
             DataManager.plot("#visualization");
             
             d3.select("#visualization")
-                .attr("viewBox", "0 0 " + $(window).width() + " " + 600);
+                .attr("viewBox", "0 0 " + $(window).width() + " " + vbHeight);
             
             setTimeout(function() {
                 Animator.spawnIncomingCars(3, "#visualization");
