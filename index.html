@@ -208,6 +208,63 @@
     <script type="text/javascript" src="resources/js/vendors/d3.v3.min.js"></script>
     <script type="text/javascript" src="resources/js/vendors/skrollr.min.js"></script>
     <script src="resources/js/squares-over.js"></script>
-    <script src="resources/js/homepage.js"></script>
+    <script src="resources/js/flying-squares.js"></script>
 </body>
+<script>
+
+    $(document).ready(function() {
+
+        var s = skrollr.init({
+            forceHeight: false,
+            smoothScrolling: true,
+        });
+
+        FlyingSquares.init(300);
+        SquaresAnimator.init();
+
+        handleNavUpdate();
+        enableSmoothScroll();
+        $(window).scroll(handleNavUpdate);
+
+        //various animations
+        $('.pre-over').delay(100).fadeOut();
+        $('.title-text-wrapper').delay(2000)
+                                .animate({
+                                    'margin-top': '-100px',
+                                    'opacity' : 1
+                                }, 1000);  
+    });
+
+    function handleNavUpdate(){
+        var top = $(document).scrollTop();
+        var sectionArray = ($('[id^="section"]').toArray());
+
+        sectionArray.forEach(function(section) {
+            if ($(section).hasClass('skrollable-between')) {
+                var activeSessionID = '#' + $(section).attr('id') + '-a';
+
+                $('.nav-box').removeClass('active');
+                $('a[href="' + activeSessionID + '"]').addClass('active');
+
+            }
+        });
+    }
+
+    function enableSmoothScroll(){
+        $(function() {
+          $('a[href*="#"]:not([href="#"])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000);
+                return false;
+              }
+            }
+          });
+        });
+    }
+</script>
 </html>

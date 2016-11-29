@@ -117,6 +117,8 @@ var SquaresAnimator = (function () {
         .attr('height', canvasHeight)
         .classed('canvas', true);
 
-    initAll();
+    return{
+        init: initAll
+    }
     
 })();

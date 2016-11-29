@@ -158,11 +158,11 @@ a{
     position: fixed;
     top: 5vh;
     opacity: 0;
-    height: 20px;
+    height: 30px;
     overflow: hidden;
     width:0px;
     margin-top: 15px;
-    margin-right: -9px;
+    margin-right: -6px;
 
     right: -155px;
     top: 160px;

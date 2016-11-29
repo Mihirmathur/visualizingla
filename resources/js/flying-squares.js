@@ -1,4 +1,4 @@
-function FlyingSquaresAnimation(){
+var FlyingSquares = (function(){
 
     var sectionWidth = d3.select('#section-1').node().getBoundingClientRect().width;
     var sectionHeight = d3.select('#section-1').node().getBoundingClientRect().height;
@@ -73,67 +73,8 @@ function FlyingSquaresAnimation(){
                     });
     }
 
-    initSquaresRandomly(300);
+    return {
+        init: initSquaresRandomly
+    }
 
-}
-
-function handleNavUpdate(){
-    var top = $(document).scrollTop();
-    var sectionArray = ($('[id^="section"]').toArray());
-
-    sectionArray.forEach(function(section) {
-        if ($(section).hasClass('skrollable-between')) {
-            var activeSessionID = '#' + $(section).attr('id') + '-a';
-
-            $('.nav-box').removeClass('active');
-            $('a[href="' + activeSessionID + '"]').addClass('active');
-
-        }
-    });
-}
-
-function enableSmoothScroll(){
-    $(function() {
-      $('a[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html, body').animate({
-              scrollTop: target.offset().top
-            }, 1000);
-            return false;
-          }
-        }
-      });
-    });
-}
-
-$(document).ready(function() {
-
-    handleNavUpdate();
-    FlyingSquaresAnimation();
-
-    var s = skrollr.init({
-        forceHeight: false,
-        smoothScrolling: true,
-    });
-    
-    enableSmoothScroll();
-    $(window).scroll(handleNavUpdate);
-
-
-    //various animations
-    $('.pre-over').delay(100).fadeOut();
-    $('.title-text-wrapper').delay(2000)
-                            .animate({
-                                'margin-top': '-100px',
-                                'opacity' : 1
-                            }, 1000);  
-
-    $('.explore').mouseover(function(){
-        allChange(flyRight);
-    }).mouseout(function(){
-        allChange(changeBack);
-    });
-});
+}());
