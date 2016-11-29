@@ -206,6 +206,8 @@ var DataManager = (function () {
             
                 
         }, delays.dataPoints);
+        
+        addXAxis(chart, x, "Month");
     }
     
     function makeChart(selector) {
@@ -220,9 +222,10 @@ var DataManager = (function () {
         updateInfoMessage("<p>" + DEFAULT_MESSAGE + "<p>");
     }
     
-    function addAxes(chart, xScale, yScale, xLabel, yLabel) {
+    function addXAxis(chart, xScale, xLabel) {
         // Add x-axis
         chart.append("g")
+            .attr("id", "x-axis")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(xScale));
         chart.append("text")
@@ -234,18 +237,18 @@ var DataManager = (function () {
             .style("font-family", "Arial, sans-serif")
             .text(xLabel);
         
-        // Add y-axis
-        chart.append("g")
-            .attr("transform", "translate(0, 5)")
-            .call(d3.axisLeft(yScale));
-        chart.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
-            .attr("x",0 - (height / 2))
-            .attr("dy", "1em")
-            .attr("fill", "#000")
-            .style("text-anchor", "middle")
-            .text(yLabel);  
+//        // Add y-axis
+//        chart.append("g")
+//            .attr("transform", "translate(0, 5)")
+//            .call(d3.axisLeft(yScale));
+//        chart.append("text")
+//            .attr("transform", "rotate(-90)")
+//            .attr("y", 0 - margin.left)
+//            .attr("x",0 - (height / 2))
+//            .attr("dy", "1em")
+//            .attr("fill", "#000")
+//            .style("text-anchor", "middle")
+//            .text(yLabel);  
     }
 
     // Return object with data on flights and vehicles in/out for a given month
