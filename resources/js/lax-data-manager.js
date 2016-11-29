@@ -211,7 +211,10 @@ var DataManager = (function () {
     }
     
     function makeChart(selector) {
-        return d3.select(selector);
+        return d3.select(selector)
+        .attr("cx", "30")
+        .style("padding-top", "100px")
+        .style("padding-bottom", "100px");
     }
     
     function updateInfoMessage(message) {
@@ -223,32 +226,44 @@ var DataManager = (function () {
     }
     
     function addXAxis(chart, xScale, xLabel) {
-        // Add x-axis
-        chart.append("g")
-            .attr("id", "x-axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(xScale));
-        chart.append("text")
-            .attr("transform", 
-                  "translate(" + (width/2) + "," + (height + margin.top + 20) + ")")
-            .style("text-anchor", "middle")
-            .style("fill", "#000")
-            .style("font-size", "14px")
-            .style("font-family", "Arial, sans-serif")
-            .text(xLabel);
         
-//        // Add y-axis
-//        chart.append("g")
-//            .attr("transform", "translate(0, 5)")
-//            .call(d3.axisLeft(yScale));
-//        chart.append("text")
-//            .attr("transform", "rotate(-90)")
-//            .attr("y", 0 - margin.left)
-//            .attr("x",0 - (height / 2))
-//            .attr("dy", "1em")
-//            .attr("fill", "#000")
-//            .style("text-anchor", "middle")
-//            .text(yLabel);  
+        var axis = d3.axisBottom(xScale);
+        chart.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(axis)
+        
+        d3.selectAll(".tick line")
+            .attr("stroke-width", 3)
+            .attr("y1", -5)
+            .attr("y2", 10);
+        
+        d3.selectAll(".tick text") 
+            .attr("class", "label")
+            .attr("y", 15)
+            .attr("font-size", function(d, i) {
+                var label = this.textContent;
+                if (isNaN(label)) {
+                    return "12px";
+                } else {
+                    return "18px";
+                }
+            });
+    }
+    
+    function addYAxis(chart, yScale, yLabel) {
+        // Add y-axis
+        chart.append("g")
+            .attr("transform", "translate(0, 5)")
+            .call(d3.axisLeft(yScale));
+        chart.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x",0 - (height / 2))
+            .attr("dy", "1em")
+            .attr("fill", "#000")
+            .style("text-anchor", "middle")
+            .text(yLabel); 
     }
 
     // Return object with data on flights and vehicles in/out for a given month

@@ -182,6 +182,29 @@ p {
     z-index: 1;
 }
 
+text {
+    fill: #fff;
+}
+
+.axis {
+    fill: #fff;
+    text-anchor: middle;
+}
+
+.title {
+    font-size: 22px;
+}
+
+.axis path {
+    stroke: #fff;
+    stroke-width: 0.3px;
+}
+
+.axis .tick line {
+    stroke: #fff;
+}
+
+
 .line {
     fill: none;
     stroke-width: 2px;
@@ -194,8 +217,6 @@ p {
     z-index: 1;
     r: 5;
 }
-
-
 
 .car {
     z-index: 100;
