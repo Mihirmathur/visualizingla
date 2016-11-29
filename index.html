@@ -54,7 +54,7 @@
 
     <div class="main-centered">
     <div class="title-wrapper">
-                <div id="scroll" data-0="opacity:1" data-100="opacity: 0">
+                <div id="scroll" data-0="opacity:1; z-index:1000" data-100="opacity: 0; z-index: -1000">
                         <p>scroll down</p>
                 </div>
                 <div class="title-text-wrapper mid-top">  
@@ -139,68 +139,67 @@
 
         </div>
      
-        <div id="section-2" class="section" data-1600="opacity: 0" data-1700="opacity:1" class="section" data-2500="">
+        <div id="section-2" class="section" data-1700="opacity: 0" data-1800="opacity:1" class="section" data-3600="">
              
         </div>
 
         <div class="section-2-content" id="section-2-a">
-            <div class="section-2-background section-background" data-1700="opacity: 0" data-2100="opacity:1; ">
+            <div class="section-2-background section-background" data-1700="opacity: 0" data-2100="opacity:1">
             </div>
-            <div class="info-box" data-1700="margin-top: 55vh; opacity:0" data-2000="opacity: 1" data-2200="opacity: 0">
+            <div class="info-box" data-1700="margin-top: 35vh; opacity:0" data-2000="opacity: 1; margin-top:55vh" data-3100="opacity:1" data-3200="opacity: 0; margin-top:75vh">
                 <h2 class="box-title">PARKING TICKETS</h2>
-                <a href="parking-tickets">EXPLORE</a>
-                <p class="box-blurb">Ever gotten a parking ticket in LA? You’re not alone. In this handy visualization, we have attempted to demystify the time/date/location factors of being the unlucky recipient of such a ticket.</p>
+                <a class="explore" href="parking-tickets">EXPLORE</a>
+                <p class="box-blurb">
+                    Ever gotten a parking ticket in LA? You’re not alone. In this handy visualization, we have attempted to demystify the time/date/location factors of being the unlucky recipient of such a ticket.
+                </p>
             </div>
             
         </div>
 
 
-        <div id="section-3" class="section" data-2501="" data-3500=""></div>
+        <div id="section-3" class="section" data-3601="" data-5600=""></div>
 
         <div class="section-3-content" id="section-3-a">
-            <div class="section-3-background section-background" data-2500="opacity: 0" data-2900="opacity:1; ">
+            <div class="section-3-background section-background" data-3500="opacity: 0" data-3900="opacity:1">
             </div>
-            <div class="info-box" data-2800="margin-top: 55vh; opacity:0" data-3000="opacity: 1" data-3200="opacity:0; ">
+            <div class="info-box" data-3700="margin-top: 35vh; opacity:0" data-4000="opacity: 1; margin-top:55vh" data-5100="opacity: 1" data-5200="opacity: 0; margin-top:75vh">
                 <h2 class="box-title">LAX TRAFFIC</h2>
-                <a href="lax-traffic">EXPLORE</a>
+                <a class="explore" href="lax-traffic">EXPLORE</a>
                 <p class="box-blurb">Grumpy at One World Way being heavily trafficked? In this visualization, we used data to determine the high traffic points over the course of 39 months, and its correlation to number of flights leaving LAX. Plan your flights wisely!</p>
             </div>
             
         </div>
 
-        <div id="section-4" class="section" data-3501="" data-4500=""></div>
+        <div id="section-4" class="section" data-5601="" data-7600=""></div>
 
         <div class="section-4-content" id="section-4-a">
-            <div class="section-4-background section-background" data-3500="opacity: 0" data-3900="opacity:1; ">
+            <div class="section-4-background section-background" data-5500="opacity: 0" data-5900="opacity:1">
             </div>
-            <div class="info-box" data-3900="margin-top: 55vh; opacity:0" data-4000="opacity: 1" data-4200="opacity:0; ">
+            <div class="info-box" data-5700="margin-top: 35vh; opacity:0" data-6000="opacity: 1; margin-top:55vh" data-7100="opacity:1" data-7200="opacity: 0; margin-top:75vh">
                 <h2 class="box-title">FLIGHTS FROM LAX</h2>
-                <a href="lax-flights">EXPLORE</a>
+                <a class="explore" href="lax-flights">EXPLORE</a>
                 <p class="box-blurb">Wondering where Angelenos fly off to during the year? We’ve analyzed the top travel destinations for you. Take the vacation of your dreams— with the rest of Los Angeles!</p>
             </div>
             
         </div>
 
-        <div id="section-5" class="section" data-4501="" data-5500=""></div>
+        <div id="section-5" class="section" data-7601="" data-9600=""></div>
 
         <div class="section-5-content" id="section-5-a">
-            <div class="section-5-background section-background" data-4500="opacity: 0" data-4900="opacity:1; ">
+            <div class="section-5-background section-background" data-7500="opacity: 0" data-7900="opacity:1; ">
             </div>
 
-            <!--TODO: FIX THIS-->
-            <!--this is breaking mobile-->
-            <!--<div class="info-box" data-4700="opacity:0" data-4750="margin-top: 300px" data-5000="opacity: 1">
-                <h2 class="box-title">SUMMARY</h2>
-                <p class="box-blurb"><hr data-4850="width:0vw" data-4950="width: 80vw">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum turpis felis, eget hendrerit sem ullamcorper sed. Donec porttitor dolor quam, sed luctus lorem maximus at.</p>
-            </div>-->
+            <div class="info-box" data-7700="opacity:0" data-7750="margin-top: 300px" data-8000="opacity: 1">
+                
+            </div>
             
         </div>
     </div>
 
     <script type="text/javascript" src="resources/js/vendors/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="resources/js/vendors/d3.v3.min.js"></script>
     <script type="text/javascript" src="resources/js/vendors/skrollr.min.js"></script>
-    <script src="resources/js/homepage.js"></script>
     <script src="resources/js/squares-over.js"></script>
+    <script src="resources/js/homepage.js"></script>
 </body>
 </html>

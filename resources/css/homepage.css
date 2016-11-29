@@ -171,7 +171,7 @@ a{
 
 .main-nav:hover .nav-text-wrapper{
     opacity: 1;
-    width: 360px;
+    width: 380px;
 }
 
 .nav-text-wrapper li{
@@ -355,10 +355,11 @@ a{
 
 .info-box{
     z-index: 60;
-    position: absolute;
+    position: fixed;
     width:40vw;
     pointer-events:none;
 
+    top: 0;
     margin-left: 10vw;
     padding: 30px;
     transform: translateY(-50%);
@@ -433,24 +434,22 @@ a{
     color: #333;
 }
 
-.section-5-content .box-title{
-    text-align: center;
-    letter-spacing: 10px;
-    font-size: 50px
+.section-5-content a, .section-5-content p{
+    font-size: 14px;
 }
 
-.section-5-content .info-box{
-    width: 50vw;
+.section-5-content a{
+    color: #F8C81C;
 }
 
-.section-5-content .box-blurb{
-    margin-bottom: -10px;
+.section-5-content a:hover{
+    cursor: pointer;
 }
 
 /*=====================SECTIONS===================*/
 
 .section{
-    height: 1000px;
+    height: 2000px;
 }
 
 .section-background{
@@ -459,7 +458,6 @@ a{
 }
 
 #section-1{
-    height: 2000px;
     z-index:1;
 }
 
@@ -508,7 +506,7 @@ a{
 }
 
 .section-5-content{
-    height: 650px;
+    height: 1000px;
 }
 
 .section-5-background{
@@ -584,19 +582,6 @@ a{
     }
 
 }
-
-/*TODO: CHECK IF THIS IS NECESSARY*/
-
-/*landscape only*/
-@media only screen and (min-width : 550px) and (max-width: 800px){
-
-}
-
-/*portrait only*/
-@media only screen and (max-width: 550px) {
-
-}
-
 
 /*============================================*/
 /*===============END-HOMEPAGE=================*
