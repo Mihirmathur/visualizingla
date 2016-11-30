@@ -120,9 +120,9 @@ a{
 .main-nav{
     position: fixed;
     right: 5vh;
-    width:55px;
+    width:65px;
     height:50px;
-    margin-right:-30px;
+    margin-right:-10px;
     margin-top: -10px;
 
     -webkit-transition: width 0.5s ease;
@@ -131,8 +131,14 @@ a{
     transition: width 0.5s ease;
 }
 
+.main-nav:hover{
+    cursor: pointer;
+    height: 360px;
+}
+
 .main-nav img{
     width: 30px;
+    margin-left: 20px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -141,6 +147,7 @@ a{
 
 .main-nav:hover img{
     transform: perspective(500px) translateY(350px);
+    opacity: 0;
 }
 
 .main-nav p{
@@ -150,19 +157,16 @@ a{
     right: 40px;
 }
 
-.main-nav:hover{
-    cursor: pointer;
-}
 
 .nav-text-wrapper{
     position: fixed;
     top: 5vh;
     opacity: 0;
-    height: 30px;
+    height: 20px;
     overflow: hidden;
     width:0px;
     margin-top: 15px;
-    margin-right: -6px;
+    margin-right: 0px;
 
     right: -155px;
     top: 160px;
