@@ -4,9 +4,39 @@
     Tesselates an image using hexagons
 */
 
+
+/**
+ * When the close button is pressed
+ */
 (function() {
 
 var hexmap = function() {
+    function closePopup() {
+        // cache the element
+        var el = $('#map-init');
+
+        el.each(function(i) {
+            // the init screen slides out to the right
+            $(this).animate({
+                "left": "100%"
+            }, {
+                "complete" : function() {
+                    // remove the init screen
+                    el.remove();
+                    // show map controls
+                    $(".leaflet-control-zoom").css("visibility", "");
+                    $(".info-panel").css('visibility', '');
+                    $(".fixed-over-mobile").css('visibility', '');
+                }
+            });
+        });
+    }
+
+    // listen for closing overlay
+    document.getElementById('btn-close').addEventListener("click", () => {
+        closePopup();
+    });
+
     /*
         Setting up parameters for the hexagon svg container
     */
@@ -490,4 +520,5 @@ var hexmap = function() {
 };
 
 hexmap();
+
 })();

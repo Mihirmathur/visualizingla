@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
 	overflow: hidden;
-	font-family: "Muli", "Helvetica Neue", Helvetica;
+    font-family: 'Avenir', sans-serif;
 	background: #323339;
 	color: #efefef;
 	/*color: #a4a5ad;*/
@@ -122,6 +122,64 @@ body {
 .nav-text-wrapper li:hover{
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+/*===========================================*/
+
+#map-init {
+	position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background-color: rgba(50, 52, 50, .90);
+  overflow: scroll;
+	color: #000000;
+}
+
+.header {
+	font-size: 24px;
+	color: #000000;
+	text-transform: uppercase;
+}
+
+.container {
+	width: 33.5%;
+	margin: 10% 7.5%;
+	padding-left: 15px;
+	background: #F8C81C;
+	z-index: 100;
+}
+
+.wrapper {
+	margin: 5%;
+	padding: 10px 5px;
+}
+
+#btn-close {
+	color: #000000;
+	background-color: #F8C81C;
+	border-radius: 0;
+	border: 1px solid #000000;
+	box-shadow: 0;
+	font-size: 1em;
+	padding: 1em 3em;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+}
+
+#btn-close:hover {
+	background-color: #000000;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.info {
+	font-size: 14px;
+	width: 90%;
+	margin-bottom: 1em;
 }
 
 /*===========================================*/
