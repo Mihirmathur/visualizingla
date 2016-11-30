@@ -290,8 +290,9 @@ h1 {
 	}
 
 	.nav-text-wrapper{
-		margin-right: -6px;
-	}
+        right: 0;
+        margin-right: -175px;
+    }
 
 	.info-desk {
 		display: none;
