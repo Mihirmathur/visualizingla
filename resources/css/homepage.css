@@ -135,7 +135,15 @@ a{
     cursor: pointer;
     height: 360px;
 }
-
+/*
+.overlay{
+    position: fixed;
+    color: #061F38;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+}
+*/
 .main-nav img{
     width: 30px;
     margin-left: 20px;
@@ -239,10 +247,10 @@ a{
 }
 
 .nav-box {
-    margin: 15px 0;
+    margin: 20px 0;
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     background-color: white;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
